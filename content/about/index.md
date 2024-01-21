@@ -1,8 +1,9 @@
 ---
-title: "Me, me, me"
+title: "Me"
 toc: false
-date: "2022-11-27"
-lastmod: "2024-01-08"
+# date: "2022-11-27"
+lastmod: "2024-01-20"
+showReadingTime: false
 draft: false
 Description: "Robert Boscacci is a data engineer and nonfiction author. He lives in Brooklyn, NY and helps run the Prospect Park Chess Club. His nonfiction book is called The Spring of Sight." # Keep to 150-160 chars
 Tags:

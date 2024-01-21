@@ -2,6 +2,8 @@
 title: "Example Page"
 # date: 2024-01-20T2:25:46-05:00
 # showDate: true
+showTableofcontents: false
+showReadingTime: false
 lastmod: 2024-01-20T05:25:46-05:00
 # showDateUpdated: true
 draft: true
@@ -16,14 +18,12 @@ slug: "template" # URL slug / suffix for non-list pages (articles)
 description: "Robert Boscacci is a data scientist reading books on startups and micro-saas" # Keep to 150-160 chars
 keywords: # For SEO
  - Robert Boscacci
- - Data science
- - Computer Vision
  - NYC
  - New York City
- - Data Engineering
  - Entrepreneur
  - Startups
- - Marketing
+ - Indie Hackers
+ - SEM
  - Bootstrapping
 ---
 
