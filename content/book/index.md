@@ -6,17 +6,16 @@ draft: false
 Description: "The Spring of Sight is a nonfiction technology futurism book \
 about computer vision, machine learning, ethics, and society. Algorithmic bias \
 and pragmatism." # Keep to 150-160 chars
-Tags:
+keywords:
  - The Spring of Sight
+ - Best books on AI
+ - Best book on AI
  - Nonfiction book
- - Technology
- - Futurism
  - Self-driving cars
- - Autonomous vehicles
  - Facial recognition
- - Privacy
- - Surveillance
  - Face recognition
+ - Privacy and AI
+ - Surveillance
 ---
 __The Spring of Sight__ is my wildly approachable, fun, and educational new book on the topic of computer vision and society. Hard copies and ebooks are up for sale now on [Amazon](https://www.amazon.com/dp/B0C5NBXFRJ), [Barnes & Noble](https://www.barnesandnoble.com/w/the-spring-of-sight-robert-boscacci/1143513153?ean=9798889269533), and [Kobo](https://www.kobo.com/us/en/ebook/the-spring-of-sight)!
 

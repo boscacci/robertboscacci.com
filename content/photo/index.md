@@ -4,7 +4,7 @@ date: 2022-11-26
 draft: false
 Description: "A small collection of Robert Boscacci's best photos, taken over \
 the years. He has dabbled in astro-photography, landscapes, and travel photography."
-tags:
+keywords:
  - Photography
  - Long exposures
  - Astro-photography

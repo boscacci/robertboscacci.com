@@ -6,17 +6,15 @@ draft: false
 related: false
 Description: "Robert Boscacci is a data scientist reading books on startups and micro-saas" # Keep to 150-160 chars
 toc: true
-Tags:
+keywords:
  - Robert Boscacci
- - Data science
- - Computer Vision
  - NYC
  - New York City
- - Data Engineering
  - Entrepreneur
  - Startups
  - Marketing
  - Bootstrapping
+ - Startup Niche
 ---
 
 ## How do you find folks to build for?

@@ -6,16 +6,16 @@ lastmod: "2024-01-20"
 showReadingTime: false
 draft: false
 Description: "Robert Boscacci is a data engineer and nonfiction author. He lives in Brooklyn, NY and helps run the Prospect Park Chess Club. His nonfiction book is called The Spring of Sight." # Keep to 150-160 chars
-Tags:
+keywords:
  - Robert Boscacci
  - Data science
+ - Data Engineering
  - Computer Vision
  - NYC
  - Brooklyn
  - New York City
- - Data Engineering
- - Authors
- - Chess clubs
+ - Author
+ - Prospect Park Chess Club
 ---
 I'm a **data engineer** 👨‍💻 and [**author**](/book) 📚 who used to work in [**cinema**](https://www.imdb.com/name/nm4574526/) 🎬 production and post-production. I grew up in the SFBay, but now I live with my fiance in Brooklyn, NY.
 

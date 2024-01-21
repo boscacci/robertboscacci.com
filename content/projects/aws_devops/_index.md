@@ -5,7 +5,7 @@ lastmod: 2023-06-08T02:25:46-05:00
 Description: "Robert Boscacci is a devops engineer. He wants to help you \
 pass the aws devops professional certification by sharing his notes here."
 summary: "Notes from my studies"
-Tags:
+keywords:
  - Robert Boscacci
  - DevOps
  - DevSecOps

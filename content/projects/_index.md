@@ -8,7 +8,7 @@ related: false
 Description: "Robert Boscacci is a data scientist and engineer. He performs \
 some contract data engineering projects, but he's looking for a new workplace \
 to call home." # Keep to 150-160 chars
-Tags:
+keywords:
  - Robert Boscacci
  - Data science
  - Computer Vision

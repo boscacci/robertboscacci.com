@@ -5,7 +5,7 @@ date: 2024-01-14T2:25:46-05:00
 draft: false
 related: false
 Description: "Robert Boscacci is a data scientist reading books on startups and micro-saas" # Keep to 150-160 chars
-Tags:
+keywords:
  - Robert Boscacci
  - Data science
  - Computer Vision

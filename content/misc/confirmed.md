@@ -7,7 +7,7 @@ draft: false
 related: false
 Description: "You've successfully subscribed to the email newsletter." # Keep to 150-160 chars
 publishdate: false
-Tags:
+keywords:
  - Robert Boscacci
  - Data science
  - Computer Vision
