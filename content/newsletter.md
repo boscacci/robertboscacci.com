@@ -5,7 +5,7 @@ showTableofcontents: false
 # showDate: true
 lastmod: 2024-01-21T01:25:46-05:00
 # showDateUpdated: true
-draft: false
+draft: true
 # feature: "*feature*" # Text pattern to match feature image fname for article
 # featureAlt: "lorem ipsum" # Alt text for feature image
 # cover: "*cover*" # Text pattern to match the cover image fname for this article
