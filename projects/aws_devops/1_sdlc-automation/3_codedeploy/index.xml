@@ -1,1 +1,105 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>3: CodeDeploy on Robert Boscacci</title><link>https://robertboscacci.com/projects/aws_devops/1_sdlc-automation/3_codedeploy/</link><description>Recent content in 3: CodeDeploy on Robert Boscacci</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Mon, 26 Jun 2023 02:25:46 -0500</lastBuildDate><atom:link href="https://robertboscacci.com/projects/aws_devops/1_sdlc-automation/3_codedeploy/index.xml" rel="self" type="application/rss+xml"/><item><title>0: Overview</title><link>https://robertboscacci.com/projects/aws_devops/1_sdlc-automation/3_codedeploy/0_overview/</link><pubDate>Thu, 22 Jun 2023 02:25:46 -0500</pubDate><guid>https://robertboscacci.com/projects/aws_devops/1_sdlc-automation/3_codedeploy/0_overview/</guid><description>What is it?</description></item><item><title>1: Setup &amp; Config</title><link>https://robertboscacci.com/projects/aws_devops/1_sdlc-automation/3_codedeploy/1_setup_config/</link><pubDate>Thu, 22 Jun 2023 02:25:46 -0500</pubDate><guid>https://robertboscacci.com/projects/aws_devops/1_sdlc-automation/3_codedeploy/1_setup_config/</guid><description>What are revisions?</description></item><item><title>2: App, Groups, Configs</title><link>https://robertboscacci.com/projects/aws_devops/1_sdlc-automation/3_codedeploy/2_app_groups_configs/</link><pubDate>Fri, 23 Jun 2023 02:25:46 -0500</pubDate><guid>https://robertboscacci.com/projects/aws_devops/1_sdlc-automation/3_codedeploy/2_app_groups_configs/</guid><description>What is a CodeDeploy &amp;ldquo;application&amp;rdquo;?</description></item><item><title>3: appspec.yml</title><link>https://robertboscacci.com/projects/aws_devops/1_sdlc-automation/3_codedeploy/3_appspec.yml/</link><pubDate>Mon, 26 Jun 2023 02:25:46 -0500</pubDate><guid>https://robertboscacci.com/projects/aws_devops/1_sdlc-automation/3_codedeploy/3_appspec.yml/</guid><description>The config file for codedeploy</description></item><item><title>4: Revision and Deployment</title><link>https://robertboscacci.com/projects/aws_devops/1_sdlc-automation/3_codedeploy/4_revision_deployment/</link><pubDate>Mon, 26 Jun 2023 02:25:46 -0500</pubDate><guid>https://robertboscacci.com/projects/aws_devops/1_sdlc-automation/3_codedeploy/4_revision_deployment/</guid><description>How do we get a revision deployed?</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>3: CodeDeploy on Robert Boscacci</title><link>https://robertboscacci.com/projects/aws_devops/1_sdlc-automation/3_codedeploy/</link><description>Recent content in 3: CodeDeploy on Robert Boscacci</description><generator>Hugo</generator><language>en</language><lastBuildDate>Mon, 26 Jun 2023 02:25:46 -0500</lastBuildDate><atom:link href="https://robertboscacci.com/projects/aws_devops/1_sdlc-automation/3_codedeploy/index.xml" rel="self" type="application/rss+xml"/><item><title>0: Overview</title><link>https://robertboscacci.com/projects/aws_devops/1_sdlc-automation/3_codedeploy/0_overview/</link><pubDate>Thu, 22 Jun 2023 02:25:46 -0500</pubDate><guid>https://robertboscacci.com/projects/aws_devops/1_sdlc-automation/3_codedeploy/0_overview/</guid><description>&lt;h2 id="what-is-it" class="relative group">What is it? &lt;/h2>&lt;ul>
+&lt;li>Automates application deployments to various servers:
+&lt;ul>
+&lt;li>Ec2 instances&lt;/li>
+&lt;li>On-prem instances&lt;/li>
+&lt;li>Lambda functions&lt;/li>
+&lt;li>ECS services&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;h2 id="what-can-you-deploy" class="relative group">What can you deploy? &lt;/h2>&lt;ul>
+&lt;li>Code:
+&lt;ul>
+&lt;li>Java, C#, Lambda Funcs&lt;/li>
+&lt;li>Web and config files&lt;/li>
+&lt;li>Execs, pkgs, scripts&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>Also multimedia files&lt;/li>
+&lt;/ul>
+&lt;h2 id="where-do-deployables-come-from" class="relative group">Where do deployables come from? &lt;/h2>&lt;ul>
+&lt;li>GitHub / BitBucket&lt;/li>
+&lt;li>S3&lt;/li>
+&lt;li>CodeCommit via S3&lt;/li>
+&lt;/ul>
+&lt;h2 id="where-can-we-deploy-to" class="relative group">Where can we deploy to? &lt;/h2>&lt;ul>
+&lt;li>Ec2 Placement Group&lt;/li>
+&lt;li>Single ec2 instance&lt;/li>
+&lt;li>Auto-scaling group&lt;/li>
+&lt;li>Potentially cross-region&lt;/li>
+&lt;/ul>
+&lt;h2 id="how-to-get-set-up" class="relative group">How to get set up? &lt;/h2>&lt;ul>
+&lt;li>Have IAM &lt;strong>user&lt;/strong> with CodeDeploy access (so you can use the service)&lt;/li>
+&lt;li>Create IAM &lt;strong>instance profile&lt;/strong> (so ec2 can fetch artifacts from S3)&lt;/li>
+&lt;li>Create IAM &lt;strong>service role(s)&lt;/strong> (so CodeDeploy can work with other AWS services like KMS)
+&lt;ul>
+&lt;li>Separate roles for lambda, ecs, ec2&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul></description></item><item><title>1: Setup &amp; Config</title><link>https://robertboscacci.com/projects/aws_devops/1_sdlc-automation/3_codedeploy/1_setup_config/</link><pubDate>Thu, 22 Jun 2023 02:25:46 -0500</pubDate><guid>https://robertboscacci.com/projects/aws_devops/1_sdlc-automation/3_codedeploy/1_setup_config/</guid><description>&lt;h2 id="what-are-revisions" class="relative group">What are revisions? &lt;/h2>&lt;ul>
+&lt;li>The package type things we deploy in CodeDeploy&lt;/li>
+&lt;/ul>
+&lt;h2 id="whats-the-deployment-configuration" class="relative group">What&amp;rsquo;s the Deployment Configuration? &lt;/h2>&lt;ul>
+&lt;li>Specifies how to deploy, and &lt;em>at what rate&lt;/em>
+&lt;ul>
+&lt;li>Disaster recovery?&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>Deployment method determines rate of deployment&lt;/li>
+&lt;/ul>
+&lt;h2 id="whats-a-deployment-group" class="relative group">What&amp;rsquo;s a Deployment Group? &lt;/h2>&lt;ul>
+&lt;li>It&amp;rsquo;s where we deploy to.&lt;/li>
+&lt;li>Could be a single instance or many
+&lt;ul>
+&lt;li>Could be one of many OS&amp;rsquo;es&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>Could also be Lambda or ECS&lt;/li>
+&lt;/ul>
+&lt;h2 id="how-do-we-bring-in-some-automation" class="relative group">How do we bring in some automation? &lt;/h2>&lt;ul>
+&lt;li>EventBridge to monitor deployments
+&lt;ul>
+&lt;li>Create an SNS topic to subscribe to&lt;/li>
+&lt;li>Make a Lambda to do stuff with e.g. Slack&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul></description></item><item><title>2: App, Groups, Configs</title><link>https://robertboscacci.com/projects/aws_devops/1_sdlc-automation/3_codedeploy/2_app_groups_configs/</link><pubDate>Fri, 23 Jun 2023 02:25:46 -0500</pubDate><guid>https://robertboscacci.com/projects/aws_devops/1_sdlc-automation/3_codedeploy/2_app_groups_configs/</guid><description>&lt;h2 id="what-is-a-codedeploy-application" class="relative group">What is a CodeDeploy &amp;ldquo;application&amp;rdquo;? &lt;/h2>&lt;ul>
+&lt;li>A name identifier used reference your deployment settings.&lt;/li>
+&lt;/ul>
+&lt;h2 id="deployment-group" class="relative group">&amp;ldquo;Deployment Group&amp;rdquo;? &lt;/h2>&lt;ul>
+&lt;li>Instance(s) where you want to target and deploy your code.
+&lt;ul>
+&lt;li>This could be even just one instance..!&lt;/li>
+&lt;li>Instance must have CodeDeploy agent installed in User Data&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;h2 id="deployment-configuration" class="relative group">&amp;ldquo;Deployment Configuration&amp;rdquo;? &lt;/h2>&lt;ul>
+&lt;li>Set of rules and success/fail conditions used during deploy&lt;/li>
+&lt;li>May vary depending on deployment medium (e.g. on-prem vs. lambda)&lt;/li>
+&lt;li>Might specify e.g. # of instances that must remain avail during deploy
+&lt;ul>
+&lt;li>&amp;ldquo;Minimum healthy host&amp;rdquo; value (can be %)&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;h2 id="whats-the-order-of-ops-for-deploy" class="relative group">What&amp;rsquo;s the order of ops for deploy? &lt;/h2>&lt;ol>
+&lt;li>Create the &amp;ldquo;application&amp;rdquo;&lt;/li>
+&lt;li>Specify deployment group&lt;/li>
+&lt;li>Specify deploy config
+&lt;ul>
+&lt;li>With &amp;ldquo;Min healthy hosts&amp;rdquo;&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>Upload our &amp;ldquo;revision&amp;rdquo; (the pkg to deploy)&lt;/li>
+&lt;li>Deploy&lt;/li>
+&lt;li>Check results&lt;/li>
+&lt;li>Redeploy as needed&lt;/li>
+&lt;/ol>
+&lt;h2 id="what-are-the-default-deployment-options" class="relative group">What are the Default Deployment Options? &lt;/h2>&lt;ul>
+&lt;li>One at a time&lt;/li>
+&lt;li>All at once&lt;/li>
+&lt;li>Half at once&lt;/li>
+&lt;/ul>
+&lt;p>&lt;a href="https://docs.aws.amazon.com/codedeploy/latest/userguide/deployment-configurations.html" target="_blank" rel="noreferrer">More details on deploy configs can be found here&lt;/a>.&lt;/p></description></item><item><title>3: appspec.yml</title><link>https://robertboscacci.com/projects/aws_devops/1_sdlc-automation/3_codedeploy/3_appspec.yml/</link><pubDate>Mon, 26 Jun 2023 02:25:46 -0500</pubDate><guid>https://robertboscacci.com/projects/aws_devops/1_sdlc-automation/3_codedeploy/3_appspec.yml/</guid><description>The config file for codedeploy</description></item><item><title>4: Revision and Deployment</title><link>https://robertboscacci.com/projects/aws_devops/1_sdlc-automation/3_codedeploy/4_revision_deployment/</link><pubDate>Mon, 26 Jun 2023 02:25:46 -0500</pubDate><guid>https://robertboscacci.com/projects/aws_devops/1_sdlc-automation/3_codedeploy/4_revision_deployment/</guid><description>How do we get a revision deployed?</description></item></channel></rss>
