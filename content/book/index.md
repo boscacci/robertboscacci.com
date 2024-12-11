@@ -17,7 +17,7 @@ keywords:
  - Privacy and AI
  - Surveillance
 ---
-__The Spring of Sight__ is my wildly approachable, fun, and educational new book on the topic of computer vision and society. Hard copies and ebooks are up for sale now on [Amazon](https://www.amazon.com/dp/B0C5NBXFRJ), [Barnes & Noble](https://www.barnesandnoble.com/w/the-spring-of-sight-robert-boscacci/1143513153?ean=9798889269533), and [Kobo](https://www.kobo.com/us/en/ebook/the-spring-of-sight)!
+__The Spring of Sight__ is my book on the topic of computer vision and society. Hard copies and ebooks are up for sale now on [Amazon](https://www.amazon.com/dp/B0C5NBXFRJ), [Barnes & Noble](https://www.barnesandnoble.com/w/the-spring-of-sight-robert-boscacci/1143513153?ean=9798889269533), and [Kobo](https://www.kobo.com/us/en/ebook/the-spring-of-sight)!
 
 <a href="https://www.amazon.com/dp/B0C5NBXFRJ"><img
 src="https://i.postimg.cc/C19cLvSK/mock-00016.png"
@@ -25,11 +25,11 @@ width="800"/></a>
 
 ## Short Synopsis
 
-Learn (in plain language and stories) about the current renaissance in __Computer Vision__, the branch of AI where engineers and academics are teaching computers to “see” and interface with the world based on visual information. Imagine where these technologies might lead us, as a society.
+Learn in plain language and stories about the current renaissance in __Computer Vision__, the branch of AI where engineers and academics are teaching computers to “see” and interface with the world based on visual information. Imagine where these technologies might lead us, as a society.
 
 ## Early Hype
 
-Smart/kind people wrote [positive things about the pre-release manuscript.](https://quip.com/GVnIAGPGfXlC) I'm so grateful to my advance readers! Makes me feel like the last ~22 months of research, writing, and editing have been worth it..!
+Kind readers wrote [positive things about the pre-release manuscript.](https://quip.com/GVnIAGPGfXlC) I'm so grateful to my advance readers! They make me feel like the last ~22 months of research, writing, and editing have been worthwhile.
 
 ```
 “A comprehensive and well-researched exploration of the latest 
