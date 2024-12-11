@@ -7,7 +7,7 @@ related: false
 weight: 0 # Zero means unset
 slug: "market-first"
 Description: "Robert Boscacci is a data scientist reading books on startups and micro-saas" # Keep to 150-160 chars
-summary: "A summary"
+summary: "Make sure people want what you’re building __before you build it__"
 keywords:
  - Robert Boscacci
  - Data science

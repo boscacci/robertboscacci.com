@@ -1,5 +1,5 @@
 ---
-title: "Demo Project: Film Slate Detector"
+title: "Computer Vision Project: Film Slate Detector"
 showTableofcontents: false
 date: 2023-05-25T02:25:46-05:00
 lastmod: 2023-05-25T02:25:46-05:00
@@ -15,7 +15,7 @@ keywords:
  - Object detection
 ---
 
-🎬🎥💻 A computer vision (object detection) pet project 👨‍💻🍿🎤
+🎬 🎥 💻 A computer vision (object detection) pet project 👨‍💻 🍿 🎤
 
 <iframe width="850" height="400" src="https://www.youtube.com/embed/KF4WEupeTAg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe><br/>
 

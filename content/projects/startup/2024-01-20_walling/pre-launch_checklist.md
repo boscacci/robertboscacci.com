@@ -6,6 +6,7 @@ draft: false
 related: false
 Description: "Robert Boscacci is a data scientist reading books on startups and micro-saas" # Keep to 150-160 chars
 toc: true
+summary: What's the A-to-Z from zero to launch?
 keywords:
  - Robert Boscacci
  - Checklist

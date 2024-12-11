@@ -1,7 +1,7 @@
 ---
-title: "My Book: The Spring of Sight"
+title: "The Spring of Sight"
 date: 2022-08-15T02:25:46-05:00
-lastmod: 2023-12-31T02:23:46-05:00
+lastmod: 2024-12-10T02:23:46-05:00
 draft: false
 Description: "The Spring of Sight is a nonfiction technology futurism book \
 about computer vision, machine learning, ethics, and society. Algorithmic bias \
@@ -17,7 +17,11 @@ keywords:
  - Privacy and AI
  - Surveillance
 ---
-__The Spring of Sight__ is my book on the topic of computer vision and society. Hard copies and ebooks are up for sale now on [Amazon](https://www.amazon.com/dp/B0C5NBXFRJ), [Barnes & Noble](https://www.barnesandnoble.com/w/the-spring-of-sight-robert-boscacci/1143513153?ean=9798889269533), and [Kobo](https://www.kobo.com/us/en/ebook/the-spring-of-sight)!
+How does the human experience change, now that computers can "see"?
+
+__The Spring of Sight__ is my first book. It's a quick (179 page) nonfiction tech futurism / ethics read centered on _computer vision_.
+
+Paperbacks and ebooks are available for purchase via [Barnes & Noble](https://www.barnesandnoble.com/w/the-spring-of-sight-robert-boscacci/1143513153?ean=9798889269533), [Amazon](https://www.amazon.com/dp/B0C5NBXFRJ), and [Kobo](https://www.kobo.com/us/en/ebook/the-spring-of-sight). It's likely that you already have $1 in promotional "[Kindle store credit](https://www.amazon.com/dp/B0C5NBXFRJ)" which can be used to download an effectively free digital copy.
 
 <a href="https://www.amazon.com/dp/B0C5NBXFRJ"><img
 src="https://i.postimg.cc/C19cLvSK/mock-00016.png"
@@ -29,7 +33,7 @@ Learn in plain language and stories about the current renaissance in __Computer 
 
 ## Early Hype
 
-Kind readers wrote [positive things about the pre-release manuscript.](https://quip.com/GVnIAGPGfXlC) I'm so grateful to my advance readers! They make me feel like the last ~22 months of research, writing, and editing have been worthwhile.
+Advance readers wrote [positive things about the pre-release manuscript.](https://quip.com/GVnIAGPGfXlC) This makes me feel like the last ~22 months of research, writing, and editing have been worthwhile.
 
 ```
 “A comprehensive and well-researched exploration of the latest 

@@ -1,10 +1,10 @@
 ---
-title: "AWS DevOps Pro Certification"
+title: "Certification: AWS DevOps Pro"
 date: 2023-06-08T02:25:46-05:00
 lastmod: 2023-06-08T02:25:46-05:00
 Description: "Robert Boscacci is a devops engineer. He wants to help you \
 pass the aws devops professional certification by sharing his notes here."
-summary: "Notes from my studies"
+summary: "Notes from my certification exam studies"
 keywords:
  - Robert Boscacci
  - DevOps

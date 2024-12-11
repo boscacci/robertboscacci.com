@@ -7,20 +7,19 @@ title = "Robert Boscacci"
 # copyright = "Copy, _right?_ :thinking_face:"
 
 [params]
-  dateFormat = "2 January 2006"
+dateFormat = "2 January 2006"
 
-  # mainSections = ["section1", "section2"]
-  # description = "My awesome website"
+# mainSections = ["section1", "section2"]
+# description = "My awesome website"
 
-[author]
+[params.author]
 name = "Robert Boscacci"
 image = "img/me.jpg"
 headline = "Data Engineer and Nonfiction Author"
 bio = "Cinema technician who learned to code"
-links = [ 
-  { linkedin = "https://linkedin.com/in/rboscacci" },
+links = [
   { github = "https://github.com/boscacci" },
-  { threads = "https://www.threads.net/@cinemarob1"},
+  { linkedin = "https://linkedin.com/in/rboscacci" },
   { instagram = "https://instagram.com/cinemarob1" },
-  { youtube = "https://www.imdb.com/name/nm4574526"},
+  { bluesky = "https://bsky.app/profile/robertboscacci.com" },
 ]

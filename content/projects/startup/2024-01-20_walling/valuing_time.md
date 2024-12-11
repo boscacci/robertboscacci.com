@@ -6,6 +6,7 @@ draft: false
 related: false
 Description: "Robert Boscacci is a data scientist reading books on startups and micro-saas" # Keep to 150-160 chars
 toc: true
+summary: Putting a value on your time is a foundational step in becoming an entrepreneur
 keywords:
  - Robert Boscacci
  - Data science

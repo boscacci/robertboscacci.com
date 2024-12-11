@@ -1,11 +1,11 @@
 ---
-title: "Notes on \"Start Small, Stay-Small: A Developer's Guide to Launching a Startup\""
+title: "Notes on Walling's \"Start Small, Stay-Small\""
 date: 2024-01-20T2:25:46-05:00
 # lastmod: 2024-01-20T05:25:46-05:00
 draft: false
 related: false
 Description: "Robert Boscacci is a data scientist reading books on startups and micro-saas" # Keep to 150-160 chars
-preview: "This is the preview text"
+summary: "It's from 2010, but I found it insightful, compact, and encouraging"
 keywords:
  - Robert Boscacci
  - Data science

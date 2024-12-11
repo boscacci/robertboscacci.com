@@ -5,6 +5,7 @@ date: 2024-01-18T2:25:46-05:00
 draft: false
 related: false
 Description: "Robert Boscacci is a data scientist reading books on startups and micro-saas" # Keep to 150-160 chars
+summary: If you can find a small group of people and make them amazingly happy, you will make money
 toc: true
 keywords:
  - Robert Boscacci
@@ -55,8 +56,8 @@ keywords:
   * Examine your hobbies, interests and work experience
 * __Approach #2__: Look at Occupations
   * Scan through the following lists of occupations to determine if you have any experience with them, or if you know someone who does:
-    * http://en.wikipedia.org/wiki/List_of_occupations
-    * http://www.bls.gov/news.release/ocwage.t01.htm
+    * <http://en.wikipedia.org/wiki/List_of_occupations>
+    * <http://www.bls.gov/news.release/ocwage.t01.htm>
 
 ## Evaluating Niches
 
@@ -73,7 +74,7 @@ keywords:
 ### Right Size Niche
 
 * If a market has a magazine devoted to it, it’s large enough to provide enough customers
-* Look at census and labor statistics to get an estimate of your market size. 
+* Look at census and labor statistics to get an estimate of your market size.
 * “Market size” research should involve the following:
   * A web search for related magazines and websites
   * Tracking down their advertising rate cards

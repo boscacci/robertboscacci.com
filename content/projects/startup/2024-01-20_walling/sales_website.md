@@ -5,6 +5,7 @@ date: 2024-01-14T2:25:46-05:00
 draft: false
 related: false
 Description: "Robert Boscacci is a data scientist reading books on startups and micro-saas" # Keep to 150-160 chars
+summary: Improving Conversion > Getting More Traffic
 keywords:
  - Robert Boscacci
  - Data science
