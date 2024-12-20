@@ -11,4 +11,4 @@ keywords:
 Description: "Robert Boscacci is a data scientist and engineer looking to get entrepreneurial." # Keep to 150-160 chars
 ---
 
-(I'm not starting anything up yet - just making notes)
+Just some notes I've taken on entrepreneurship.
