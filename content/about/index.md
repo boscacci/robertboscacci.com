@@ -27,10 +27,9 @@ My [professional history is on LinkedIn](https://www.linkedin.com/in/rboscacci/)
 
 I live with my super cool genomic-science-lady fiance [Catherine](https://www.linkedin.com/in/catherine-mayo-ms-cgc-126153111/) in Brooklyn, NY, but not for long; we're moving to Seattle in July 2025, after our wedding.
 
-<div style="display: flex; justify-content: center; align-items: center; width: 100%; margin: 2em 0;">
+<div style="display: flex; justify-content: center; align-items: center; width: 100%; margin: 1em 0;">
   <div data-iframe-width="150" data-iframe-height="270" data-share-badge-id="7afe970a-4997-459d-92ab-ae0e86ae48c6" data-share-badge-host="https://www.credly.com"></div>
-</div>
-<script type="text/javascript" async src="//cdn.credly.com/assets/utilities/embed.js"></script>
+</div><script type="text/javascript" async src="//cdn.credly.com/assets/utilities/embed.js"></script>
 
 ## Mind Map
 
