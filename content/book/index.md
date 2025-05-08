@@ -21,7 +21,7 @@ How does the human experience change, now that computers can "see"?
 
 __The Spring of Sight__ is my first book. It's a quick (179 page) nonfiction tech futurism / ethics read centered on _computer vision_.
 
-Paperbacks and ebooks are available for purchase via [Barnes & Noble](https://www.barnesandnoble.com/w/the-spring-of-sight-robert-boscacci/1143513153?ean=9798889269533), [Amazon](https://www.amazon.com/dp/B0C5NBXFRJ), and [Kobo](https://www.kobo.com/us/en/ebook/the-spring-of-sight). It's likely that you already have $1 in promotional "[Kindle store credit](https://www.amazon.com/dp/B0C5NBXFRJ)" which can be used to download an effectively free digital copy.
+Paperbacks and ebooks are available for purchase via [Barnes & Noble](https://www.barnesandnoble.com/w/the-spring-of-sight-robert-boscacci/1143513153?ean=9798889269946), [Amazon](https://www.amazon.com/dp/B0C5NBXFRJ), and [Kobo](https://www.kobo.com/us/en/ebook/the-spring-of-sight). It's likely that you already have $1 in promotional "[Kindle store credit](https://www.amazon.com/dp/B0C5NBXFRJ)" which can be used to download an effectively free digital copy.
 
 <a href="https://www.amazon.com/dp/B0C5NBXFRJ"><img
 src="https://i.postimg.cc/C19cLvSK/mock-00016.png"
