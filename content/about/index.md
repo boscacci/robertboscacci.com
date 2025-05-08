@@ -1,8 +1,8 @@
 ---
-title: "About Rob"
+title: "Me, me, me"
 toc: false
 date: "2022-11-27"
-lastmod: 2024-12-10T02:23:46-05:00
+lastmod: 2025-05-08T02:23:46-05:00
 showReadingTime: false
 draft: false
 Description: "Robert Boscacci is a data engineer and nonfiction author. He lives in Brooklyn, NY and helps run the Prospect Park Chess Club. His nonfiction book is called The Spring of Sight." # Keep to 150-160 chars
@@ -17,13 +17,20 @@ keywords:
  - Author
  - Prospect Park Chess Club
 ---
-I'm a data engineer and [author](/book) 📚 who used to work in [film](https://www.imdb.com/name/nm4574526/) 🎬
+I'm an AWS-[certified](https://www.credly.com/badges/7afe970a-4997-459d-92ab-ae0e86ae48c6/public_url) Data Engineer and [author](/book)  📖 who used to work in [film](https://www.imdb.com/name/nm4574526/)🎬
 
-[_The Spring of Sight_](/book) is my debut nonfiction book. It's a tech ethics read for lay-people about computer vision and society. Grab a copy for [99¢ on the kindle store](https://www.amazon.com/Spring-Sight-Inflection-Computer-Society-ebook/dp/B0C5NBXFRJ)!
+[_The Spring of Sight_](/book) is my debut nonfiction book from 2022. It's about computer vision and its big implications for society. I wrote it with my boomer real-estate-agent mother in mind, so it should be highly readable even if you've never written a line of code! Grab a copy for only [99¢ on the kindle store](https://www.amazon.com/Spring-Sight-Inflection-Computer-Society-ebook/dp/B0C5NBXFRJ).
 
-[My day job](https://www.linkedin.com/in/rboscacci/) is currently "Senior Data Mining Engineer" at Angi dot com (FKA "Angie's List"). It involves programming _cloud computers_ to scrape and clean web data, mostly with Python and NodeJS. [Angi is hiring](https://www.angi.com/careers), so reach out if you see a role that calls to you!
+My [professional history is on LinkedIn](https://www.linkedin.com/in/rboscacci/). I've been coding for money since early 2019 in roles like "Data Scientist" or "Senior Data Mining Engineer." Someday, I hope to work in a role that can use both:
+* My 10+ years of domain knowledge in video (post-production), and also...
+* My 6+ years exp. in automation, __computer vision__, and cloud computing
 
-I grew up in Silicon Valley, and it shows. Now I live with my fiancée in Brooklyn, NY.
+I live with my super cool genomic-science-lady fiance [Catherine](https://www.linkedin.com/in/catherine-mayo-ms-cgc-126153111/) in Brooklyn, NY, but not for long; we're moving to Seattle in July 2025, after our wedding.
+
+<div style="display: flex; justify-content: center; align-items: center; width: 100%; margin: 2em 0;">
+  <div data-iframe-width="150" data-iframe-height="270" data-share-badge-id="7afe970a-4997-459d-92ab-ae0e86ae48c6" data-share-badge-host="https://www.credly.com"></div>
+</div>
+<script type="text/javascript" async src="//cdn.credly.com/assets/utilities/embed.js"></script>
 
 ## Mind Map
 
