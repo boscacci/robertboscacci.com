@@ -57,8 +57,8 @@ I [am credited](https://www.imdb.com/name/nm4574526/) as a colorist or dailies t
 
 ## About This Site
 
-* [Built](https://github.com/boscacci/boscacci.github.io) with the [Congo](https://jpanther.github.io/congo/) theme on [Hugo](https://gohugo.io/), "the world's fastest framework"
-* Deployed via github pages with automatic [git workflows](https://github.com/boscacci/boscacci.github.io/actions)
+* [Built](https://github.com/boscacci/robertboscacci.com) with the [Congo](https://jpanther.github.io/congo/) theme on [Hugo](https://gohugo.io/), "the world's fastest framework"
+* Deployed via github pages with automatic [git workflows](https://github.com/boscacci/robertboscacci.com/actions)
 * [AWS Route53](https://aws.amazon.com/route53/) for DNS stuff
 
 ## Contact
