@@ -17,19 +17,23 @@ keywords:
  - Author
  - Prospect Park Chess Club
 ---
-I'm an AWS-[certified](https://www.credly.com/badges/7afe970a-4997-459d-92ab-ae0e86ae48c6/public_url) Data Engineer and [author](/book)  📖 who used to work in [film](https://www.imdb.com/name/nm4574526/)🎬
+I'm an AWS-[certified](https://www.credly.com/badges/7afe970a-4997-459d-92ab-ae0e86ae48c6/public_url) Data Engineer and [author](/book) 📖 who used to work in [film](https://www.imdb.com/name/nm4574526/)🎬!
 
-[_The Spring of Sight_](/book) is my debut nonfiction book from 2022. It's about computer vision and its big implications for society. I wrote it with my boomer real-estate-agent mother in mind, so it should be highly readable even if you've never written a line of code! Grab a copy for only [99¢ on the kindle store](https://www.amazon.com/Spring-Sight-Inflection-Computer-Society-ebook/dp/B0C5NBXFRJ).
+[_The Spring of Sight_](/book) (2022) is my debut nonfiction book. It's about the ongoing renaissance in __Computer Vision__ and its big implications for society.
 
-My [professional history is on LinkedIn](https://www.linkedin.com/in/rboscacci/). I've been coding for money since early 2019 in roles like "Data Scientist" or "Senior Data Mining Engineer." Someday, I hope to work in a role that can use both:
-* My 10+ years of domain knowledge in video (post-production), and also...
-* My 6+ years exp. in automation, __computer vision__, and cloud computing
+My [career history is on LinkedIn](https://www.linkedin.com/in/rboscacci/). In a nutshell, I am a pro with Python, shell scripting, and AWS. I've been coding for money since 2019 in roles like "Data Science Lead" at [Butter Works](https://butter.works) or "Sr. Data Mining Engineer" at [Angi](https://www.angi.com/aboutus.htm). I am a fan of Docker, serverless stuff, and infrastructure-as-code. I've _really_ enjoyed fine-tuning [vision models](https://huggingface.co/spaces/cinemarob1/Film-slate-or-nah).
 
-I live with my super cool genomic-science-lady fiance [Catherine](https://www.linkedin.com/in/catherine-mayo-ms-cgc-126153111/) in Brooklyn, NY, but not for long; we're moving to Seattle in July 2025, after our wedding.
+I'm hoping to find work with an org that is at least morally neutral (i.e. no Amazon/Google/Meta/Walmart/Lockheed/Monsanto) and can use both:
+* My 10+ years deep domain knowledge in __video__ (production + post)
+* My 6+ years exp. in automation, __computer vision__, and cloud computing.
 
-<div style="display: flex; justify-content: center; align-items: center; width: 100%; margin: 1em 0;">
-  <div data-iframe-width="150" data-iframe-height="270" data-share-badge-id="7afe970a-4997-459d-92ab-ae0e86ae48c6" data-share-badge-host="https://www.credly.com"></div>
+For example, I would LOVE to help improve patient outcomes and ease the burden on overworked healthcare workers! I believe this is one of the best use-cases for computer vision. Otherwise, I could see myself at really any company that wants to do [innovative new things with computer vision](https://www.caltech.edu/about/news/neural-networks-model-audience-reactions-movies-79098). Perhaps in film.
+
+<div style="display: flex; justify-content: center; align-items: center; width: 100%; margin: 0.1em 0;">
+  <div data-iframe-width="250" data-iframe-height="240" data-share-badge-id="7afe970a-4997-459d-92ab-ae0e86ae48c6" data-share-badge-host="https://www.credly.com"></div>
 </div><script type="text/javascript" async src="//cdn.credly.com/assets/utilities/embed.js"></script>
+
+I live with my rad genomic-science-lady [fiance](https://www.linkedin.com/in/catherine-mayo-ms-cgc-126153111/) in Brooklyn, NY, but not for long; we're moving to Seattle in July 2025. I love cycling, backpacking, cold-brewing 3 liters of specialty coffee at a time, and my two cats.
 
 ## Mind Map
 
@@ -49,16 +53,7 @@ width="900"/></a>
 
 ## Cinema Career
 
-I [am credited](https://www.imdb.com/name/nm4574526/) as a colorist and dailies technician on major motion pictures and episodics featuring Pedro Pascal, Spike Lee, Paul Giamatti, Errol Morris, and more.
-
-My 10+ year career in film and TV production brought me to:
-
-* Bogotá
-* Myanmar
-* Alaska
-* Alcatraz
-* Hawaii
-* The U.S.-Mexico border
+I [am credited](https://www.imdb.com/name/nm4574526/) as a colorist or dailies technician on major movies and TV shows featuring Pedro Pascal, Spike Lee, Paul Giamatti, Errol Morris, and more. My 10+ year career in film brought me to Bogotá, Myanmar, Alaska, Alcatraz, Hawaii, the U.S.-Mexico border, and beyond. Someday I'd love to bring my new skill-set back to the industry that taught me what it means to be a professional.
 
 ## About This Site
 

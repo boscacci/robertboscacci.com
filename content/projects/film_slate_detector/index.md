@@ -5,6 +5,7 @@ date: 2023-05-25T02:25:46-05:00
 lastmod: 2023-05-25T02:25:46-05:00
 draft: false
 Description: "Robert Boscacci is a data scientist and author. He knows how to fine-tune an object detection computer vision model. He used this ability to make a film slate detector." # Keep to 150-160 chars
+Summary: I used CVAT, FiftyOne, WandB, and "IceVision" to fine-tune an object detector.
 keywords:
  - Robert Boscacci
  - Data science
