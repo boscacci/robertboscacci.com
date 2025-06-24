@@ -23,11 +23,11 @@ I'm an AWS-[certified](https://www.credly.com/badges/7afe970a-4997-459d-92ab-ae0
 
 My [career history is on LinkedIn](https://www.linkedin.com/in/rboscacci/). In a nutshell, I am a pro with Python, shell scripting, and AWS. I've been coding for money since 2019 in roles like "Data Science Lead" at [Butter Works](https://butter.works) or "Sr. Data Mining Engineer" at [Angi](https://www.angi.com/aboutus.htm). I am a fan of Docker, serverless stuff, and infrastructure-as-code. I've _really_ enjoyed fine-tuning [vision models](https://huggingface.co/spaces/cinemarob1/Film-slate-or-nah).
 
-I'm hoping to find work with an org that is at least morally neutral (i.e. no Amazon/Google/Meta/Walmart/Lockheed/Monsanto) and can use both:
-* My 10+ years deep domain knowledge in __video__ (production + post)
+In my next professional role, I would love to draw from both:
 * My 6+ years exp. in automation, __computer vision__, and cloud computing.
+* My 10+ years deep domain knowledge in __video__ (production + post)
 
-For example, I would LOVE to help improve patient outcomes and ease the burden on overworked healthcare workers! I believe this is one of the best use-cases for computer vision. Otherwise, I could see myself at really any company that wants to do [innovative new things with computer vision](https://www.caltech.edu/about/news/neural-networks-model-audience-reactions-movies-79098). Perhaps in film.
+For example, I would LOVE to help improve patient outcomes and ease the burden on overworked healthcare workers! I believe this is one of the best use-cases for computer vision. Otherwise, I could see myself at really any company that wants to do [innovative new things with computer vision](https://www.caltech.edu/about/news/neural-networks-model-audience-reactions-movies-79098). Perhaps in the entertainment industry, where I came from.
 
 <div style="display: flex; justify-content: center; align-items: center; width: 100%; margin: 0.1em 0;">
   <div data-iframe-width="250" data-iframe-height="240" data-share-badge-id="7afe970a-4997-459d-92ab-ae0e86ae48c6" data-share-badge-host="https://www.credly.com"></div>
