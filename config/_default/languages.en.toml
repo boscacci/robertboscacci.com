@@ -15,11 +15,10 @@ dateFormat = "2 January 2006"
 [params.author]
 name = "Robert Boscacci"
 image = "img/me.jpg"
-headline = "Data Engineer and Nonfiction Author"
+headline = "Data Engineer from the Film Biz"
 bio = "Cinema technician who learned to code"
 links = [
   { github = "https://github.com/boscacci" },
   { linkedin = "https://linkedin.com/in/rboscacci" },
-  { instagram = "https://instagram.com/cinemarob1" },
   { bluesky = "https://bsky.app/profile/robertboscacci.com" },
 ]

@@ -1,7 +1,7 @@
 ---
 title: "The Spring of Sight"
 date: 2022-08-15T02:25:46-05:00
-lastmod: 2024-12-10T02:23:46-05:00
+lastmod: 2025-09-25T02:23:46-05:00
 draft: false
 Description: "The Spring of Sight is a nonfiction technology futurism book \
 about computer vision, machine learning, ethics, and society. Algorithmic bias \
@@ -98,10 +98,10 @@ The Spring of Sight is a nonfiction book that speaks to futurists and activists 
 
 ## About the Author
 
-Robert Boscacci is the former Data Science Lead at Butter Works, a startup that used computer vision to analyze dozens of thousands of social media videos for clients like Disney+, Netflix, Spotify, and ViacomCBS. He comes from a background in New York City’s film post-production industry, with [IMdB credits](https://www.imdb.com/name/nm4574526/) as a film colorist and dailies technician on Netflix features and episodic productions.
+Robert Boscacci was the Data Science Lead at Butter Works, a startup that used computer vision to analyze thousands of social media videos for clients like Netflix, Spotify, and ViacomCBS. He comes from a background in New York City's film post-production industry, with [IMdB credits](https://www.imdb.com/name/nm4574526/) as a film colorist and dailies technician on Netflix original features and episodic productions.
 
-Boscacci is curious about how tech policy can become more proactive, so that communities and organizations can maximize the utility and minimize the harm of the cutting edge. He hopes to encourage readers from all walks of life to join the conversation around tech and policy—so that the folks who normally get steamrolled in the name of progress are more empowered to make their voices heard, and those driving the steamrollers become more aware of themselves.
+Boscacci is curious about how tech policy can become more proactive, so that communities and organizations maximize the utility and minimize the harm of cutting edge tools. He hopes to encourage readers from all walks of life to join the conversation around tech and policy so that the folks who normally get steamrolled in the name of progress are more empowered to make their voices heard.
 
-Boscacci is the caricature of a millennial Brooklyn hipster: Picture him wearing his nearly non-prescription glasses, dismounting his fixie and tapping to pay to slurp a single-origin espresso on his way to the nonprofit repertory cinema. He un-ironically holds a fishing license from the state of New York and uses it to catch Bluegill in the Prospect Park Lake.
+Boscacci is a bright-eyed new Seattleite: Picture him wearing his nearly non-prescription glasses, dismounting his 2001 road bike while tapping to pay for a single-origin espresso on his way to the repertory cinema. He just got his boater safety card and is looking for pals with whom to cycle and play pickleball, plus seeking his next home chess meetup.
 
-He is reachable at boscacci.data[at]gmail[dot]com
+He can be emailed at rob[at]boscacci[dot]com.
