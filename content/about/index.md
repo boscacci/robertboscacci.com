@@ -70,14 +70,13 @@ I'm equally enthusiastic about two main directions for my next role—and they'r
 
 I'm open to either path—or a blend of both. Whether it's advancing media analytics, contributing to mission-driven projects, or working at the intersection of the two, I'm eager to apply my skills where they can make a meaningful difference.
 
-## Personal Life
+## Former Career in Cinema
 
-- Live in Seattle, WA with my rad genomic-science-lady [wife](https://www.linkedin.com/in/catherine-mayo-ms-cgc-126153111/)
-- Enjoy:
-  - Cycling + Rock Climbing
-  - Backpacking + Hiking
-  - Cold-brewing 3 liters of specialty coffee at a time
-  - Coodling my two cats
+- [Credited](https://www.imdb.com/name/nm4574526/) as a colorist or dailies technician on major movies and TV shows featuring:
+  - [Pedro Pascal / Oscar Isaac / Charlie Hunnam](https://www.imdb.com/title/tt1488606/fullcredits/?ref_=tt_cst_sm)
+  - [Spike Lee / DeWanda Wise / Anthony Ramos](https://www.imdb.com/title/tt6075358/fullcredits/?ref_=tt_cst_sm)
+  - [Paul Giamatti / Maggie Siff / Damian Lewis](https://www.imdb.com/title/tt5960350/fullcredits/?ref_=tt_cst_sm)
+  - [Errol Morris / Peter Sarsgaard](https://www.imdb.com/title/tt7310192/fullcredits/?ref_=tt_cst_sm)
 
 ## Mind Map
 
@@ -87,19 +86,20 @@ I'm open to either path—or a blend of both. Whether it's advancing media analy
 src="/about/img/skills_interests_values.png"
 width="900"/></a>
 
+## Personal Life
+
+- Live in Seattle, WA with my rad genomic-science-lady [wife](https://www.linkedin.com/in/catherine-mayo-ms-cgc-126153111/)
+- Enjoy:
+  - Cycling + Rock Climbing
+  - Backpacking + Hiking
+  - Cold-brewing 3 liters of specialty coffee at a time
+  - Coodling my two cats
+
 ## Trivia
 
-- [The New York Times piece](https://www.nytimes.com/2018/09/03/realestate/a-couch-surfer-lands-his-perfect-apartment.html) on my move from SFBay to NYC
-- Ate a flaming muffin in [a semi-popular music video from 2011](https://youtu.be/5dE-7-kBxXw?t=135)
-- [Walked clear across](https://magazine.scu.edu/magazines/spring-2013/walk-across-california/) the state of California as part of a university class
-
-## Cinema Career
-
-- [Credited](https://www.imdb.com/name/nm4574526/) as a colorist or dailies technician on major movies and TV shows featuring:
-  - [Pedro Pascal / Oscar Isaac / Charlie Hunnam](https://www.imdb.com/title/tt1488606/fullcredits/?ref_=tt_cst_sm)
-  - [Spike Lee / DeWanda Wise / Anthony Ramos](https://www.imdb.com/title/tt6075358/fullcredits/?ref_=tt_cst_sm)
-  - [Paul Giamatti / Maggie Siff / Damian Lewis](https://www.imdb.com/title/tt5960350/fullcredits/?ref_=tt_cst_sm)
-  - [Errol Morris / Peter Sarsgaard](https://www.imdb.com/title/tt7310192/fullcredits/?ref_=tt_cst_sm)
+- [The 2018 New York Times piece](https://www.nytimes.com/2018/09/03/realestate/a-couch-surfer-lands-his-perfect-apartment.html) on my move from the SFBay to NYC
+- Eating a flaming muffin in [a semi-popular music video from 2011](https://youtu.be/5dE-7-kBxXw?t=135)
+- [Walking clear across](https://magazine.scu.edu/magazines/spring-2013/walk-across-california/) the state of California as part of a university class
   
 ## About This Site
 
