@@ -1,6 +1,6 @@
 ---
-title: "Bluesky Bot with Cursor IDE and Vibe-Coding"
-toc: false
+title: "AI-Enhanced Bluesky Bot with Multi-Modal GPT-4o"
+showTableofcontents: false
 date: 2025-09-25T02:25:46-05:00
 lastmod: 2025-09-25T02:25:46-05:00
 draft: false
@@ -19,6 +19,8 @@ keywords:
  - Python
  - Flask
 ---
+
+🤖 🧠 💻 A multi-modal AI bot for Bluesky social media 👨‍💻 🚴‍♂️ 🏙️
 
 ## The Project
 

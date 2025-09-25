@@ -11,8 +11,8 @@
 # ordered by weight from lowest to highest.
 
 [[main]]
-name = "Book"
-pageRef = "/book"
+name = "About"
+pageRef = "/about"
 weight = 10
 
 [[main]]
@@ -21,13 +21,13 @@ pageRef = "/projects"
 weight = 20
 
 [[main]]
-name = "Blog"
-pageRef = "/blog"
+name = "Book"
+pageRef = "/book"
 weight = 30
 
 [[main]]
-name = "About"
-pageRef = "/about"
+name = "Blog"
+pageRef = "/blog"
 weight = 40
 
 # [[main]]
