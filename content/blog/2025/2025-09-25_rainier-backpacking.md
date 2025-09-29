@@ -27,9 +27,11 @@ tags:
 We're heading out for an easy 3-day backpacking trip in Mount Rainier National Park, and I wanted to share our plan, route, and a few tips in case you're considering something similar.
 {{< /lead >}}
 
+<a data-flickr-embed="true" href="https://www.flickr.com/photos/rboscacci1/54819223597/in/album-72177720329339062" title="2025-09-26_#51_Tahoma"><img src="https://live.staticflickr.com/65535/54819223597_c48c8833d4_b.jpg" width="771" height="1024" alt="2025-09-26_#51_Tahoma"/></a>
+
 ## Trip Overview
 
-We’ll be spending two nights in the backcountry (September 26-28, 2025), starting at the Dry Creek Trailhead. Our first night is at Lake George Camp, the second at South Puyallup River Camp, and then we’ll hike out on Sunday. If you’re interested in planning a similar trip, here’s how we’re approaching it.
+We’ll be spending two nights in the backcountry (September 26-28, 2025), starting at the [Dry Creek Trailhead](https://maps.app.goo.gl/eMJom3UHjkjNaEF78). Our first night is at [Lake George Camp](https://maps.app.goo.gl/RU9iJra885krCttTA), the second at [South Puyallup River Camp](https://maps.app.goo.gl/Vw8y6wH9tTB2Ux1T7), and then we’ll hike out on Sunday. If you’re interested in planning a similar trip, here’s how we’re approaching it.
 
 ## Permits & Passes
 
@@ -39,6 +41,8 @@ You’ll also need a park entrance pass. We use the very reasonably priced [Amer
 
 After a certain point in the season, they remove the "bear poles" that people can use to safely store food (up high) at campsites. Since they're coming down today, we'll be bringing our own bear-safe food canister for smellables. They also lend out complimentary bear canisters at the wilderness info centers, where you pick up your permits before setting out.
 
+<a data-flickr-embed="true" href="https://www.flickr.com/photos/rboscacci1/54820072061/in/album-72177720329339062/" title="2025-09-27_#15_Tahoma"><img src="https://live.staticflickr.com/65535/54820072061_b7685ed289_b.jpg" width="1024" height="771" alt="2025-09-27_#15_Tahoma"/></a>
+
 ## Our Itinerary
 
 ### Friday, September 26th
@@ -47,15 +51,42 @@ After a certain point in the season, they remove the "bear poles" that people ca
 - Park at Dry Creek Trailhead and start hiking
 - Hike about 4.5 miles to Lake George Camp (aiming to arrive before dark)
 
+<a data-flickr-embed="true" href="https://www.flickr.com/photos/rboscacci1/54820405295/in/album-72177720329339062/" title="2025-09-26_#55_Tahoma"><img src="https://live.staticflickr.com/65535/54820405295_20ac25630b_b.jpg" width="1024" height="771" alt="2025-09-26_#55_Tahoma"/></a>
+
+<a data-flickr-embed="true" href="https://www.flickr.com/photos/rboscacci1/54819223407/in/album-72177720329339062/" title="2025-09-26_#50_Tahoma"><img src="https://live.staticflickr.com/65535/54819223407_ffd53af456_b.jpg" width="771" height="1024" alt="2025-09-26_#50_Tahoma"/></a>
+
+<a data-flickr-embed="true" href="https://www.flickr.com/photos/rboscacci1/54820405115/in/album-72177720329339062/" title="2025-09-26_#48_Tahoma"><img src="https://live.staticflickr.com/65535/54820405115_711f37086a_b.jpg" width="771" height="1024" alt="2025-09-26_#48_Tahoma"/></a>
+
+<a data-flickr-embed="true" href="https://www.flickr.com/photos/rboscacci1/54820338528/in/album-72177720329339062/" title="2025-09-27_#50_Tahoma"><img src="https://live.staticflickr.com/65535/54820338528_132c7f10e7_b.jpg" width="1024" height="771" alt="2025-09-27_#50_Tahoma"/></a>
+
+<a data-flickr-embed="true" href="https://www.flickr.com/photos/rboscacci1/54820323584/in/album-72177720329339062/" title="2025-09-27_#27_Tahoma"><img src="https://live.staticflickr.com/65535/54820323584_9b95f52d93_b.jpg" width="771" height="1024" alt="2025-09-27_#27_Tahoma"/></a>
+
+The Lake George campsite boasts a primitive pit latrine:
+<a data-flickr-embed="true" href="https://www.flickr.com/photos/rboscacci1/54820338533/in/album-72177720329339062" title="2025-09-27_#49_Tahoma"><img src="https://live.staticflickr.com/65535/54820338533_35f5b2ca2d_b.jpg" width="771" height="1024" alt="2025-09-27_#49_Tahoma"/></a>
+
+<a data-flickr-embed="true" href="https://www.flickr.com/photos/rboscacci1/54819223337/in/album-72177720329339062/" title="2025-09-27_#50_Tahoma-2"><img src="https://live.staticflickr.com/65535/54819223337_d91f483074_b.jpg" width="771" height="1024" alt="2025-09-27_#50_Tahoma-2"/></a>
+
 ### Saturday, September 27th  
 - Hike about 3 (steep) miles to South Puyallup River Camp
 - Set up camp, then day-hike or explore nearby
 - Relax and chill; let the mountain seep into our subconscious
 
+<a data-flickr-embed="true" href="https://www.flickr.com/photos/rboscacci1/54820323579/in/album-72177720329339062/" title="2025-09-27_#16_Tahoma"><img src="https://live.staticflickr.com/65535/54820323579_6b3a97d530_b.jpg" width="771" height="1024" alt="2025-09-27_#16_Tahoma"/></a>
+
+<a data-flickr-embed="true" href="https://www.flickr.com/photos/rboscacci1/54820338618/in/album-72177720329339062/" title="2025-09-27_#23_Tahoma"><img src="https://live.staticflickr.com/65535/54820338618_c3e60948a5_b.jpg" width="771" height="1024" alt="2025-09-27_#23_Tahoma"/></a>
+
+<a data-flickr-embed="true" href="https://www.flickr.com/photos/rboscacci1/54819223522/in/album-72177720329339062/" title="2025-09-27_#06_Tahoma"><img src="https://live.staticflickr.com/65535/54819223522_fac06cd298_b.jpg" width="771" height="1024" alt="2025-09-27_#06_Tahoma"/></a>
+
+<a data-flickr-embed="true" href="https://www.flickr.com/photos/rboscacci1/54820338638/in/album-72177720329339062/" title="2025-09-27_#09_Tahoma"><img src="https://live.staticflickr.com/65535/54820338638_d53d620241_b.jpg" width="1024" height="771" alt="2025-09-27_#09_Tahoma"/></a>
+
+<a data-flickr-embed="true" href="https://www.flickr.com/photos/rboscacci1/54819223427/in/album-72177720329339062/" title="2025-09-27_#45_Tahoma"><img src="https://live.staticflickr.com/65535/54819223427_da93e5d9f0_b.jpg" width="771" height="1024" alt="2025-09-27_#45_Tahoma"/></a>
+
 ### Sunday, September 28th
 - Hike back to the car
 - Grab a burger at the In n' Out Burger [imitation restaurant](https://www.instagram.com/outandaboutburgers/?hl=en) in Puyallup on the way home
 - Go home and coodle our cats 🐱
+
+<a data-flickr-embed="true" href="https://www.flickr.com/photos/rboscacci1/54820338538/in/album-72177720329339062/" title="2025-09-28_#13_Tahoma"><img src="https://live.staticflickr.com/65535/54820338538_7cea9ae79a_b.jpg" width="771" height="1024" alt="2025-09-28_#13_Tahoma"/></a><script async src="//embedr.flickr.com/assets/client-code.js" charset="utf-8"></script>
 
 ## Packing & Planning
 
@@ -84,7 +115,3 @@ We’ve shared our itinerary with family and have a plan in place:
 ## Looking Forward
 
 We’re excited to get out of the city, challenge ourselves to the small climb (with pack weight), and enjoy some quiet nights in the backcountry. And, of course, we’re looking forward to that post-hike burger and seeing our cats again.
-
----
-
-*We’ll share photos and a trip report when we return.*
