@@ -77,6 +77,8 @@ The Lake George campsite boasts a primitive pit latrine:
 
 <a data-flickr-embed="true" href="https://www.flickr.com/photos/rboscacci1/54819223522/in/album-72177720329339062/" title="2025-09-27_#06_Tahoma"><img src="https://live.staticflickr.com/65535/54819223522_fac06cd298_b.jpg" width="771" height="1024" alt="2025-09-27_#06_Tahoma"/></a>
 
+<a data-flickr-embed="true" href="https://www.flickr.com/photos/rboscacci1/54819223452/in/dateposted-public/" title="2025-09-27_#44_Tahoma"><img src="https://live.staticflickr.com/65535/54819223452_765042cc23_b.jpg" width="771" height="1024" alt="2025-09-27_#44_Tahoma"/></a>
+
 Insane walls of [columnar basalt](https://www.youtube.com/watch?v=W-e7zJsSCI4) near S. Puyallup River Camp:
 
 <a data-flickr-embed="true" href="https://www.flickr.com/photos/rboscacci1/54820338638/in/album-72177720329339062/" title="2025-09-27_#09_Tahoma"><img src="https://live.staticflickr.com/65535/54820338638_d53d620241_b.jpg" width="1024" height="771" alt="2025-09-27_#09_Tahoma"/></a>
