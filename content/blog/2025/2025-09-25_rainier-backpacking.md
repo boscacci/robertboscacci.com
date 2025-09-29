@@ -88,7 +88,9 @@ Insane walls of [columnar basalt](https://www.youtube.com/watch?v=W-e7zJsSCI4) n
 - Grab a burger at the In n' Out Burger [imitation restaurant](https://www.instagram.com/outandaboutburgers/?hl=en) in Puyallup on the way home
 - Go home and coodle our cats 🐱
 
-<a data-flickr-embed="true" href="https://www.flickr.com/photos/rboscacci1/54820338538/in/album-72177720329339062/" title="2025-09-28_#13_Tahoma"><img src="https://live.staticflickr.com/65535/54820338538_7cea9ae79a_b.jpg" width="771" height="1024" alt="2025-09-28_#13_Tahoma"/></a><script async src="//embedr.flickr.com/assets/client-code.js" charset="utf-8"></script>
+<a data-flickr-embed="true" href="https://www.flickr.com/photos/rboscacci1/54820338538/in/album-72177720329339062/" title="2025-09-28_#13_Tahoma"><img src="https://live.staticflickr.com/65535/54820338538_7cea9ae79a_b.jpg" width="771" height="1024" alt="2025-09-28_#13_Tahoma"/></a>
+
+<a data-flickr-embed="true" href="https://www.flickr.com/photos/rboscacci1/54820461834/in/dateposted-public/" title="out_and_about_burger"><img src="https://live.staticflickr.com/65535/54820461834_8136439968_b.jpg" width="768" height="1024" alt="out_and_about_burger"/></a>
 
 ## Packing & Planning
 
@@ -116,4 +118,4 @@ We share our itinerary with family and have a plan in place:
 
 ## Looking Forward
 
-We’re excited to get out of the city, challenge ourselves to the small climb (with pack weight), and enjoy some quiet nights in the backcountry. And, of course, we look forward to that post-hike burger and seeing our cats again.
+Next weekend we're headed to the Olympics! Expect another trip report post like this one.
