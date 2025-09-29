@@ -24,22 +24,22 @@ tags:
 ---
 
 {{< lead >}}
-We're heading out for an easy 3-day backpacking trip in Mount Rainier National Park, and I wanted to share our plan, route, and a few tips in case you're considering something similar.
+We're heading out for an easy 3-day backpacking trip in Mount Rainier National Park, and I want to share our plan, route, and a few tips in case you're considering something similar.
 {{< /lead >}}
 
 <a data-flickr-embed="true" href="https://www.flickr.com/photos/rboscacci1/54819223597/in/album-72177720329339062" title="2025-09-26_#51_Tahoma"><img src="https://live.staticflickr.com/65535/54819223597_c48c8833d4_b.jpg" width="771" height="1024" alt="2025-09-26_#51_Tahoma"/></a>
 
 ## Trip Overview
 
-We’ll be spending two nights in the backcountry (September 26-28, 2025), starting at the [Dry Creek Trailhead](https://maps.app.goo.gl/eMJom3UHjkjNaEF78). Our first night is at [Lake George Camp](https://maps.app.goo.gl/RU9iJra885krCttTA), the second at [South Puyallup River Camp](https://maps.app.goo.gl/Vw8y6wH9tTB2Ux1T7), and then we’ll hike out on Sunday. If you’re interested in planning a similar trip, here’s how we’re approaching it.
+We spend two nights in the backcountry (September 26-28, 2025), starting at the [Dry Creek Trailhead](https://maps.app.goo.gl/eMJom3UHjkjNaEF78). Our first night is at [Lake George Camp](https://maps.app.goo.gl/RU9iJra885krCttTA), the second at [South Puyallup River Camp](https://maps.app.goo.gl/Vw8y6wH9tTB2Ux1T7), and then we hike out on Sunday. If you’re interested in planning a similar trip, here’s how we approach it.
 
 ## Permits & Passes
 
-We reserved our [wilderness permit](https://www.recreation.gov/permits/4675309) in advance through recreation.gov (wilderness.gov redirects there). If you expect to pick up your permit after 12pm, be sure to let the rangers know you’ll need a “late pickup”—otherwise, they may not hold your permit past noon.
+We reserve our [wilderness permit](https://www.recreation.gov/permits/4675309) in advance through recreation.gov (wilderness.gov redirects there). If you expect to pick up your permit after 12pm, be sure to let the rangers know you need a “late pickup”—otherwise, they may not hold your permit past noon.
 
-You’ll also need a park entrance pass. We use the very reasonably priced [America the Beautiful Pass](https://www.nps.gov/planyourvisit/passes.htm), which covers entry to all national parks for a year.
+You also need a park entrance pass. We use the very reasonably priced [America the Beautiful Pass](https://www.nps.gov/planyourvisit/passes.htm), which covers entry to all national parks for a year.
 
-After a certain point in the season, they remove the "bear poles" that people can use to safely store food (up high) at campsites. Since they're coming down today, we'll be bringing our own bear-safe food canister for smellables. They also lend out complimentary bear canisters at the wilderness info centers, where you pick up your permits before setting out.
+After a certain point in the season, they remove the "bear poles" that people can use to safely store food (up high) at campsites. Since they're coming down today, we bring our own bear-safe food canister for smellables. They also lend out complimentary bear canisters at the wilderness info centers, where you pick up your permits before setting out.
 
 <a data-flickr-embed="true" href="https://www.flickr.com/photos/rboscacci1/54820072061/in/album-72177720329339062/" title="2025-09-27_#15_Tahoma"><img src="https://live.staticflickr.com/65535/54820072061_b7685ed289_b.jpg" width="1024" height="771" alt="2025-09-27_#15_Tahoma"/></a>
 
@@ -47,7 +47,7 @@ After a certain point in the season, they remove the "bear poles" that people ca
 
 ### Friday, September 26th
 - Take a half day at work; leave Seattle after lunch
-- Pick up permits at Longmire Wilderness Info Center (let them know if you’ll arrive after 12pm)
+- Pick up permits at Longmire Wilderness Info Center (let them know if you arrive after 12pm)
 - Park at Dry Creek Trailhead and start hiking
 - Hike about 4.5 miles to Lake George Camp (aiming to arrive before dark)
 
@@ -77,6 +77,8 @@ The Lake George campsite boasts a primitive pit latrine:
 
 <a data-flickr-embed="true" href="https://www.flickr.com/photos/rboscacci1/54819223522/in/album-72177720329339062/" title="2025-09-27_#06_Tahoma"><img src="https://live.staticflickr.com/65535/54819223522_fac06cd298_b.jpg" width="771" height="1024" alt="2025-09-27_#06_Tahoma"/></a>
 
+Insane walls of [columnar basalt](https://www.youtube.com/watch?v=W-e7zJsSCI4) near S. Puyallup River Camp:
+
 <a data-flickr-embed="true" href="https://www.flickr.com/photos/rboscacci1/54820338638/in/album-72177720329339062/" title="2025-09-27_#09_Tahoma"><img src="https://live.staticflickr.com/65535/54820338638_d53d620241_b.jpg" width="1024" height="771" alt="2025-09-27_#09_Tahoma"/></a>
 
 <a data-flickr-embed="true" href="https://www.flickr.com/photos/rboscacci1/54819223427/in/album-72177720329339062/" title="2025-09-27_#45_Tahoma"><img src="https://live.staticflickr.com/65535/54819223427_da93e5d9f0_b.jpg" width="771" height="1024" alt="2025-09-27_#45_Tahoma"/></a>
@@ -90,7 +92,7 @@ The Lake George campsite boasts a primitive pit latrine:
 
 ## Packing & Planning
 
-I keep re-using and evolving this packing list that covers shared gear (tent, stove, bear canister), personal items, and a few fun extras. Feel free to use it as a reference:
+I keep re-using and evolve this packing list that covers shared gear (tent, stove, bear canister), personal items, and a few fun extras. Feel free to use it as a reference:
 
 {{< button href="https://docs.google.com/spreadsheets/d/1bgYjOy6dDmCtpgO7J9CV0az3ZHKAHv4Q3HqrpMCkoMY/edit?usp=sharing" target="_blank" >}}
 📋 View Packing List
@@ -106,12 +108,12 @@ Here’s our planned route on Gaia GPS:
 
 ## Safety & Communication
 
-We’ve shared our itinerary with family and have a plan in place:
-- If we’re not back by Sunday night, a family member will alert the rangers at Longmire
+We share our itinerary with family and have a plan in place:
+- If we’re not back by Sunday night, a family member alerts the rangers at Longmire
 - Permits are secured and our route is approved by the ranger station
-- We’re bringing a bear canister and following food storage guidelines
+- We bring a bear canister and follow food storage guidelines
 - Emergency contacts are set
 
 ## Looking Forward
 
-We’re excited to get out of the city, challenge ourselves to the small climb (with pack weight), and enjoy some quiet nights in the backcountry. And, of course, we’re looking forward to that post-hike burger and seeing our cats again.
+We’re excited to get out of the city, challenge ourselves to the small climb (with pack weight), and enjoy some quiet nights in the backcountry. And, of course, we look forward to that post-hike burger and seeing our cats again.
