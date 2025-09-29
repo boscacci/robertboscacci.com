@@ -43,6 +43,22 @@ After a certain point in the season, they remove the "bear poles" that people ca
 
 <a data-flickr-embed="true" href="https://www.flickr.com/photos/rboscacci1/54820072061/in/album-72177720329339062/" title="2025-09-27_#15_Tahoma"><img src="https://live.staticflickr.com/65535/54820072061_b7685ed289_b.jpg" width="1024" height="771" alt="2025-09-27_#15_Tahoma"/></a>
 
+## Packing & Planning
+
+I keep re-using and evolve this packing list that covers shared gear (tent, stove, bear canister), personal items, and a few fun extras. Feel free to use it as a reference:
+
+{{< button href="https://docs.google.com/spreadsheets/d/1bgYjOy6dDmCtpgO7J9CV0az3ZHKAHv4Q3HqrpMCkoMY/edit?usp=sharing" target="_blank" >}}
+📋 View Packing List
+{{< /button >}}
+
+## Route Map
+
+Here’s our planned route on Gaia GPS:
+
+{{< button href="https://www.gaiagps.com/map/?loc=12.6/-121.8837/46.7960&pubLink=7YyaVsBd1Ro0yoXYXkbgqmJy&routeId=93793a06-31e7-4cbf-9b8a-34e0da26c2df" target="_blank" >}}
+🗺️ View Route on Gaia GPS
+{{< /button >}}
+
 ## Our Itinerary
 
 ### Friday, September 26th
@@ -93,22 +109,6 @@ Insane walls of [columnar basalt](https://www.youtube.com/watch?v=W-e7zJsSCI4) n
 <a data-flickr-embed="true" href="https://www.flickr.com/photos/rboscacci1/54820338538/in/album-72177720329339062/" title="2025-09-28_#13_Tahoma"><img src="https://live.staticflickr.com/65535/54820338538_7cea9ae79a_b.jpg" width="771" height="1024" alt="2025-09-28_#13_Tahoma"/></a>
 
 <a data-flickr-embed="true" href="https://www.flickr.com/photos/rboscacci1/54820461834/in/dateposted-public/" title="out_and_about_burger"><img src="https://live.staticflickr.com/65535/54820461834_8136439968_b.jpg" width="768" height="1024" alt="out_and_about_burger"/></a>
-
-## Packing & Planning
-
-I keep re-using and evolve this packing list that covers shared gear (tent, stove, bear canister), personal items, and a few fun extras. Feel free to use it as a reference:
-
-{{< button href="https://docs.google.com/spreadsheets/d/1bgYjOy6dDmCtpgO7J9CV0az3ZHKAHv4Q3HqrpMCkoMY/edit?usp=sharing" target="_blank" >}}
-📋 View Packing List
-{{< /button >}}
-
-## Route Map
-
-Here’s our planned route on Gaia GPS:
-
-{{< button href="https://www.gaiagps.com/map/?loc=12.6/-121.8837/46.7960&pubLink=7YyaVsBd1Ro0yoXYXkbgqmJy&routeId=93793a06-31e7-4cbf-9b8a-34e0da26c2df" target="_blank" >}}
-🗺️ View Route on Gaia GPS
-{{< /button >}}
 
 ## Safety & Communication
 
