@@ -12,5 +12,8 @@ enableRobotsTXT = true
 pagination.pagerSize = 10
 summaryLength = 2
 
+# Google Analytics
+googleAnalytics = "G-DF82VT340B"
+
 [outputs]
 home = ["HTML", "RSS", "JSON"]
