@@ -158,7 +158,7 @@ We're idly chatting when a black bear materializes just off the trail to our lef
 
 Twenty feet away, maybe less. We freeze mid-sentence. The bear keeps foraging, completely unfazed—a neighbor tending its wild garden. Olympic's black bears are small and intent on their berries, paying us no mind. Still, my heart pounds.
 
-Some hikers carry bear bells—their jingling echoes through the forest. I should get some. I bought bear spray before this trip but left it behind; Olympic has "not recorded a single bear attack in the history of the park" [per their FAQs](https://www.nps.gov/olym/planyourvisit/backpacking-faq.htm#:~:text=we%20have%20not%20recorded%20a%20single%20bear%20attack%20in%20the%20history%20of%20the%20park). The canister felt unnecessary, and honestly, these little black bears seem utterly uninterested in hikers.
+Some hikers carry bear bells—their jingling echoes through the forest. I should get some. I bought bear spray before this trip but left it behind; Olympic has "not recorded a single bear attack in the history of the park" [per their FAQs](https://www.nps.gov/olym/planyourvisit/backpacking-faq.htm#:~:text=we%20have%20not%20recorded%20a%20single%20bear%20attack%20in%20the%20history%20of%20the%20park). I'll probably return it.
 
 ## Looking Back & Forward
 
