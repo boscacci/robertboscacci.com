@@ -5,8 +5,8 @@ date: 2025-10-01T09:00:00-05:00
 lastmod: 2025-10-03T09:00:00-05:00
 draft: false
 slug: "olympics-backpacking"
-description: "A weekend backpacking trip in Olympic National Park: Sol Duc to Lunch Lake"
-summary: "Trip report and planning details for a 3-day backpacking loop in Olympic National Park, October 2025"
+description: "Wild bear encounters and alpine lakes on a 3-day Olympic National Park loop"
+summary: "Bears, lakes, and an epic October backpacking trip in the Seven Lakes Basin"
 keywords:
   - Olympic National Park
   - Backpacking
