@@ -12,6 +12,9 @@ enableRobotsTXT = true
 pagination.pagerSize = 10
 summaryLength = 2
 
+# Ignore Dropbox metadata files
+ignoreFiles = [".*:com\\.dropbox\\.attrs$"]
+
 # Google Analytics
 googleAnalytics = "G-DF82VT340B"
 

@@ -21,9 +21,39 @@ I'm an AWS-[certified](https://www.credly.com/badges/7afe970a-4997-459d-92ab-ae0
 
 [_The Spring of Sight_](/book) (2022) is my debut nonfiction book. It's about the ongoing renaissance in __Computer Vision__ and its big implications for society.
 
+Here's a little digital badge that proves I'm good at AWS things:
+
 <div style="display: flex; justify-content: center; align-items: center; width: 100%; margin: 0.1em 0;">
-  <div data-iframe-width="250" data-iframe-height="240" data-share-badge-id="7afe970a-4997-459d-92ab-ae0e86ae48c6" data-share-badge-host="https://www.credly.com"></div>
+  <div data-iframe-width="450" data-iframe-height="270" data-share-badge-id="7afe970a-4997-459d-92ab-ae0e86ae48c6" data-share-badge-host="https://www.credly.com"></div>
 </div><script type="text/javascript" async src="//cdn.credly.com/assets/utilities/embed.js"></script>
+
+## Book a Meeting
+
+<div style="display: flex; justify-content: center; margin: 2em 0;">
+  <a href="https://calendly.com/cinemarob1/25-minute-meeting"
+     target="_blank"
+     rel="noopener noreferrer"
+     style="
+        background: linear-gradient(90deg, #1c92d2, #87ceeb);
+        color: #14304b;
+        font-weight: 600;
+        text-decoration: none;
+        padding: 0.85em 2em;
+        border-radius: 32px;
+        font-size: 1.2em;
+        box-shadow: 0 2px 18px rgba(28, 146, 210, 0.12);
+        border: none;
+        transition: background 0.2s, box-shadow 0.2s, color 0.2s;
+        letter-spacing: 0.01em;
+        cursor: pointer;
+        display: inline-block;"
+     onmouseover="this.style.background='linear-gradient(90deg, #1c92d2, #a1c4fd 90%)';this.style.color='#000';this.style.boxShadow='0 4px 28px rgba(28,146,210,0.22)';"
+     onmouseout="this.style.background='linear-gradient(90deg, #1c92d2, #87ceeb)';this.style.color='#14304b';this.style.boxShadow='0 2px 18px rgba(28,146,210,0.12)';"
+  >
+    📅 Book a 25-Minute Meeting
+  </a>
+</div>
+
 
 ## Career Overview
 
