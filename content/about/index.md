@@ -5,7 +5,7 @@ date: "2022-11-27"
 lastmod: 2026-02-08T00:00:00-08:00
 showReadingTime: false
 draft: false
-Description: "Robert Boscacci is an AWS-certified data engineer and nonfiction author based in Seattle, WA. He works on mission-driven mobility tech at SilverRide." # Keep to 150-160 chars
+Description: "Robert Boscacci is a data engineer and nonfiction author in Seattle. He builds mission-driven mobility tech at SilverRide across Azure + AWS." # Keep to 150-160 chars
 keywords:
  - Robert Boscacci
  - Data science
@@ -16,10 +16,13 @@ keywords:
  - Washington
  - Author
  - SilverRide
+ - Azure
 ---
-I'm an AWS-[certified](https://www.credly.com/badges/7afe970a-4997-459d-92ab-ae0e86ae48c6/public_url) Data Engineer and [author](/book) who used to work in [film](https://www.imdb.com/name/nm4574526/)!
+I'm a data engineer and [author](/book) who used to work in [film](https://www.imdb.com/name/nm4574526/)!
 
-I currently work with [SilverRide, Inc](https://silverride.com/), a company providing older folks with another paratransit option.
+I currently work with [SilverRide, Inc](https://silverride.com/), a company providing older folks with another paratransit option — and I’m all over **Azure + AWS** these days.
+
+I did a data science bootcamp in 2018 and the rest is history. It’s 2026 now; we’re entering the era of Claude Code.
 
 [_The Spring of Sight_](/book) (2022) is my debut nonfiction book. It's about the ongoing renaissance in __Computer Vision__ and its big implications for society.
 
@@ -64,6 +67,7 @@ Here's a little digital badge that proves I'm good at AWS things:
 - Data engineer specializing in:
   - Computer vision
   - AWS
+  - Azure
   - Event-driven architectures
 - Coding professionally since 2019 in roles such as:
   - "Data Science Lead" at [Butter Works](https://butter.works)
