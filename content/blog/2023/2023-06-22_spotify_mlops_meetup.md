@@ -6,6 +6,7 @@ lastmod: 2023-06-22T02:25:46-05:00
 draft: false
 Description: "Robert Boscacci is a data scientist and author. Sometimes he does freelance data analysis work. If you need some business data analyzed, you might consider hitting him up." # Keep to 150-160 chars
 Summary: Photos and Notes from a tech meetup
+thumbnailUrl: "https://live.staticflickr.com/65535/52995898729_8996897933_k.jpg"
 keywords:
  - Robert Boscacci
  - Data science

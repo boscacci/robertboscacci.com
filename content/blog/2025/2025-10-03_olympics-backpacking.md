@@ -7,6 +7,7 @@ draft: false
 slug: "olympics-backpacking"
 description: "Wild bear encounters and alpine lakes on a 3-day Olympic National Park loop"
 summary: "Bears, lakes, and an epic October backpacking trip in the Seven Lakes Basin"
+thumbnailUrl: "https://live.staticflickr.com/65535/54846272319_a7a8dbb3d5_h.jpg"
 keywords:
   - Olympic National Park
   - Backpacking

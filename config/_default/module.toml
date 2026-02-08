@@ -1,3 +1,54 @@
 [hugoVersion]
   extended = false
   min = "0.123.7"
+
+[[mounts]]
+  source = "archetypes"
+  target = "archetypes"
+
+[[mounts]]
+  source = "assets"
+  target = "assets"
+
+[[mounts]]
+  source = "content"
+  target = "content"
+
+[[mounts]]
+  source = "data"
+  target = "data"
+
+[[mounts]]
+  source = "i18n"
+  target = "i18n"
+
+[[mounts]]
+  source = "static"
+  target = "static"
+
+# Congo theme templates
+[[mounts]]
+  source = "themes/congo/layouts"
+  target = "layouts"
+
+# Congo stores these in underscored dirs; mount them into Hugo's expected paths.
+[[mounts]]
+  source = "themes/congo/layouts/_partials"
+  target = "layouts/partials"
+
+[[mounts]]
+  source = "themes/congo/layouts/_shortcodes"
+  target = "layouts/shortcodes"
+
+# Site overrides (mounted last so they win).
+[[mounts]]
+  source = "layouts/_default"
+  target = "layouts/_default"
+
+[[mounts]]
+  source = "layouts/partials"
+  target = "layouts/partials"
+
+[[mounts]]
+  source = "layouts/shortcodes"
+  target = "layouts/shortcodes"

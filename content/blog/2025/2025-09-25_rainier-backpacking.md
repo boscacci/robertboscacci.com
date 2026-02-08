@@ -7,6 +7,7 @@ draft: false
 slug: "rainier-backpacking"
 description: "Planning a weekend backpacking trip to Mount Rainier National Park"
 summary: "Planning a weekend backpacking trip to Mount Rainier National Park"
+thumbnailUrl: "https://live.staticflickr.com/65535/54819223597_c48c8833d4_b.jpg"
 keywords:
   - Mount Rainier
   - Backpacking
