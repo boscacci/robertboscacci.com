@@ -2,10 +2,10 @@
 title: "About Me"
 toc: false
 date: "2022-11-27"
-lastmod: 2025-09-25T02:23:46-05:00
+lastmod: 2026-02-08T00:00:00-08:00
 showReadingTime: false
 draft: false
-Description: "Robert Boscacci is a data engineer and nonfiction author based in Seattle, WA. He's actively seeking opportunities in media analytics. His nonfiction book is called The Spring of Sight." # Keep to 150-160 chars
+Description: "Robert Boscacci is an AWS-certified data engineer and nonfiction author based in Seattle, WA. He works on mission-driven mobility tech at SilverRide." # Keep to 150-160 chars
 keywords:
  - Robert Boscacci
  - Data science
@@ -15,9 +15,11 @@ keywords:
  - Seattle
  - Washington
  - Author
- - Job Search
+ - SilverRide
 ---
 I'm an AWS-[certified](https://www.credly.com/badges/7afe970a-4997-459d-92ab-ae0e86ae48c6/public_url) Data Engineer and [author](/book) who used to work in [film](https://www.imdb.com/name/nm4574526/)!
+
+I currently work with [SilverRide, Inc](https://silverride.com/), a company providing older folks with another paratransit option.
 
 [_The Spring of Sight_](/book) (2022) is my debut nonfiction book. It's about the ongoing renaissance in __Computer Vision__ and its big implications for society.
 
@@ -53,8 +55,6 @@ Here's a little digital badge that proves I'm good at AWS things:
     📅 Book a 25-Minute Meeting
   </a>
 </div>
-
-
 ## Career Overview
 
 - See my [career history on LinkedIn](https://www.linkedin.com/in/rboscacci/)
@@ -74,15 +74,17 @@ Here's a little digital badge that proves I'm good at AWS things:
   - Challenging yet healthy work environments
 - Enjoys building custom datasets for fine-tuning [vision models](https://huggingface.co/spaces/cinemarob1/Film-slate-or-nah)
 
-### What I'm Looking For
+### What I'm Doing Now
 
-- Actively seeking my next role in data engineering, analytics, or automation where I can leverage:
-  - 6+ years experience in programming, __computer vision__, and cloud computing
-  - 10+ years deep domain knowledge in __cinema__ production + post
+- I'm not actively looking for a new role at the moment.
+- I'm focused on building mission-driven mobility tech at [SilverRide](https://silverride.com/), and continuing to grow my craft across:
+  - AWS + event-driven systems
+  - Analytics & automation
+  - Computer vision
 
 ### Interests & Ideal Roles
 
-I'm equally enthusiastic about two main directions for my next role—and they're not mutually exclusive:
+My interests tend to cluster around two directions—and they're not mutually exclusive:
 
 - **Media Analytics:** I'm particularly excited about opportunities to:
   - Help companies understand audience behavior
@@ -98,7 +100,7 @@ I'm equally enthusiastic about two main directions for my next role—and they'r
   - Building tools to support overworked healthcare professionals
   - Contributing to solutions for immigration challenges
 
-I'm open to either path—or a blend of both. Whether it's advancing media analytics, contributing to mission-driven projects, or working at the intersection of the two, I'm eager to apply my skills where they can make a meaningful difference.
+Whether it's advancing media analytics, contributing to mission-driven projects, or working at the intersection of the two, I'm excited to keep building systems that make a meaningful difference.
 
 ## Former Career in Cinema
 
