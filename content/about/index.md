@@ -18,11 +18,11 @@ keywords:
  - SilverRide
  - Azure
 ---
-I'm a Seattle-based data engineer, [author](/book), and former [film colorist / dailies technician](https://www.imdb.com/name/nm4574526/).
+I'm a Seattle-based data engineer, husband, [author](/book), and former [film colorist / dailies technician](https://www.imdb.com/name/nm4574526/).
 
-I currently work with [SilverRide](https://silverride.com/), building mission-driven mobility technology for older adults and people who need extra assistance getting where they need to go. I'm all over **Azure + AWS** these days.
+I currently work with [SilverRide](https://silverride.com/) to build mission-driven mobility technology for older adults and people who need extra assistance getting where they need to go. In my spare time I enjoy strumming the guitar, cooking for my wife and friends, and playing with my cats.
 
-I did a data science bootcamp in 2018 and the rest is history. It's 2026 now; we're entering the era of Claude Code.
+Lately, I've built heaps of automated solutions on **Azure** and **AWS** with agentic coding tools like OpenAI's Codex. I get excited about image analysis and visual question answering tasks.
 
 [_The Spring of Sight_](/book) (2022) is my debut nonfiction book. It's about the ongoing renaissance in __Computer Vision__ and its big implications for society.
 
@@ -51,43 +51,15 @@ I did a data science bootcamp in 2018 and the rest is history. It's 2026 now; we
   - AWS
   - Azure
   - Event-driven architectures
-  - Python, SQL, automation, Terraform, Docker, and cloud data pipelines
+  - Python, SQL, automation, OpenTofu, Docker, and cloud data pipelines
 - Coding professionally since 2019 in roles such as:
   - "Data Science Lead" at [Butter Works](https://butter.works)
   - "Sr. Data Mining Engineer" at [Angi](https://www.angi.com/aboutus.htm)
 - Fan of:
   - Tidy software development lifecycles; test-driven development
   - Infrastructure-as-code and container orchestration
-  - Challenging yet healthy work environments
+  - Challenging but healthy work environments
 - Enjoys building custom datasets for fine-tuning [vision models](https://huggingface.co/spaces/cinemarob1/Film-slate-or-nah)
-
-### What I'm Doing Now
-
-- I'm not actively looking for a new role at the moment.
-- I'm focused on building mission-driven mobility tech at [SilverRide](https://silverride.com/), and continuing to grow my craft across:
-  - Azure + AWS systems
-  - Analytics & automation
-  - Computer vision
-
-### Interests & Ideal Roles
-
-My interests tend to cluster around two directions—and they're not mutually exclusive:
-
-- **Media Analytics:** I'm particularly excited about opportunities to:
-  - Help companies understand audience behavior
-  - Optimize content performance
-  - Drive data-driven decisions in the entertainment and media space
-- My unique combination of technical skills and industry experience makes me well-suited for roles that bridge data science and media production.
-
-**and/or**
-
-- **Mission-Driven Work:** I'm also very interested in joining teams focused on creating positive social impact, such as:
-  - Leveraging analytics to improve sustainability
-  - Designing systems that enhance urban accessibility
-  - Building tools to support overworked healthcare professionals
-  - Contributing to solutions for immigration challenges
-
-Whether it's advancing media analytics, contributing to mission-driven projects, or working at the intersection of the two, I'm excited to keep building systems that make a meaningful difference.
 
 ## Former Career in Cinema
 
@@ -96,17 +68,6 @@ Whether it's advancing media analytics, contributing to mission-driven projects,
   - [Spike Lee / DeWanda Wise / Anthony Ramos](https://www.imdb.com/title/tt6075358/fullcredits/?ref_=tt_cst_sm)
   - [Paul Giamatti / Maggie Siff / Damian Lewis](https://www.imdb.com/title/tt5960350/fullcredits/?ref_=tt_cst_sm)
   - [Errol Morris / Peter Sarsgaard](https://www.imdb.com/title/tt7310192/fullcredits/?ref_=tt_cst_sm)
-
-I like that the film years still show up in my technical work: a lot of the useful instincts from post-production transfer directly into data engineering, especially around reliability, boring automation, and keeping operators out of repetitive manual workflows.
-
-## Personal Life
-
-- Live in Seattle, WA with my rad genomic-science-lady [wife](https://www.linkedin.com/in/catherine-mayo-ms-cgc-126153111/)
-- Enjoy:
-  - Cycling + Rock Climbing
-  - Backpacking + Hiking
-  - Cold-brewing 3 liters of specialty coffee at a time
-  - Cuddling my two cats
 
 ## Trivia
 
