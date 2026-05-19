@@ -1,6 +1,6 @@
-languageCode = "en"
-languageName = "English"
-languageDirection = "ltr"
+locale = "en"
+label = "English"
+direction = "ltr"
 weight = 1
 
 title = "Robert Boscacci"
@@ -15,8 +15,8 @@ dateFormat = "2 January 2006"
 [params.author]
 name = "Robert Boscacci"
 image = "img/me.jpg"
-headline = "Data Engineer from the Film Biz"
-bio = "Cinema technician who learned to code"
+headline = "Husband, Tinkerer, Things Done"
+bio = "I build useful systems, write when something sticks, and keep a few projects in motion."
 links = [
   { github = "https://github.com/boscacci" },
   { linkedin = "https://linkedin.com/in/rboscacci" },

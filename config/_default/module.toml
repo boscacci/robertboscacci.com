@@ -1,6 +1,6 @@
 [hugoVersion]
   extended = false
-  min = "0.123.7"
+  min = "0.161.1"
 
 [[mounts]]
   source = "archetypes"
@@ -26,29 +26,10 @@
   source = "static"
   target = "static"
 
-# Congo theme templates
+[[mounts]]
+  source = "layouts"
+  target = "layouts"
+
 [[mounts]]
   source = "themes/congo/layouts"
   target = "layouts"
-
-# Congo stores these in underscored dirs; mount them into Hugo's expected paths.
-[[mounts]]
-  source = "themes/congo/layouts/_partials"
-  target = "layouts/partials"
-
-[[mounts]]
-  source = "themes/congo/layouts/_shortcodes"
-  target = "layouts/shortcodes"
-
-# Site overrides (mounted last so they win).
-[[mounts]]
-  source = "layouts/_default"
-  target = "layouts/_default"
-
-[[mounts]]
-  source = "layouts/partials"
-  target = "layouts/partials"
-
-[[mounts]]
-  source = "layouts/shortcodes"
-  target = "layouts/shortcodes"

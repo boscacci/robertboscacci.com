@@ -3,7 +3,7 @@ title: "The Spring of Sight"
 date: 2022-08-15T02:25:46-05:00
 lastmod: 2025-09-25T02:23:46-05:00
 draft: false
-Description: "The Spring of Sight is a nonfiction technology futurism book \
+description: "The Spring of Sight is a nonfiction technology futurism book \
 about computer vision, machine learning, ethics, and society. Algorithmic bias \
 and pragmatism." # Keep to 150-160 chars
 keywords:
@@ -19,7 +19,7 @@ keywords:
 ---
 How does the human experience change, now that computers can "see"?
 
-__The Spring of Sight__ is my first book. It's a quick (179 page) nonfiction tech futurism / ethics read centered on _computer vision_.
+__The Spring of Sight__ is my first book. It's a compact nonfiction tech futurism / ethics read centered on _computer vision_.
 
 Paperbacks and ebooks are available for purchase via [Barnes & Noble](https://www.barnesandnoble.com/w/the-spring-of-sight-robert-boscacci/1143513153?ean=9798889269946), [Amazon](https://www.amazon.com/dp/B0C5NBXFRJ), and [Kobo](https://www.kobo.com/us/en/ebook/the-spring-of-sight). It's likely that you already have $1 in promotional "[Kindle store credit](https://www.amazon.com/dp/B0C5NBXFRJ)" which can be used to download an effectively free digital copy.
 
@@ -98,10 +98,8 @@ The Spring of Sight is a nonfiction book that speaks to futurists and activists 
 
 ## About the Author
 
-Robert Boscacci was the Data Science Lead at Butter Works, a startup that used computer vision to analyze thousands of social media videos for clients like Netflix, Spotify, and ViacomCBS. He comes from a background in New York City's film post-production industry, with [IMdB credits](https://www.imdb.com/name/nm4574526/) as a film colorist and dailies technician on Netflix original features and episodic productions.
+Robert Boscacci is a Seattle data engineer at SilverRide, building cloud data systems for mission-driven mobility services. He was previously Data Science Lead at Butter Works, a startup that used computer vision and NLP to analyze social video for clients including Netflix, Spotify, and ViacomCBS.
+
+Before moving into software, Boscacci worked in New York City's film post-production industry, with [IMDb credits](https://www.imdb.com/name/nm4574526/) as a film colorist and dailies technician on Netflix original features and episodic productions.
 
 Boscacci is curious about how tech policy can become more proactive, so that communities and organizations maximize the utility and minimize the harm of cutting edge tools. He hopes to encourage readers from all walks of life to join the conversation around tech and policy so that the folks who normally get steamrolled in the name of progress are more empowered to make their voices heard.
-
-Boscacci is a bright-eyed new Seattleite: Picture him wearing his nearly non-prescription glasses, dismounting his 2001 road bike while tapping to pay for a single-origin espresso on his way to the repertory cinema. He just got his boater safety card and is looking for pals with whom to cycle and play pickleball, plus seeking his next home chess meetup.
-
-He can be emailed at rob[at]boscacci[dot]com.

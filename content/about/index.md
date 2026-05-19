@@ -5,7 +5,7 @@ date: "2022-11-27"
 lastmod: 2026-02-08T00:00:00-08:00
 showReadingTime: false
 draft: false
-Description: "Robert Boscacci is a data engineer and nonfiction author in Seattle. He builds mission-driven mobility tech at SilverRide across Azure + AWS." # Keep to 150-160 chars
+description: "Robert Boscacci is a Seattle data engineer, author, and former film colorist building mission-driven mobility tech at SilverRide." # Keep to 150-160 chars
 keywords:
  - Robert Boscacci
  - Data science
@@ -18,46 +18,28 @@ keywords:
  - SilverRide
  - Azure
 ---
-I'm a data engineer and [author](/book) who used to work in [film](https://www.imdb.com/name/nm4574526/)!
+I'm a Seattle-based data engineer, [author](/book), and former [film colorist / dailies technician](https://www.imdb.com/name/nm4574526/).
 
-I currently work with [SilverRide, Inc](https://silverride.com/), a company providing older folks with another paratransit option — and I’m all over **Azure + AWS** these days.
+I currently work with [SilverRide](https://silverride.com/), building mission-driven mobility technology for older adults and people who need extra assistance getting where they need to go. I'm all over **Azure + AWS** these days.
 
-I did a data science bootcamp in 2018 and the rest is history. It’s 2026 now; we’re entering the era of Claude Code.
+I did a data science bootcamp in 2018 and the rest is history. It's 2026 now; we're entering the era of Claude Code.
 
 [_The Spring of Sight_](/book) (2022) is my debut nonfiction book. It's about the ongoing renaissance in __Computer Vision__ and its big implications for society.
 
-Here's a little digital badge that proves I'm good at AWS things:
+## Selected Highlights
 
-<div style="display: flex; justify-content: center; align-items: center; width: 100%; margin: 0.1em 0;">
-  <div data-iframe-width="450" data-iframe-height="270" data-share-badge-id="7afe970a-4997-459d-92ab-ae0e86ae48c6" data-share-badge-host="https://www.credly.com"></div>
-</div><script type="text/javascript" async src="//cdn.credly.com/assets/utilities/embed.js"></script>
+- [AWS Certified Data Engineer](https://www.credly.com/badges/7afe970a-4997-459d-92ab-ae0e86ae48c6) in 2025.
+- [IMDb credits](https://www.imdb.com/name/nm4574526/) across editorial, camera/electrical, cinematography, editing, visual effects, and sound roles.
+- Author of [_The Spring of Sight_](/book), a nonfiction computer-vision book published by New Degree Press and sold through major book retailers.
+- Built a [film slate detector](/projects/film_slate_detector/) by fine-tuning object detection models on a custom labeled dataset.
+- Helped film and photograph a Santa Clara University fellowship project in Myanmar, covered by [Santa Clara Magazine](https://magazine.scu.edu/magazines/spring-2014/decide-who-we-are/).
+
+{{< button href="https://www.credly.com/badges/7afe970a-4997-459d-92ab-ae0e86ae48c6" target="_blank" >}}View AWS credential{{< /button >}}
 
 ## Book a Meeting
 
-<div style="display: flex; justify-content: center; margin: 2em 0;">
-  <a href="https://calendly.com/cinemarob1/25-minute-meeting"
-     target="_blank"
-     rel="noopener noreferrer"
-     style="
-        background: linear-gradient(90deg, #1c92d2, #87ceeb);
-        color: #14304b;
-        font-weight: 600;
-        text-decoration: none;
-        padding: 0.85em 2em;
-        border-radius: 32px;
-        font-size: 1.2em;
-        box-shadow: 0 2px 18px rgba(28, 146, 210, 0.12);
-        border: none;
-        transition: background 0.2s, box-shadow 0.2s, color 0.2s;
-        letter-spacing: 0.01em;
-        cursor: pointer;
-        display: inline-block;"
-     onmouseover="this.style.background='linear-gradient(90deg, #1c92d2, #a1c4fd 90%)';this.style.color='#000';this.style.boxShadow='0 4px 28px rgba(28,146,210,0.22)';"
-     onmouseout="this.style.background='linear-gradient(90deg, #1c92d2, #87ceeb)';this.style.color='#14304b';this.style.boxShadow='0 2px 18px rgba(28,146,210,0.12)';"
-  >
-    📅 Book a 25-Minute Meeting
-  </a>
-</div>
+{{< button href="https://calendly.com/cinemarob1/25-minute-meeting" target="_blank" >}}Book a 25-minute meeting{{< /button >}}
+
 ## Career Overview
 
 - See my [career history on LinkedIn](https://www.linkedin.com/in/rboscacci/)
@@ -69,6 +51,7 @@ Here's a little digital badge that proves I'm good at AWS things:
   - AWS
   - Azure
   - Event-driven architectures
+  - Python, SQL, automation, Terraform, Docker, and cloud data pipelines
 - Coding professionally since 2019 in roles such as:
   - "Data Science Lead" at [Butter Works](https://butter.works)
   - "Sr. Data Mining Engineer" at [Angi](https://www.angi.com/aboutus.htm)
@@ -82,7 +65,7 @@ Here's a little digital badge that proves I'm good at AWS things:
 
 - I'm not actively looking for a new role at the moment.
 - I'm focused on building mission-driven mobility tech at [SilverRide](https://silverride.com/), and continuing to grow my craft across:
-  - AWS + event-driven systems
+  - Azure + AWS systems
   - Analytics & automation
   - Computer vision
 
@@ -114,13 +97,7 @@ Whether it's advancing media analytics, contributing to mission-driven projects,
   - [Paul Giamatti / Maggie Siff / Damian Lewis](https://www.imdb.com/title/tt5960350/fullcredits/?ref_=tt_cst_sm)
   - [Errol Morris / Peter Sarsgaard](https://www.imdb.com/title/tt7310192/fullcredits/?ref_=tt_cst_sm)
 
-## Mind Map
-
-- Here's a little map of my brain, including **skills**, **interests**, and **values**:
-
-<a href="/about/img/skills_interests_values.png"><img
-src="/about/img/skills_interests_values.png"
-width="900"/></a>
+I like that the film years still show up in my technical work: a lot of the useful instincts from post-production transfer directly into data engineering, especially around reliability, boring automation, and keeping operators out of repetitive manual workflows.
 
 ## Personal Life
 
@@ -129,19 +106,20 @@ width="900"/></a>
   - Cycling + Rock Climbing
   - Backpacking + Hiking
   - Cold-brewing 3 liters of specialty coffee at a time
-  - Coodling my two cats
+  - Cuddling my two cats
 
 ## Trivia
 
 - [The 2018 New York Times piece](https://www.nytimes.com/2018/09/03/realestate/a-couch-surfer-lands-his-perfect-apartment.html) on my move from the SFBay to NYC
 - Eating a flaming muffin in [a semi-popular music video from 2011](https://youtu.be/5dE-7-kBxXw?t=135)
 - [Walking clear across](https://magazine.scu.edu/magazines/spring-2013/walk-across-california/) the state of California as part of a university class
+- [Getting quoted in SFGATE](https://www.sfgate.com/outdoors/article/Santa-Clara-University-s-Walk-Across-California-3684399.php) after said walk, while badly needing a shower
   
 ## About This Site
 
 * [Built](https://github.com/boscacci/robertboscacci.com) with the [Congo](https://jpanther.github.io/congo/) theme on [Hugo](https://gohugo.io/), "the world's fastest framework"
-* Deployed via github pages with automatic [git workflows](https://github.com/boscacci/robertboscacci.com/actions)
-* [AWS Route53](https://aws.amazon.com/route53/) for DNS stuff
+* Deployed via GitHub Pages with automatic [GitHub Actions](https://github.com/boscacci/robertboscacci.com/actions)
+* [Amazon Route 53](https://aws.amazon.com/route53/) for DNS stuff
 
 ## Contact
 
