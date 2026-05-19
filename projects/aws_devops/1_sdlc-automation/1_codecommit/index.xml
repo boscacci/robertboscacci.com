@@ -1,1 +1,28 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>1: CodeCommit on Robert Boscacci</title><link>https://robertboscacci.com/projects/aws_devops/1_sdlc-automation/1_codecommit/</link><description>Recent content in 1: CodeCommit on Robert Boscacci</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Thu, 08 Jun 2023 02:25:46 -0500</lastBuildDate><atom:link href="https://robertboscacci.com/projects/aws_devops/1_sdlc-automation/1_codecommit/index.xml" rel="self" type="application/rss+xml"/><item><title>0: CodeCommit Overview</title><link>https://robertboscacci.com/projects/aws_devops/1_sdlc-automation/1_codecommit/0_overview/</link><pubDate>Thu, 08 Jun 2023 02:25:46 -0500</pubDate><guid>https://robertboscacci.com/projects/aws_devops/1_sdlc-automation/1_codecommit/0_overview/</guid><description>What is it?</description></item><item><title>1: CodeCommit Details</title><link>https://robertboscacci.com/projects/aws_devops/1_sdlc-automation/1_codecommit/1_codecommit/</link><pubDate>Thu, 08 Jun 2023 02:25:46 -0500</pubDate><guid>https://robertboscacci.com/projects/aws_devops/1_sdlc-automation/1_codecommit/1_codecommit/</guid><description>Basic actions: Create repo: $ aws codecommit create-repository --repository-name rad-repo-name View a repo: get-repository List repos: list-repositories Delete repo(s) $ aws codecommit delete-repository --repository-name rad-repo-name Commands are pretty literal!</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>1: CodeCommit on Robert Boscacci</title><link>https://robertboscacci.com/projects/aws_devops/1_sdlc-automation/1_codecommit/</link><description>Recent content in 1: CodeCommit on Robert Boscacci</description><generator>Hugo</generator><language>en</language><lastBuildDate>Thu, 08 Jun 2023 02:25:46 -0500</lastBuildDate><atom:link href="https://robertboscacci.com/projects/aws_devops/1_sdlc-automation/1_codecommit/index.xml" rel="self" type="application/rss+xml"/><item><title>0: CodeCommit Overview</title><link>https://robertboscacci.com/projects/aws_devops/1_sdlc-automation/1_codecommit/0_overview/</link><pubDate>Thu, 08 Jun 2023 02:25:46 -0500</pubDate><guid>https://robertboscacci.com/projects/aws_devops/1_sdlc-automation/1_codecommit/0_overview/</guid><description>&lt;h2 id="what-is-it" class="relative group"&gt;What is it? &lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;A managed service to host &lt;em&gt;private&lt;/em&gt; git repos.&lt;/li&gt;
+&lt;li&gt;It&amp;rsquo;s highly available, scalable, fault-tolerant&lt;/li&gt;
+&lt;li&gt;Commands will be familiar if you use git normally&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="why-not-just-use-git" class="relative group"&gt;Why not just use git? &lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;No concerns about managing version control servers&lt;/li&gt;
+&lt;li&gt;It plays nice with other AWS services
+&lt;ul&gt;
+&lt;li&gt;E.g. build, pipeline, deploy, lambda, SNS&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="what-other-repos-can-i-use-in-aws-deployments" class="relative group"&gt;What other repos can I use in AWS deployments? &lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;S3&lt;/li&gt;
+&lt;li&gt;GitHub (+ enterprise)&lt;/li&gt;
+&lt;li&gt;Bitbucket&lt;/li&gt;
+&lt;/ul&gt;</description></item><item><title>1: CodeCommit Details</title><link>https://robertboscacci.com/projects/aws_devops/1_sdlc-automation/1_codecommit/1_codecommit/</link><pubDate>Thu, 08 Jun 2023 02:25:46 -0500</pubDate><guid>https://robertboscacci.com/projects/aws_devops/1_sdlc-automation/1_codecommit/1_codecommit/</guid><description>&lt;h2 id="basic-actions" class="relative group"&gt;Basic actions: &lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;Create repo:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-Shell" data-lang="Shell"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;$ aws codecommit create-repository --repository-name rad-repo-name
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;View a repo: &lt;code&gt;get-repository&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;List repos: &lt;code&gt;list-repositories&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Delete repo(s)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-Shell" data-lang="Shell"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;$ aws codecommit delete-repository --repository-name rad-repo-name
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;Commands are pretty literal!&lt;/strong&gt;&lt;/p&gt;</description></item></channel></rss>
