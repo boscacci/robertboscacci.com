@@ -1,0 +1,58 @@
+# .github/workflows/dev-preview.yml
+
+name: Development Preview
+
+on:
+  push:
+    branches:
+      - develop
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write
+
+env:
+  DEV_BASE_URL: https://dev.robertboscacci.com/
+  AWS_REGION: us-west-2
+  AWS_ROLE_TO_ASSUME: arn:aws:iam::062008221187:role/robertboscacci-com-dev-github-actions
+  DEV_S3_BUCKET: robertboscacci-com-dev-site
+  DEV_CLOUDFRONT_DISTRIBUTION_ID: E282I2XU6PLMW4
+
+jobs:
+  build-deploy:
+    name: Build and deploy development
+    runs-on: ubuntu-latest
+    environment: development
+    concurrency:
+      group: development-preview-${{ github.ref }}
+      cancel-in-progress: true
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          submodules: recursive
+          fetch-depth: 0
+
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: "0.161.1"
+
+      - name: Build development site
+        run: hugo --gc --minify --cleanDestinationDir --environment development --baseURL "${DEV_BASE_URL}"
+
+      - name: Remove production GitHub Pages CNAME from dev artifact
+        run: rm -f public/CNAME
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v5
+        with:
+          role-to-assume: ${{ env.AWS_ROLE_TO_ASSUME }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Sync to development S3 bucket
+        run: aws s3 sync public/ "s3://${{ env.DEV_S3_BUCKET }}" --delete --cache-control "public,max-age=300"
+
+      - name: Invalidate development CloudFront distribution
+        run: aws cloudfront create-invalidation --distribution-id "${{ env.DEV_CLOUDFRONT_DISTRIBUTION_ID }}" --paths "/*"

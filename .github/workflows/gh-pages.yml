@@ -1,6 +1,6 @@
 # .github/workflows/gh-pages.yml
 
-name: GitHub Pages
+name: Production GitHub Pages
 
 on:
   push:
@@ -13,9 +13,11 @@ permissions:
 
 jobs:
   build-deploy:
+    name: Build and deploy production
     runs-on: ubuntu-latest
+    environment: production
     concurrency:
-      group: ${{ github.workflow }}-${{ github.ref }}
+      group: production-pages-${{ github.ref }}
       cancel-in-progress: true
     steps:
       - name: Checkout
@@ -30,7 +32,7 @@ jobs:
           hugo-version: "0.161.1"
 
       - name: Build
-        run: hugo --gc --minify --cleanDestinationDir --baseURL "https://robertboscacci.com/"
+        run: hugo --gc --minify --cleanDestinationDir --environment production --baseURL "https://robertboscacci.com/"
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v4

@@ -1,0 +1,6 @@
+# Development-only site config.
+
+baseURL = "https://dev.robertboscacci.com/"
+
+[services.googleAnalytics]
+id = ""

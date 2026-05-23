@@ -1,0 +1,7 @@
+# Development-only theme params. These are merged over config/_default when Hugo is
+# run with `--environment development`.
+
+robots = "noindex,nofollow,noarchive"
+
+[verification]
+google = ""
