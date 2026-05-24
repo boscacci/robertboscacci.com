@@ -107,16 +107,12 @@ The portrait does not identify a squadron, base, theater, aircraft type, job spe
 
 ## Yearbook Photographs
 
-Robert E. Boscacci appears on printed page 24 of the [1949 *Redwood*](https://archive.org/details/redwoodunse_38). Mark Boscacci and Frances Pereira appear in the [1981 *Redwood*](https://archive.org/details/redwood77unse). The 1981 portrait page prints her name as "Francis Pereira"; the senior index lists "Frances L. Pereira."
+Robert E. Boscacci appears on printed page 24 of the [1949 *Redwood*](https://archive.org/details/redwoodunse_38). Frances Pereira appears in the [1981 *Redwood*](https://archive.org/details/redwood77unse). The 1981 portrait page prints her name as "Francis Pereira"; the senior index lists "Frances L. Pereira."
 
 <div class="yearbook-context-list">
   <figure class="yearbook-context">
     <img src="robert-yearbook-1949.jpg" alt="Robert E. Boscacci in the 1949 Redwood yearbook.">
     <figcaption><strong>Robert E. Boscacci</strong><br><a href="https://archive.org/details/redwoodunse_38">1949 <em>Redwood</em></a>, printed p. 24.</figcaption>
-  </figure>
-  <figure class="yearbook-context">
-    <img src="mark-yearbook-1981.jpg" alt="Mark Boscacci in the 1981 Redwood yearbook.">
-    <figcaption><strong>Mark Boscacci</strong><br><a href="https://archive.org/details/redwood77unse">1981 <em>Redwood</em></a>, printed p. 300.</figcaption>
   </figure>
   <figure class="yearbook-context">
     <img src="frances-pereira-yearbook-1981.jpg" alt="Frances Pereira Solorzano in the 1981 Redwood yearbook.">
