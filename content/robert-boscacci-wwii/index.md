@@ -25,6 +25,12 @@ showTableOfContents: true
 
 {{< figure src="portrait.jpg" alt="Studio portrait of Robert E. Boscacci in a World War II-era U.S. Army Air Forces officer uniform." caption="Robert E. Boscacci in a World War II-era U.S. Army Air Forces officer uniform." class="family-military-portrait" >}}
 
+## Relationship And Research Note
+
+Robert E. Boscacci was the paternal grandfather of Robert Boscacci, the site owner: he was Mark Boscacci's father.
+
+This page was researched, drafted, and assembled by **OpenAI Codex**, a GPT-5-based coding agent, at extra-high effort. The work combined visual inspection of the family portrait, public web and archive research, yearbook image comparison, and careful historical inference. Treat it as sourced notes and leads, not as a certified military service record or completed family genealogy.
+
 ## Quick Read
 
 This is a **World War II-era [U.S. Army Air Forces](https://web.archive.org/web/20250126182535/https://www.afhistory.af.mil/FAQs/Fact-Sheets/Article/459016/1907-1947-the-lineage-of-the-us-air-force/) officer portrait**. The sleeve patch, collar brass, and shoulder rank indicate a commissioned officer in the Army's wartime air arm, wearing the Army officer service uniform often nicknamed **[pinks and greens](https://www.nationalww2museum.org/war/articles/pinks-and-greens)**.

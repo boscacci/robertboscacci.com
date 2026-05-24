@@ -26,6 +26,12 @@ showReadingTime: false
 showTableOfContents: true
 ---
 
+## Relationship And Research Note
+
+Enrique A. Pereira de Nueda was the maternal grandfather of Robert Boscacci, the site owner: he was the father of Frances Lucia Pereira, who married Mark Boscacci.
+
+This page was researched, drafted, and assembled by **OpenAI Codex**, a GPT-5-based coding agent, at extra-high effort. The work combined public web and archive research, yearbook image comparison, and careful historical inference. Treat it as sourced notes and leads, not as a certified civil registry file or completed family genealogy.
+
 ## Quick Read
 
 Enrique A. Pereira de Nueda was a Nicaraguan civil engineer and builder with a documented Santa Clara education and a long public record around Managua construction.
