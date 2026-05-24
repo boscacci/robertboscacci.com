@@ -61,7 +61,7 @@ The portrait does **not** show a ribbon rack, campaign medals, overseas bars, or
 
 These public references are not military service papers, but they narrow the search. Treat the civil-index items as leads until they are matched against family documents or an official service record.
 
-- **University of Santa Clara, 1949.** A [1949 Redwood yearbook listing](https://www.e-yearbook.com/yearbooks/University_Santa_Clara_Redwood_Yearbook/1949/Page_28.html) identifies Robert E. Boscacci, B.C.S., from Stockton, California. The same page lists student roles including Business Manager of *The Santa Clara*, Senior Class Treasurer, Sanctuary Society Treasurer, Sodality, B.A.A., and Alpha Phi Omega.
+- **University of Santa Clara, 1949.** A [1949 *Redwood* yearbook listing](https://archive.org/details/redwoodunse_38) identifies Robert E. Boscacci, B.C.S., from Stockton, California. The same page lists student roles including Business Manager of *The Santa Clara*, Senior Class Treasurer, Sanctuary Society Treasurer, Sodality, B.A.A., and Alpha Phi Omega.
 - **Santa Clara alumni record, 1982-83.** [Santa Clara University](https://www.scu.edu/alumni/about/board/council-of-past-presidents/) lists Robert E. Boscacci, class of 1949, as Alumni Association president for 1982-83.
 - **Civil birth and death index lead.** A secondary public index points to Robert Everett Boscacci, born November 18, 1924 in Stockton, California, son of William T. Boscacci and Nell M. Hunting, and died March 16, 1990 while associated with a San Jose-area ZIP code. The same public-index search also shows another Robert E. Boscacci born in California in 1924, so this should remain a probable identity lead rather than a proved military fact. No Social Security numbers are reproduced here.
 - **1930 census lead.** A genealogy-forum transcription of the [1930 U.S. census](https://www.archives.gov/research/census/1930/) places a five-year-old Robert E. Boscacci in Stockton in the household of William T. and Nellie M. Boscacci. This should be checked against the census image.
@@ -70,9 +70,7 @@ I did not find a public indexed Army Air Forces service record, flight-school li
 
 ## What This Does Not Prove
 
-It does not identify a squadron, air base, theater, aircraft type, or job specialty. The Army Air Forces included pilots and aircrew, but also intelligence, weather, engineering, communications, maintenance, training, transport, administration, and many other officer roles.
-
-It also does not prove overseas service. If he served overseas, the proof is more likely to show up in orders, discharge papers, campaign ribbons, an overseas-service stripe, a numbered Air Force patch in another photo, letters, or family records.
+The portrait does not identify a squadron, base, theater, aircraft type, job specialty, or overseas service; those details would need orders, discharge papers, campaign ribbons, overseas-service stripes, a numbered Air Force patch in another photo, letters, or family records.
 
 ## Best Next Records To Find
 
@@ -90,9 +88,32 @@ It also does not prove overseas service. If he served overseas, the proof is mor
 - [National WWII Museum: "Pinks and Greens"](https://www.nationalww2museum.org/war/articles/pinks-and-greens)
 - [Smithsonian National Air and Space Museum: U.S. Army Air Corps officer collar insignia](https://airandspace.si.edu/collection-objects/insignia-collar-officer-united-states-army-air-corps/nasm_A19710218000)
 - [Smithsonian: U.S. Army Air Force second lieutenant rank insignia](https://www.si.edu/object/insignia-rank-second-lieutenant-united-states-army-air-force%3Anasm_A19951099000)
+- [Santa Clara University Scholar Commons: The Redwood collection](https://scholarcommons.scu.edu/redwood/)
+- [Internet Archive: 1949 *Redwood*](https://archive.org/details/redwoodunse_38)
+- [Internet Archive: 1981 *Redwood*](https://archive.org/details/redwood77unse)
 - [University of Santa Clara 1949 Redwood yearbook page](https://www.e-yearbook.com/yearbooks/University_Santa_Clara_Redwood_Yearbook/1949/Page_28.html)
+- [University of Santa Clara 1981 Redwood yearbook text and pages](https://www.e-yearbook.com/yearbooks/University_Santa_Clara_Redwood_Yearbook/1981/Page_1.html)
 - [Santa Clara University Alumni Council of Past Presidents](https://www.scu.edu/alumni/about/board/council-of-past-presidents/)
 - [Santa Clara County Genealogy transcription of the University of Santa Clara Senior Class of 1949](https://legacy.sfgenealogy.org/santaclara/schools/scusc49g.htm)
 - [National Archives: 1930 Federal Population Census](https://www.archives.gov/research/census/1930/)
 - [National Archives: Request Military Service Records](https://www.archives.gov/veterans/military-service-records)
 - Secondary public name-index and census-transcription leads were checked but are treated as unconfirmed and not fully linked here because they surface Social Security fields or still need image-level verification.
+
+## Yearbook Photographs
+
+Robert E. Boscacci appears on printed page 24 of the [1949 *Redwood*](https://archive.org/details/redwoodunse_38). Mark Boscacci and Frances Pereira appear in the [1981 *Redwood*](https://archive.org/details/redwood77unse). The 1981 portrait page prints her name as "Francis Pereira"; the senior index lists "Frances L. Pereira."
+
+<div class="yearbook-portrait-grid">
+  <figure class="yearbook-portrait">
+    <img src="robert-yearbook-1949.jpg" alt="Robert E. Boscacci in the 1949 Redwood yearbook.">
+    <figcaption><strong>Robert E. Boscacci</strong><br><a href="https://archive.org/details/redwoodunse_38">1949 <em>Redwood</em></a>, printed p. 24.</figcaption>
+  </figure>
+  <figure class="yearbook-portrait">
+    <img src="mark-yearbook-1981.jpg" alt="Mark Boscacci in the 1981 Redwood yearbook.">
+    <figcaption><strong>Mark Boscacci</strong><br><a href="https://archive.org/details/redwood77unse">1981 <em>Redwood</em></a>, printed p. 300.</figcaption>
+  </figure>
+  <figure class="yearbook-portrait">
+    <img src="frances-pereira-yearbook-1981.jpg" alt="Frances Pereira Solorzano in the 1981 Redwood yearbook.">
+    <figcaption><strong>Frances Pereira (Solorzano)</strong><br><a href="https://archive.org/details/redwood77unse">1981 <em>Redwood</em></a>, printed p. 346.</figcaption>
+  </figure>
+</div>
