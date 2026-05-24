@@ -16,30 +16,27 @@
   width: 100%;
 }
 
-.yearbook-portrait-grid {
+.yearbook-context-list {
   display: grid;
-  gap: 1rem;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1.5rem;
   margin: 1.5rem 0;
 }
 
-.yearbook-portrait {
+.yearbook-context {
   border: 1px solid rgb(214 211 209);
   border-radius: 8px;
   margin: 0;
   overflow: hidden;
 }
 
-.yearbook-portrait img {
-  aspect-ratio: 4 / 5;
+.yearbook-context img {
   background: rgb(245 245 244);
   display: block;
   height: auto;
-  object-fit: cover;
   width: 100%;
 }
 
-.yearbook-portrait figcaption {
+.yearbook-context figcaption {
   font-size: 0.9rem;
   line-height: 1.35;
   padding: 0.75rem;
