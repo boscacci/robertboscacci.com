@@ -27,21 +27,21 @@ showTableOfContents: true
 
 ## Quick Read
 
-This is a **World War II-era [U.S. Army Air Forces](https://www.afhistory.af.mil/FAQs/Fact-Sheets/Article/459016/1907-1947-the-lineage-of-the-us-air-force/) officer portrait**. The sleeve patch, collar brass, and shoulder rank indicate a commissioned officer in the Army's wartime air arm, wearing the Army officer service uniform often nicknamed **[pinks and greens](https://www.nationalww2museum.org/war/articles/pinks-and-greens)**.
+This is a **World War II-era [U.S. Army Air Forces](https://web.archive.org/web/20250126182535/https://www.afhistory.af.mil/FAQs/Fact-Sheets/Article/459016/1907-1947-the-lineage-of-the-us-air-force/) officer portrait**. The sleeve patch, collar brass, and shoulder rank indicate a commissioned officer in the Army's wartime air arm, wearing the Army officer service uniform often nicknamed **[pinks and greens](https://www.nationalww2museum.org/war/articles/pinks-and-greens)**.
 
 The most likely read is:
 
-- **Service:** [U.S. Army Air Forces](https://www.afhistory.af.mil/FAQs/Fact-Sheets/Article/459016/1907-1947-the-lineage-of-the-us-air-force/), with [Air Corps branch insignia](https://airandspace.si.edu/collection-objects/insignia-collar-officer-united-states-army-air-corps/nasm_A19710218000) still in use.
+- **Service:** [U.S. Army Air Forces](https://web.archive.org/web/20250126182535/https://www.afhistory.af.mil/FAQs/Fact-Sheets/Article/459016/1907-1947-the-lineage-of-the-us-air-force/), with [Air Corps branch insignia](https://airandspace.si.edu/collection-objects/insignia-collar-officer-united-states-army-air-corps/nasm_A19710218000) still in use.
 - **Rank:** lieutenant; probably **[second lieutenant](https://www.si.edu/object/insignia-rank-second-lieutenant-united-states-army-air-force%3Anasm_A19951099000)** if the single bar was gold.
-- **Date window:** not earlier than **February 23, 1942**, when the [AAF shoulder patch](https://www.afhistory.af.mil/FAQs/Fact-Sheets/Article/459018/army-air-forces-world-war-ii-shoulder-sleeve-insignia/) was approved; most likely **1942-1945**, with a possible immediate-postwar tail through **1947**.
-- **Assignment clue:** the sleeve patch is the generic [AAF "Hap Arnold" winged-star emblem](https://www.afhistory.af.mil/FAQs/Fact-Sheets/Article/459018/army-air-forces-world-war-ii-shoulder-sleeve-insignia/), not a numbered Air Force or theater-specific patch.
+- **Date window:** not earlier than **February 23, 1942**, when the [AAF shoulder patch](https://web.archive.org/web/20250125220851/https://www.afhistory.af.mil/FAQs/Fact-Sheets/Article/459018/army-air-forces-world-war-ii-shoulder-sleeve-insignia/) was approved; most likely **1942-1945**, with a possible immediate-postwar tail through **1947**.
+- **Assignment clue:** the sleeve patch is the generic [AAF "Hap Arnold" winged-star emblem](https://web.archive.org/web/20250125220851/https://www.afhistory.af.mil/FAQs/Fact-Sheets/Article/459018/army-air-forces-world-war-ii-shoulder-sleeve-insignia/), not a numbered Air Force or theater-specific patch.
 - **Unknowns:** the portrait alone does not identify his specialty.
 
 ## What Is Visible
 
-**The sleeve patch is Army Air Forces.** The patch on his upper sleeve matches the [AAF shoulder sleeve insignia](https://www.afhistory.af.mil/FAQs/Fact-Sheets/Article/459018/army-air-forces-world-war-ii-shoulder-sleeve-insignia/): a winged star on a dark circular field. The Air Force Historical Support Division says this design was approved on **February 23, 1942**, and was initially worn by AAF personnel wherever stationed. The same source gives the color version: ultramarine disk, white star with red center, and golden wings.
+**The sleeve patch is Army Air Forces.** The patch on his upper sleeve matches the [AAF shoulder sleeve insignia](https://web.archive.org/web/20250125220851/https://www.afhistory.af.mil/FAQs/Fact-Sheets/Article/459018/army-air-forces-world-war-ii-shoulder-sleeve-insignia/): a winged star on a dark circular field. The Air Force Historical Support Division says this design was approved on **February 23, 1942**, and was initially worn by AAF personnel wherever stationed. The same source gives the color version: ultramarine disk, white star with red center, and golden wings.
 
-This makes the portrait very unlikely to be pre-1942. It also places him in the [Army Air Forces era](https://www.afhistory.af.mil/FAQs/Fact-Sheets/Article/459016/1907-1947-the-lineage-of-the-us-air-force/) rather than the independent U.S. Air Force era, which began in 1947.
+This makes the portrait very unlikely to be pre-1942. It also places him in the [Army Air Forces era](https://web.archive.org/web/20250126182535/https://www.afhistory.af.mil/FAQs/Fact-Sheets/Article/459016/1907-1947-the-lineage-of-the-us-air-force/) rather than the independent U.S. Air Force era, which began in 1947.
 
 **The lapel brass says United States officer plus aviation branch.** The visible upper lapel has the block **U.S.** device. Below it, the lower lapel device appears to be the [Air Corps winged propeller](https://airandspace.si.edu/collection-objects/insignia-collar-officer-united-states-army-air-corps/nasm_A19710218000). The Smithsonian's National Air and Space Museum describes the officer Air Corps collar insignia as gold wings with a silver two-blade propeller, which matches the small winged shape visible here.
 
@@ -53,7 +53,7 @@ This makes the portrait very unlikely to be pre-1942. It also places him in the 
 
 Robert E. Boscacci had likely been commissioned into the Army's aviation establishment and sat for this portrait either during training, after commissioning, or during a stateside assignment.
 
-The generic [AAF sleeve patch](https://www.afhistory.af.mil/FAQs/Fact-Sheets/Article/459018/army-air-forces-world-war-ii-shoulder-sleeve-insignia/) is a limited assignment clue. In early 1942 it was broadly worn across the Army Air Forces. In 1943, distinctive patches were authorized for overseas and numbered air forces, while the winged-star emblem continued for Headquarters AAF and some other personnel not wearing a specific air-force patch. If this photo was taken after mid-1943 and the patch is on his current-assignment sleeve, it may point more toward a stateside, headquarters, training, or independent-command context than a numbered combat air force.
+The generic [AAF sleeve patch](https://web.archive.org/web/20250125220851/https://www.afhistory.af.mil/FAQs/Fact-Sheets/Article/459018/army-air-forces-world-war-ii-shoulder-sleeve-insignia/) is a limited assignment clue. In early 1942 it was broadly worn across the Army Air Forces. In 1943, distinctive patches were authorized for overseas and numbered air forces, while the winged-star emblem continued for Headquarters AAF and some other personnel not wearing a specific air-force patch. If this photo was taken after mid-1943 and the patch is on his current-assignment sleeve, it may point more toward a stateside, headquarters, training, or independent-command context than a numbered combat air force.
 
 The portrait does **not** show a ribbon rack, campaign medals, overseas bars, or a qualification badge clearly enough to read. It also does not show the left breast area well enough to rule out pilot, navigator, bombardier, observer, or aircrew wings. So absence of visible wings here is not evidence that he was not aircrew.
 
@@ -85,8 +85,8 @@ It also does not prove overseas service. If he served overseas, the proof is mor
 
 ## Sources Checked
 
-- [Air Force Historical Support Division: Army Air Forces World War II Shoulder Sleeve Insignia](https://www.afhistory.af.mil/FAQs/Fact-Sheets/Article/459018/army-air-forces-world-war-ii-shoulder-sleeve-insignia/)
-- [Air Force Historical Support Division: 1907-1947, The Lineage of the U.S. Air Force](https://www.afhistory.af.mil/FAQs/Fact-Sheets/Article/459016/1907-1947-the-lineage-of-the-us-air-force/)
+- [Archived Air Force Historical Support Division: Army Air Forces World War II Shoulder Sleeve Insignia](https://web.archive.org/web/20250125220851/https://www.afhistory.af.mil/FAQs/Fact-Sheets/Article/459018/army-air-forces-world-war-ii-shoulder-sleeve-insignia/)
+- [Archived Air Force Historical Support Division: 1907-1947, The Lineage of the U.S. Air Force](https://web.archive.org/web/20250126182535/https://www.afhistory.af.mil/FAQs/Fact-Sheets/Article/459016/1907-1947-the-lineage-of-the-us-air-force/)
 - [National WWII Museum: "Pinks and Greens"](https://www.nationalww2museum.org/war/articles/pinks-and-greens)
 - [Smithsonian National Air and Space Museum: U.S. Army Air Corps officer collar insignia](https://airandspace.si.edu/collection-objects/insignia-collar-officer-united-states-army-air-corps/nasm_A19710218000)
 - [Smithsonian: U.S. Army Air Force second lieutenant rank insignia](https://www.si.edu/object/insignia-rank-second-lieutenant-united-states-army-air-force%3Anasm_A19951099000)
