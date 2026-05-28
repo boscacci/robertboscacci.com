@@ -1,6 +1,6 @@
 # robertboscacci.com
 
-Personal portfolio site built with [Hugo](https://gohugo.io/) and the [Congo](https://github.com/jpanther/congo) theme. Production deploys to GitHub Pages from `main`.
+Personal portfolio site built with [Hugo](https://gohugo.io/) and the [Congo](https://github.com/jpanther/congo) theme. Production deploys to GitHub Pages from a GitHub Actions artifact built on `main`.
 
 ## Local development
 
@@ -29,7 +29,7 @@ LaunchAgent, and external-image migration workflow.
 
 ## Environments
 
-Production deploys to GitHub Pages from `main` using `.github/workflows/gh-pages.yml` and the `robertboscacci.com` custom domain in `static/CNAME`.
+Production deploys to GitHub Pages from `main` using `.github/workflows/gh-pages.yml` and the `robertboscacci.com` custom domain in `static/CNAME`. The repository Pages source should be configured as `build_type=workflow`, not the legacy `gh-pages` branch source.
 
 Development is designed as a separate AWS-hosted static site at `dev.robertboscacci.com`. The repo-side deployment workflow is `.github/workflows/dev-preview.yml`; the AWS/Route53/CloudFront/S3 resources are described in `infra/dev/`. Development builds set noindex robots metadata and the CloudFront stack adds an `X-Robots-Tag` noindex response header.
 
