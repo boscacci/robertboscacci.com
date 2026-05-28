@@ -6,7 +6,7 @@ lastmod: 2023-06-22T02:25:46-05:00
 draft: false
 Description: "Robert Boscacci is a data scientist and author. Sometimes he does freelance data analysis work. If you need some business data analyzed, you might consider hitting him up." # Keep to 150-160 chars
 Summary: Photos and Notes from a tech meetup
-thumbnailUrl: "https://live.staticflickr.com/65535/52995898729_8996897933_k.jpg"
+thumbnailUrl: "https://media.robertboscacci.com/photos/migrated/live.staticflickr.com/899a94d18f65-52995898729_8996897933_k.jpg"
 keywords:
  - Robert Boscacci
  - Data science
@@ -24,15 +24,15 @@ On 2023-06-22 I attended the [NYC MLOps Community meetup at Spotify](https://mlo
 
 <div class="image-grid">
  <!-- Image with link -->
- <img src="https://live.staticflickr.com/65535/52995898729_8996897933_k.jpg"
+ <img src="https://media.robertboscacci.com/photos/migrated/live.staticflickr.com/899a94d18f65-52995898729_8996897933_k.jpg"
  style="border: 3px solid black;"/>
- <img src="https://live.staticflickr.com/65535/52995758576_898b4743c8_k.jpg"
- style="border: 3px solid black;"/>
- <!-- Image with link -->
- <img src="https://live.staticflickr.com/65535/52996122560_3b1d70dfa6_k.jpg"
+ <img src="https://media.robertboscacci.com/photos/migrated/live.staticflickr.com/d4fcd9b8d728-52995758576_898b4743c8_k.jpg"
  style="border: 3px solid black;"/>
  <!-- Image with link -->
- <img src="https://live.staticflickr.com/65535/52995153352_e043ef2521_k.jpg"
+ <img src="https://media.robertboscacci.com/photos/migrated/live.staticflickr.com/7820a2331b4d-52996122560_3b1d70dfa6_k.jpg"
+ style="border: 3px solid black;"/>
+ <!-- Image with link -->
+ <img src="https://media.robertboscacci.com/photos/migrated/live.staticflickr.com/eb16cd1a301d-52995153352_e043ef2521_k.jpg"
  style="border: 3px solid black;"/>
 </div>
 

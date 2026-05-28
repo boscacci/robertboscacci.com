@@ -1,6 +1,6 @@
 [hugoVersion]
   extended = false
-  min = "0.161.1"
+  min = "0.162.0"
 
 [[mounts]]
   source = "archetypes"

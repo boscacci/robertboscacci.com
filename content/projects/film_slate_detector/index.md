@@ -6,7 +6,7 @@ lastmod: 2023-05-25T02:25:46-05:00
 draft: false
 description: "Robert Boscacci fine-tuned an object detection model to find film slates, using a custom labeled dataset and cloud GPU experiments." # Keep to 150-160 chars
 summary: I used CVAT, FiftyOne, WandB, and IceVision to fine-tune an object detector.
-thumbnailUrl: "https://img.youtube.com/vi/KF4WEupeTAg/hqdefault.jpg"
+thumbnailUrl: "https://media.robertboscacci.com/photos/migrated/img.youtube.com/d03f2f3812b2-hqdefault.jpg"
 keywords:
  - Robert Boscacci
  - Data science

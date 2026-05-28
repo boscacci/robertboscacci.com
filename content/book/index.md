@@ -24,7 +24,7 @@ __The Spring of Sight__ is my first book. It's a compact nonfiction tech futuris
 Paperbacks and ebooks are available for purchase via [Barnes & Noble](https://www.barnesandnoble.com/w/the-spring-of-sight-robert-boscacci/1143513153?ean=9798889269946), [Amazon](https://www.amazon.com/dp/B0C5NBXFRJ), and [Kobo](https://www.kobo.com/us/en/ebook/the-spring-of-sight). It's likely that you already have $1 in promotional "[Kindle store credit](https://www.amazon.com/dp/B0C5NBXFRJ)" which can be used to download an effectively free digital copy.
 
 <a href="https://www.amazon.com/dp/B0C5NBXFRJ"><img
-src="https://i.postimg.cc/C19cLvSK/mock-00016.png"
+src="https://media.robertboscacci.com/photos/migrated/i.postimg.cc/9610396c54b8-mock-00016.png"
 width="800"/></a>
 
 ## Short Synopsis
@@ -94,7 +94,7 @@ You will love _The Spring of Sight_ if you’re excited about technology’s pro
 
 The Spring of Sight is a nonfiction book that speaks to futurists and activists who are looking at image-based automation and mass surveillance for the first time.
 
-![](https://i.postimg.cc/kDP98FFJ/mock-00404.png)
+![](https://media.robertboscacci.com/photos/migrated/i.postimg.cc/96dd84977b58-mock-00404.png)
 
 ## About the Author
 

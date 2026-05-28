@@ -26,8 +26,8 @@ keywords:
 
 Monday-Tuesday, I build and deploy a computer vision ("AI") powered Bluesky bot, along with a web control panel. Today I shut it down, because I'm told its replies are indistinguishable from a human user—which is annoying people. To be clear: I never type any replies myself. I just push a button, and the bot (powered by GPT-4o) generates and posts all the responses automatically.
 
-<a href="https://images.squidge.org/images/2025/09/25/bsky_reply_guy.jpeg" target="_blank" rel="noopener">
-  <img src="https://images.squidge.org/images/2025/09/25/bsky_reply_guy.jpeg" alt="Screenshot of Bluesky bot reply" width="800"/>
+<a href="https://media.robertboscacci.com/photos/migrated/images.squidge.org/1cf6f464c217-bsky_reply_guy.jpeg" target="_blank" rel="noopener">
+  <img src="https://media.robertboscacci.com/photos/migrated/images.squidge.org/1cf6f464c217-bsky_reply_guy.jpeg" alt="Screenshot of Bluesky bot reply" width="800"/>
 </a>
 
 The bot uses a multi-modal OpenAI model (4o) to analyze image posts and generate replies based on the actual image content. I give it a "personality" (Seattle-based cyclist) and infuse it with my own "values" (accessible urban infrastructure advocacy) via prompt engineering. I am impressed when it reads the slogan off a lady's shirt in a photo and works that into a comedic reply—all without any manual input from me.

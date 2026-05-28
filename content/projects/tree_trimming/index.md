@@ -34,7 +34,7 @@ Barnes expressed interest in __mining their invoicing and calendar data for busi
 
 <!-- Image with link -->
 <a href="https://barnes-brothers-tree-service-llc.business.site/">
- <img src="https://live.staticflickr.com/65535/52810020073_b6080f71c1_o.png"
+ <img src="https://media.robertboscacci.com/photos/migrated/live.staticflickr.com/6eac6f7cdfa9-52810020073_b6080f71c1_o.png"
  width="800"
  style="border: 1px solid black;"/>
 </a>
@@ -97,7 +97,7 @@ __3. Reports/Viz__
 * [Plotly](https://plotly.com/python/) to generate ordinary bar charts outlining top clients, high-conversion areas
 * [kepler.gl](https://github.com/keplergl/kepler.gl) to visualize high-spend geographies. The maps look sort of like this:
 
-![](https://d1a3f4spazzrp4.cloudfront.net/kepler.gl/website/hero/kepler.gl-contours.png)
+![](https://media.robertboscacci.com/photos/migrated/d1a3f4spazzrp4.cloudfront.net/2e28eb5cf92d-kepler.gl-contours.png)
 
 ## Deliverables
 
@@ -109,4 +109,4 @@ __3. Reports/Viz__
 ## Client Feedback
 
 Positive!
-![](https://live.staticflickr.com/65535/52810073321_3371779cd9_o.png)
+![](https://media.robertboscacci.com/photos/migrated/live.staticflickr.com/c4f39f8c04f0-52810073321_3371779cd9_o.png)

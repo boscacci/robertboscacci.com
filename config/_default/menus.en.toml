@@ -11,24 +11,24 @@
 # ordered by weight from lowest to highest.
 
 [[main]]
-name = "About"
-pageRef = "/about"
-weight = 10
-
-[[main]]
 name = "Projects"
 pageRef = "/projects"
-weight = 20
+weight = 10
 
 [[main]]
 name = "Book"
 pageRef = "/book"
-weight = 30
+weight = 20
 
 [[main]]
 name = "Blog"
 pageRef = "/blog"
-weight = 40
+weight = 30
+
+[[main]]
+name = "About"
+pageRef = "/about"
+weight = 100
 
 # [[main]]
 #  identifier = "locale"

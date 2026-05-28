@@ -37,7 +37,7 @@ jobs:
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v3
         with:
-          hugo-version: "0.161.1"
+          hugo-version: "0.162.0"
 
       - name: Build development site
         run: hugo --gc --minify --cleanDestinationDir --environment development --baseURL "${DEV_BASE_URL}"

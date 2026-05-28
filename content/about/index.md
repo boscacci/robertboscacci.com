@@ -2,9 +2,10 @@
 title: "About Me"
 toc: false
 date: "2022-11-27"
-lastmod: 2026-02-08T00:00:00-08:00
+lastmod: 2026-05-28T00:00:00-07:00
 showReadingTime: false
 draft: false
+weight: 100
 description: "Robert Boscacci is a Seattle data engineer, author, and former film colorist building mission-driven mobility tech at SilverRide." # Keep to 150-160 chars
 keywords:
  - Robert Boscacci
@@ -31,8 +32,6 @@ Lately, I've built heaps of automated solutions on **Azure** and **AWS** with ag
 - [AWS Certified Data Engineer](https://www.credly.com/badges/7afe970a-4997-459d-92ab-ae0e86ae48c6) in 2025.
 - [IMDb credits](https://www.imdb.com/name/nm4574526/) across editorial, camera/electrical, cinematography, editing, visual effects, and sound roles.
 - Author of [_The Spring of Sight_](/book), a nonfiction computer-vision book published by New Degree Press and sold through major book retailers.
-- Built a [film slate detector](/projects/film_slate_detector/) by fine-tuning object detection models on a custom labeled dataset.
-- Helped film and photograph a Santa Clara University fellowship project in Myanmar, covered by [Santa Clara Magazine](https://magazine.scu.edu/magazines/spring-2014/decide-who-we-are/).
 
 {{< button href="https://www.credly.com/badges/7afe970a-4997-459d-92ab-ae0e86ae48c6" target="_blank" >}}View AWS credential{{< /button >}}
 
@@ -75,6 +74,7 @@ Lately, I've built heaps of automated solutions on **Azure** and **AWS** with ag
 - Eating a flaming muffin in [a semi-popular music video from 2011](https://youtu.be/5dE-7-kBxXw?t=135)
 - [Walking clear across](https://magazine.scu.edu/magazines/spring-2013/walk-across-california/) the state of California as part of a university class
 - [Getting quoted in SFGATE](https://www.sfgate.com/outdoors/article/Santa-Clara-University-s-Walk-Across-California-3684399.php) after said walk, while badly needing a shower
+- Helped film and photograph a Santa Clara University fellowship project in Myanmar, covered by [Santa Clara Magazine](https://magazine.scu.edu/magazines/spring-2014/decide-who-we-are/)
   
 ## About This Site
 

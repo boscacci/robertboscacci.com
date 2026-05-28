@@ -19,13 +19,13 @@ keywords:
 
 I was hired as a contractor to take [this broken WordPress site](https://web.archive.org/web/20220311091755/https://nysgeneticstaskforce.org/):
 <a href='https://web.archive.org/web/20220311091755/https://nysgeneticstaskforce.org/' target='_blank' style="display:block;">
-  <img src='https://i.postimg.cc/Zqnd4X8v/Screenshot-2025-05-08-201714.png' alt='Screenshot-2025-05-08-201714' style="width:100%;height:auto;display:block;"/>
+  <img src='https://media.robertboscacci.com/photos/migrated/i.postimg.cc/e894e4e4e5fb-Screenshot-2025-05-08-201714.png' alt='Screenshot-2025-05-08-201714' style="width:100%;height:auto;display:block;"/>
 </a>
 
 And improve it, porting it over to Squarespace for easy management:
-<a href='https://www.nysgeneticstaskforce.com/' target='_blank'><img src='https://i.postimg.cc/D01CC3j7/image.png' border='0' alt='image'/></a>
+<a href='https://www.nysgeneticstaskforce.com/' target='_blank'><img src='https://media.robertboscacci.com/photos/migrated/i.postimg.cc/50bd06e856ef-image.png' border='0' alt='image'/></a>
 
-<a href='https://www.nysgeneticstaskforce.com/' target='_blank'><img src='https://i.postimg.cc/VksJLBcR/image.png' border='0' alt='image'/></a>
+<a href='https://www.nysgeneticstaskforce.com/' target='_blank'><img src='https://media.robertboscacci.com/photos/migrated/i.postimg.cc/396288358c11-image.png' border='0' alt='image'/></a>
 
 Check it out---it's live at [nysgeneticstaskforce.com](https://www.nysgeneticstaskforce.com/).
 
