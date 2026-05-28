@@ -57,3 +57,5 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v5
         if: ${{ github.ref == 'refs/heads/main' }}
+        env:
+          NODE_OPTIONS: --no-deprecation
