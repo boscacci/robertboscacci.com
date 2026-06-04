@@ -2,10 +2,10 @@
 title: "VHF Chatter in Elliott Bay"
 showTableofcontents: true
 date: 2026-05-27T17:45:00-07:00
-lastmod: 2026-06-02T23:53:51-07:00
+lastmod: 2026-06-03T18:19:24-07:00
 draft: false
-description: "A home-lab marine VHF listening project with Raspberry Pi radio capture, OptiPlex processing, DynamoDB clip state, live audio, clips, transcript search, and analysis."
-summary: "Live Elliott Bay marine VHF capture with recent clips, transcripts, search, Hall of Fame, and language analysis."
+description: "A home-lab marine VHF listening project with Raspberry Pi radio capture, OptiPlex processing, AWS HLS live audio, AIS, DynamoDB clip state, transcript search, and analysis."
+summary: "Live Elliott Bay marine VHF capture with HLS live audio, AIS, recent clips, transcripts, search, Hall of Fame, and language analysis."
 keywords:
  - Robert Boscacci
  - Software engineering
@@ -19,7 +19,11 @@ keywords:
  - OpenTofu
 ---
 
-This project captures nearby Elliott Bay marine VHF radio traffic and publishes a read-only web interface with live audio, recent clips, transcripts, transcript search, Hall of Fame clips, and language analysis. The production site is [vhf.robertboscacci.com](https://vhf.robertboscacci.com/), the development site is [vhf-dev.robertboscacci.com](https://vhf-dev.robertboscacci.com/), and the source repo is [boscacci/vhf-seattle](https://github.com/boscacci/vhf-seattle).
+This project captures nearby Elliott Bay marine VHF radio traffic and publishes a read-only web interface for live audio, AIS vessel positions, recent clips, transcripts, search, Hall of Fame clips, and language analysis.
+
+- Production: [vhf.robertboscacci.com](https://vhf.robertboscacci.com/)
+- Development: [vhf-dev.robertboscacci.com](https://vhf-dev.robertboscacci.com/)
+- Source: [boscacci/vhf-seattle](https://github.com/boscacci/vhf-seattle)
 
 ## Why
 
@@ -27,105 +31,106 @@ I learned about the marine radio channels while taking the online classes for th
 
 I originally considered buying a handheld marine radio. Instead, I decided it would be more useful and more interesting to connect a receiver to a Raspberry Pi and do computer-based processing with the audio.
 
-## Current Shape
+## Architecture
 
-The system has three main runtime layers:
+The system has three runtime layers:
 
-- Raspberry Pi radio edge near the antenna and RTL-SDR receivers
-- Used Dell OptiPlex desktop repurposed as a small Ubuntu home server
-- AWS public edge using private S3 buckets, DynamoDB, CloudFront, ACM, and Route 53
+- **Raspberry Pi radio edge:** VHF voice capture, AIS decode, HLS segment generation, activity detection, clip spooling, and bounded local buffers.
+- **OptiPlex home server:** private API, presigned raw-audio uploads, transcription, transcript corrections, public export generation, and telemetry.
+- **AWS public edge:** private S3 origins, CloudFront, DynamoDB, API Gateway/Lambda for AIS, ACM, and Route 53.
 
-The Raspberry Pi handles radio work that needs to stay close to the antenna: voice-channel demodulation, AIS decode, live MP3 streams, squelch and activity gates, split-on-transmission clip files, sidecar metadata, and bounded local buffers. It does not hold long-lived AWS credentials.
+Boundary decisions:
 
-The OptiPlex is a secondhand office desktop originally bought as a Windows box and repurposed with Ubuntu. It runs the private API, presigns raw-audio uploads, runs transcription and export jobs, serves the read-only live proxy, and handles normal development and operations work.
-
-AWS stores durable state and serves the public edge. Raw audio lives in private S3 buckets. DynamoDB stores clip metadata, status transitions, transcripts, transcript corrections, and serving read models. CloudFront serves the production static app from private S3 and routes narrow read-only live/API paths to the OptiPlex proxy.
-
-SQLite is no longer the operational clip or transcript store. It remains for explicit legacy backfills, local fixture tests, and separate realtime performance telemetry.
+- Public browser reads terminate at AWS edges.
+- The OptiPlex is private/dev infrastructure, not a production website origin.
+- The Pi publishes outbound only, using scoped cloud resources.
+- Dev/operator paths can reach the OptiPlex private API over the tailnet for write-capable actions.
+- SQLite is retained only for explicit legacy backfills, local fixtures, and separate realtime telemetry.
 
 ![Production boundary diagram for Elliott Bay VHF](https://media.robertboscacci.com/photos/elliott-bay-vhf/production-boundary.png)
 
-_Production boundary diagram showing public read-only routes, tailnet operator routes, local runtime services, and AWS durable stores._
+_Current production boundary._
 
-## Radio And Capture Path
+## Radio And Live Paths
 
-The voice capture path is:
+Radio capture:
 
-- Antenna to RTL-SDR receiver
-- RTL-SDR receiver to Raspberry Pi
-- Raspberry Pi capture services to local spool files and selected Icecast live streams
-- Raspberry Pi spool uploader to the OptiPlex private API
-- OptiPlex private API to private S3 and DynamoDB
-- OptiPlex export jobs to the public S3/CloudFront site
+- Antenna and RTL-SDR receivers feed the Raspberry Pi.
+- RTLSDR-Airband monitors a 12-channel marine VHF profile: 05A, 06, 09, 13, 14, 16, 22A, 67, 68, 69, 71, and 72.
+- VHF 14 remains the default live feed for Seattle Traffic / Puget Sound VTS.
+- A second RTL-SDR runs AIS-catcher around 162 MHz.
 
-The current balanced voice profile uses RTLSDR-Airband to monitor these marine VHF channels in one multichannel process:
+Live audio:
 
-- 05A, VTS / Port Ops
-- 06, Intership Safety
-- 09, Calling / Commercial
-- 13, Bridge-to-bridge
-- 14, VTS / Seattle Traffic
-- 16, Distress / Calling
-- 22A, USCG Liaison
-- 67, Commercial / Bridge
-- 68, Recreational
-- 69, Non-commercial
-- 71, Non-commercial
-- 72, Ship-to-ship
-
-Browser-facing live streams are narrower than the captured channel set. The public live routes expose selected channel streams, including VHF 13, VHF 14, VHF 16, and VHF 68. The stable `/api/live/current.mp3` route keeps VHF 14 as the default live feed.
+- The Pi converts local Icecast output into short HLS playlists and segments.
+- HLS objects are written to the public-site S3 `live/` prefix.
+- CloudFront serves `/live/current.m3u8`, `/live/channels.json`, and per-channel playlists such as `/live/channels/14/current.m3u8`.
 
 ![Production Live Monitor screenshot for Elliott Bay VHF](https://media.robertboscacci.com/photos/elliott-bay-vhf/app-live-monitor.png)
 
-_Production Live Monitor view showing the default feed, queue state, waveform area, and monitored channel buttons._
+_Live Monitor._
 
-A second RTL-SDR can run AIS-catcher around 162 MHz. The AIS map is available on dev/local paths only; the production site does not expose the AIS viewer.
+AIS:
+
+- AIS-catcher decodes vessel messages on the Pi.
+- A local forwarder sends sanitized-bound input to API Gateway over outbound HTTPS.
+- Lambda strips private fields and bounds the public payload to local waters.
+- Public reads use `/ais/latest.json` and `wss://ais-live.robertboscacci.com/v1`.
+
+Production browsers do not connect directly to the Pi, OptiPlex, LAN Icecast URLs, Tailscale Funnel origins, raw S3 objects, or DynamoDB.
 
 ## Processing Path
 
-The Raspberry Pi applies the cheap, realtime processing first: demodulation, squelch, speech-band cleanup, split-on-transmission file output, and short local rolling buffers. Completed spool files are uploaded through the OptiPlex private API using short-lived presigned S3 URLs.
+Clip processing:
 
-The OptiPlex records clip state in DynamoDB, retries incomplete uploads, runs `faster-whisper` transcription, stores transcript segments and corrections, and generates public exports. The public export copies safe audio files, removes private fields, skips very short or nearly silent clips, filters low-confidence transcript artifacts, and preserves the analysis artifacts used by the public app.
+- The Pi creates activity clips and sidecar metadata.
+- The Pi asks the OptiPlex private API for short-lived presigned upload URLs.
+- Raw audio stays in private S3.
+- DynamoDB stores clip events, transcripts, corrections, and serving read models.
+- The OptiPlex runs `faster-whisper`, review/correction workflows, lexical analysis, and public exports.
 
-Unstarred raw audio in the private S3 `raw/` prefix expires by lifecycle rule after 90 days. Starred Hall of Fame clips are tagged for longer retention.
+Retention and export:
+
+- Unstarred raw `raw/` audio expires after 90 days.
+- Starred Hall of Fame clips are tagged for longer retention.
+- Public exports strip private fields, raw keys, internal URLs, account IDs, and nondisplayable transcript artifacts.
+- Playback controls are shown only when public audio can still be resolved.
 
 ![Durable clip lifecycle diagram for Elliott Bay VHF](https://media.robertboscacci.com/photos/elliott-bay-vhf/durable-clip-lifecycle.png)
 
-_Durable clip lifecycle diagram showing private ingest, DynamoDB and raw S3 state, transcription/review, sanitized export, and public read-only delivery._
-
-## Public Boundary
-
-The production site is public and read-only. It exposes static app assets, published clip metadata, short-lived playback URLs, live audio/status routes, transcript search, and language-analysis data.
-
-It does not expose radio controls, retune endpoints, ingest endpoints, raw S3 object keys, presigned URLs, private database access, long-lived credentials, LAN Icecast URLs, the AIS viewer, performance telemetry, or the Raspberry Pi's local services.
-
-The public live/API paths are routed through CloudFront to a read-only OptiPlex proxy exposed by Tailscale Funnel. Dev and local hosts can expose additional operator surfaces, including transcript correction, clip starring, AIS, and performance checks.
+_Clip, live audio, and AIS lifecycle._
 
 ## Deployment And Infrastructure
 
-Infrastructure is managed with OpenTofu. The AWS layer uses separate dev and production static-site buckets, separate raw-audio buckets, separate DynamoDB event tables, CloudFront Origin Access Control, TLS certificates, DNS records, and server IAM policies.
+Infrastructure is managed with OpenTofu:
 
-Development deploys go to a separate dev S3 origin and are served behind `vhf-dev.robertboscacci.com` through the OptiPlex tailnet path. Production deploys go to the production S3 origin and CloudFront distribution behind `vhf.robertboscacci.com`. The deploy helper only allows production from a clean `main` worktree.
+- Separate dev/prod static-site buckets.
+- Separate dev/prod private raw-audio buckets.
+- Separate DynamoDB event tables.
+- CloudFront Origin Access Control for private S3 origins.
+- API Gateway/Lambda AIS ingest and WebSocket delivery.
+- ACM certificates, Route 53 records, and scoped IAM policies.
 
-## Current Outputs
+## Public Interface
 
-The current public interface includes these views:
+Production includes:
 
-- Clip Review for recent public clips, transcript text, playback controls, per-channel filtering, and Hall of Fame filtering
-- Live Monitor for the default VHF 14 feed and selected per-channel live audio/status routes
-- Search for finding clips by transcript meaning
-- Analysis for lexical-analysis JSON, topic output, entities, and related language summaries
+- Clip Review: recent clips, transcripts, playback, channel filters, and Hall of Fame filtering.
+- Live Monitor: HLS live audio, queue state, waveform, and per-channel status.
+- AIS: local vessel positions published through the sanitized AWS path.
+- Search: transcript search and generated search starters.
+- Analysis: lexical analysis, topic output, entities, and language summaries.
 
 ![Production Clip Review screenshot for Elliott Bay VHF](https://media.robertboscacci.com/photos/elliott-bay-vhf/app-clip-review.png)
 
-_Production Clip Review view showing recent transcripts, playback controls, channel filtering, page size controls, and Hall of Fame filtering._
+_Clip Review._
 
 ![Production Search screenshot for Elliott Bay VHF](https://media.robertboscacci.com/photos/elliott-bay-vhf/app-search.png)
 
-_Production Search view showing transcript search controls and generated search starters._
+_Search._
 
 ![Production Analysis screenshot for Elliott Bay VHF](https://media.robertboscacci.com/photos/elliott-bay-vhf/app-analysis.png)
 
-_Production Analysis view showing analyzed transcript counts, channel distribution, and topic-model summary._
+_Analysis._
 
-Development and local operator views also support transcript correction, clip starring, performance telemetry, and AIS map checks.
+Dev/operator views also support transcript correction, clip starring, performance telemetry, and runtime checks.
