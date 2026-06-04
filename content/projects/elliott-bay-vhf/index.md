@@ -1,8 +1,8 @@
 ---
-title: "VHF Chatter in Elliott Bay"
+title: "Elliott Bay Marine VHF Monitor"
 showTableofcontents: true
 date: 2026-05-27T17:45:00-07:00
-lastmod: 2026-06-03T23:27:40-07:00
+lastmod: 2026-06-04T08:07:34-07:00
 draft: false
 description: "A home-lab marine VHF listening project with Raspberry Pi radio capture, OptiPlex processing, AWS HLS live audio, AIS, DynamoDB clip state, transcript search, and analysis."
 summary: "Live Elliott Bay marine VHF capture with HLS live audio, AIS, recent clips, transcripts, search, Hall of Fame, and language analysis."
