@@ -2,7 +2,7 @@
 title: "Elliott Bay Marine VHF Monitor"
 showTableofcontents: true
 date: 2026-05-27T17:45:00-07:00
-lastmod: 2026-06-04T11:41:45-07:00
+lastmod: 2026-06-04T11:57:20-07:00
 draft: false
 description: "A home-lab marine VHF listening project with Raspberry Pi radio capture, OptiPlex processing, AWS HLS live audio, AIS, DynamoDB clip state, transcript search, and analysis."
 summary: "Live Elliott Bay marine VHF capture with HLS live audio, AIS, recent clips, transcripts, search, Hall of Fame, and language analysis."
@@ -56,6 +56,10 @@ Desktop captures:
   </figure>
 </div>
 
+![Transcript topic cluster animation for Elliott Bay VHF](https://media.robertboscacci.com/photos/elliott-bay-vhf/topic-clusters.gif)
+
+_Transcript topic cluster view._
+
 Mobile captures:
 
 <div class="vhf-screenshot-gallery vhf-screenshot-gallery--mobile">
@@ -76,10 +80,6 @@ Mobile captures:
     <figcaption>Analysis.</figcaption>
   </figure>
 </div>
-
-![Transcript topic cluster animation for Elliott Bay VHF](https://media.robertboscacci.com/photos/elliott-bay-vhf/topic-clusters.gif)
-
-_Transcript topic cluster view._
 
 ## Architecture
 
