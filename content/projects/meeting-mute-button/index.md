@@ -6,6 +6,8 @@ lastmod: 2026-05-28T00:00:00-07:00
 draft: false
 description: "A hardware mute button for Zoom and Microsoft Teams on macOS, using Arduino ESP32 firmware, USB serial messages, and Hammerspoon app control."
 summary: "A physical red and green mute button for Zoom and Microsoft Teams on macOS."
+featureUrl: "https://media.robertboscacci.com/photos/meeting-mute-button/mute-button-index.png"
+featureAlt: "Illustration of the red and green hardware mute button."
 keywords:
  - Robert Boscacci
  - Software engineering

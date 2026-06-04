@@ -6,6 +6,8 @@ lastmod: 2023-06-08T02:25:46-05:00
 draft: false
 Description: "Robert Boscacci is a devops engineer. He wants to help you pass the aws devops professional certification by sharing his notes here." # Keep to 150-160 chars
 Summary: "I actually failed the exam first try, but my notes remain."
+featureUrl: "https://media.robertboscacci.com/photos/aws-devops/aws-devops-index.png"
+featureAlt: "Illustration of AWS DevOps certification notes and a build, test, deploy pipeline."
 keywords:
  - Robert Boscacci
  - DevOps

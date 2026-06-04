@@ -6,6 +6,8 @@ lastmod: 2025-09-25T02:25:46-05:00
 draft: false
 Description: "Robert Boscacci built a multi-modal GPT-4o Bluesky bot with computer vision that was so convincing he had to shut it down. Built with Cursor IDE." # Keep to 150-160 chars
 Summary: "Building and shutting down an AI bot that was indistinguishable from human users"
+featureUrl: "https://media.robertboscacci.com/photos/migrated/images.squidge.org/1cf6f464c217-bsky_reply_guy.jpeg"
+featureAlt: "Screenshot of the Bluesky image reply bot responding to a post."
 keywords:
  - Robert Boscacci
  - Data science

@@ -3,6 +3,29 @@
   max-width: 100%;
 }
 
+.article-link__image-frame {
+  background: rgb(41 37 36);
+  border-radius: 6px;
+  display: block;
+  height: 4.5rem;
+  overflow: hidden;
+  width: 6rem;
+}
+
+.article-link__image {
+  display: block;
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+
+@media (min-width: 640px) {
+  .article-link__image-frame {
+    height: 7.5rem;
+    width: 10rem;
+  }
+}
+
 .js-lightbox-image {
   cursor: zoom-in;
 }

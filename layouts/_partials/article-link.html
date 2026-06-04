@@ -19,6 +19,7 @@
   {{- if or $feature $featureUrl }}
     <div class="flex-none pe-4 sm:pe-6">
       <a
+        class="article-link__image-frame"
         href="{{ with $.Params.externalUrl }}{{ . }}{{ else }}{{ $.Permalink }}{{ end }}"
         aria-label="{{ $.Title | emojify }}"
       >
@@ -27,10 +28,10 @@
           <img
             alt="{{ $.Params.featureAlt | default $.Params.thumbnailAlt | default "" }}"
             {{ if eq $img.MediaType.SubType "svg" }}
-              class="w-24 max-w-[6rem] max-h-[4.5rem] rounded-md object-cover sm:max-h-[7.5rem] sm:w-40 sm:max-w-[10rem]"
+              class="article-link__image"
               src="{{ $img.Permalink }}"
             {{ else }}
-              class="w-24 rounded-md object-cover sm:w-40"
+              class="article-link__image"
               srcset="{{- ($img.Fill "160x120 smart").Permalink }} 160w, {{- ($img.Fill "320x240 smart").Permalink }} 2x"
               src="{{ ($img.Fill "160x120 smart").Permalink }}"
               width="160"
@@ -41,7 +42,7 @@
         {{- else }}
           <img
             alt="{{ $featureAlt }}"
-            class="w-24 h-[4.5rem] rounded-md object-cover sm:w-40 sm:h-[7.5rem]"
+            class="article-link__image"
             src="{{ $featureUrl }}"
             width="160"
             height="120"

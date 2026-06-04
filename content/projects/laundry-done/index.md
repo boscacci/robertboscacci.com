@@ -6,6 +6,8 @@ lastmod: 2026-05-28T00:00:00-07:00
 draft: false
 description: "A washer and dryer vibration sensor that detects when a laundry cycle finishes, sends signed events to a FastAPI relay, and notifies a phone."
 summary: "A washer and dryer vibration sensor that detects finished laundry cycles and sends phone notifications."
+featureUrl: "https://media.robertboscacci.com/photos/laundry-done/laundry-done-index.png"
+featureAlt: "Illustration of a washer and dryer vibration sensor with a phone notification."
 keywords:
  - Robert Boscacci
  - Software engineering

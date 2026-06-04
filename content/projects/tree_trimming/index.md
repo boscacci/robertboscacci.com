@@ -6,6 +6,8 @@ lastmod: 2023-04-11T02:25:46-05:00
 draft: false
 Description: "Robert Boscacci is a data scientist and author. Sometimes he does freelance data analysis work. If you need some business data analyzed, you might consider hitting him up." # Keep to 150-160 chars
 Summary: A data analysis consulting project for a tree trimming service 🌳 🏡
+featureUrl: "https://media.robertboscacci.com/photos/migrated/live.staticflickr.com/6eac6f7cdfa9-52810020073_b6080f71c1_o.png"
+featureAlt: "Screenshot from the tree-service analysis project."
 keywords:
  - Robert Boscacci
  - Data scientist

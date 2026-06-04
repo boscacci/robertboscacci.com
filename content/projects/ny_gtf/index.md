@@ -7,6 +7,8 @@ draft: false
 description: "Robert Boscacci rebuilt the New York State Genetics Task Force website, improving usability, maintainability, and member workflows." # Keep to 150-160 chars
 slug: "new-york-state-genetics-task-force-web-design"
 summary: I helped rebuild a website for a professional organization in NY State.
+featureUrl: "https://media.robertboscacci.com/photos/migrated/i.postimg.cc/50bd06e856ef-image.png"
+featureAlt: "Screenshot of the rebuilt New York State Genetics Task Force homepage."
 keywords:
  - Robert Boscacci
  - Data analysis
