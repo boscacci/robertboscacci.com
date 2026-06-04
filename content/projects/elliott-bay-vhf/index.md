@@ -2,7 +2,7 @@
 title: "Elliott Bay Marine VHF Monitor"
 showTableofcontents: true
 date: 2026-05-27T17:45:00-07:00
-lastmod: 2026-06-04T11:08:23-07:00
+lastmod: 2026-06-04T11:41:45-07:00
 draft: false
 description: "A home-lab marine VHF listening project with Raspberry Pi radio capture, OptiPlex processing, AWS HLS live audio, AIS, DynamoDB clip state, transcript search, and analysis."
 summary: "Live Elliott Bay marine VHF capture with HLS live audio, AIS, recent clips, transcripts, search, Hall of Fame, and language analysis."
@@ -25,11 +25,15 @@ This project captures nearby Elliott Bay marine VHF radio traffic and publishes 
 - Development: [vhf-dev.robertboscacci.com](https://vhf-dev.robertboscacci.com/)
 - Source: [boscacci/vhf-seattle](https://github.com/boscacci/vhf-seattle)
 
-![Transcript topic cluster animation for Elliott Bay VHF](https://media.robertboscacci.com/photos/elliott-bay-vhf/topic-clusters.gif)
+## Why
 
-_Transcript topic cluster view._
+I learned about the marine radio channels while taking the online classes for the Washington boater safety card. I now see a wide variety of boats going by on Elliott Bay, so I wanted to know what they say to each other.
+
+I originally considered buying a handheld marine radio. Instead, I decided it would be more useful and more interesting to connect a receiver to a Raspberry Pi and do computer-based processing with the audio.
 
 ## Screenshots
+
+The public interface has views for clip review, live monitoring, transcript search, language analysis, and transcript topic clustering.
 
 Desktop captures:
 
@@ -73,11 +77,9 @@ Mobile captures:
   </figure>
 </div>
 
-## Why
+![Transcript topic cluster animation for Elliott Bay VHF](https://media.robertboscacci.com/photos/elliott-bay-vhf/topic-clusters.gif)
 
-I learned about the marine radio channels while taking the online classes for the Washington boater safety card. I now see a wide variety of boats going by on Elliott Bay, so I wanted to know what they say to each other.
-
-I originally considered buying a handheld marine radio. Instead, I decided it would be more useful and more interesting to connect a receiver to a Raspberry Pi and do computer-based processing with the audio.
+_Transcript topic cluster view._
 
 ## Architecture
 
