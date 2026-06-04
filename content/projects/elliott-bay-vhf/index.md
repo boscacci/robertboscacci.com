@@ -2,7 +2,7 @@
 title: "VHF Chatter in Elliott Bay"
 showTableofcontents: true
 date: 2026-05-27T17:45:00-07:00
-lastmod: 2026-06-03T18:36:33-07:00
+lastmod: 2026-06-03T22:45:19-07:00
 draft: false
 description: "A home-lab marine VHF listening project with Raspberry Pi radio capture, OptiPlex processing, AWS HLS live audio, AIS, DynamoDB clip state, transcript search, and analysis."
 summary: "Live Elliott Bay marine VHF capture with HLS live audio, AIS, recent clips, transcripts, search, Hall of Fame, and language analysis."
@@ -136,9 +136,9 @@ Retention and export:
 - Public exports strip private fields, raw keys, internal URLs, account IDs, and nondisplayable transcript artifacts.
 - Playback controls are shown only when public audio can still be resolved.
 
-![Durable clip lifecycle diagram for Elliott Bay VHF](https://media.robertboscacci.com/photos/elliott-bay-vhf/durable-clip-lifecycle.png)
+![Whisper fine-tuning feedback loop diagram for Elliott Bay VHF](https://media.robertboscacci.com/photos/elliott-bay-vhf/whisper-fine-tuning.png)
 
-_Clip, live audio, and AIS lifecycle._
+_Whisper fine-tuning feedback loop._
 
 ## Deployment And Infrastructure
 
