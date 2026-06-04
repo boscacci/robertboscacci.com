@@ -2,7 +2,7 @@
 title: "VHF Chatter in Elliott Bay"
 showTableofcontents: true
 date: 2026-05-27T17:45:00-07:00
-lastmod: 2026-06-03T18:19:24-07:00
+lastmod: 2026-06-03T18:36:33-07:00
 draft: false
 description: "A home-lab marine VHF listening project with Raspberry Pi radio capture, OptiPlex processing, AWS HLS live audio, AIS, DynamoDB clip state, transcript search, and analysis."
 summary: "Live Elliott Bay marine VHF capture with HLS live audio, AIS, recent clips, transcripts, search, Hall of Fame, and language analysis."
@@ -24,6 +24,50 @@ This project captures nearby Elliott Bay marine VHF radio traffic and publishes 
 - Production: [vhf.robertboscacci.com](https://vhf.robertboscacci.com/)
 - Development: [vhf-dev.robertboscacci.com](https://vhf-dev.robertboscacci.com/)
 - Source: [boscacci/vhf-seattle](https://github.com/boscacci/vhf-seattle)
+
+## Screenshots
+
+Desktop captures:
+
+<div class="vhf-screenshot-gallery">
+  <figure>
+    <img src="https://media.robertboscacci.com/photos/elliott-bay-vhf/app-clip-review.png" alt="Production Clip Review desktop screenshot for Elliott Bay VHF">
+    <figcaption>Clip Review.</figcaption>
+  </figure>
+  <figure>
+    <img src="https://media.robertboscacci.com/photos/elliott-bay-vhf/app-live-monitor.png" alt="Production Live Monitor desktop screenshot for Elliott Bay VHF">
+    <figcaption>Live Monitor.</figcaption>
+  </figure>
+  <figure>
+    <img src="https://media.robertboscacci.com/photos/elliott-bay-vhf/app-search.png" alt="Production Search desktop screenshot for Elliott Bay VHF">
+    <figcaption>Search.</figcaption>
+  </figure>
+  <figure>
+    <img src="https://media.robertboscacci.com/photos/elliott-bay-vhf/app-analysis.png" alt="Production Analysis desktop screenshot for Elliott Bay VHF">
+    <figcaption>Analysis.</figcaption>
+  </figure>
+</div>
+
+Mobile captures:
+
+<div class="vhf-screenshot-gallery vhf-screenshot-gallery--mobile">
+  <figure>
+    <img src="https://media.robertboscacci.com/photos/elliott-bay-vhf/mobile-clip-review.png" alt="Production Clip Review mobile screenshot for Elliott Bay VHF">
+    <figcaption>Clip Review.</figcaption>
+  </figure>
+  <figure>
+    <img src="https://media.robertboscacci.com/photos/elliott-bay-vhf/mobile-live-monitor.png" alt="Production Live Monitor mobile screenshot for Elliott Bay VHF">
+    <figcaption>Live Monitor.</figcaption>
+  </figure>
+  <figure>
+    <img src="https://media.robertboscacci.com/photos/elliott-bay-vhf/mobile-search.png" alt="Production Search mobile screenshot for Elliott Bay VHF">
+    <figcaption>Search.</figcaption>
+  </figure>
+  <figure>
+    <img src="https://media.robertboscacci.com/photos/elliott-bay-vhf/mobile-analysis.png" alt="Production Analysis mobile screenshot for Elliott Bay VHF">
+    <figcaption>Analysis.</figcaption>
+  </figure>
+</div>
 
 ## Why
 
@@ -66,10 +110,6 @@ Live audio:
 - HLS objects are written to the public-site S3 `live/` prefix.
 - CloudFront serves `/live/current.m3u8`, `/live/channels.json`, and per-channel playlists such as `/live/channels/14/current.m3u8`.
 
-![Production Live Monitor screenshot for Elliott Bay VHF](https://media.robertboscacci.com/photos/elliott-bay-vhf/app-live-monitor.png)
-
-_Live Monitor._
-
 AIS:
 
 - AIS-catcher decodes vessel messages on the Pi.
@@ -110,27 +150,3 @@ Infrastructure is managed with OpenTofu:
 - CloudFront Origin Access Control for private S3 origins.
 - API Gateway/Lambda AIS ingest and WebSocket delivery.
 - ACM certificates, Route 53 records, and scoped IAM policies.
-
-## Public Interface
-
-Production includes:
-
-- Clip Review: recent clips, transcripts, playback, channel filters, and Hall of Fame filtering.
-- Live Monitor: HLS live audio, queue state, waveform, and per-channel status.
-- AIS: local vessel positions published through the sanitized AWS path.
-- Search: transcript search and generated search starters.
-- Analysis: lexical analysis, topic output, entities, and language summaries.
-
-![Production Clip Review screenshot for Elliott Bay VHF](https://media.robertboscacci.com/photos/elliott-bay-vhf/app-clip-review.png)
-
-_Clip Review._
-
-![Production Search screenshot for Elliott Bay VHF](https://media.robertboscacci.com/photos/elliott-bay-vhf/app-search.png)
-
-_Search._
-
-![Production Analysis screenshot for Elliott Bay VHF](https://media.robertboscacci.com/photos/elliott-bay-vhf/app-analysis.png)
-
-_Analysis._
-
-Dev/operator views also support transcript correction, clip starring, performance telemetry, and runtime checks.

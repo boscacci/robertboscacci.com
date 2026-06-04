@@ -3,6 +3,118 @@
   max-width: 100%;
 }
 
+.js-lightbox-image {
+  cursor: zoom-in;
+}
+
+.js-lightbox-image:focus {
+  outline: 2px solid rgb(37 99 235);
+  outline-offset: 4px;
+}
+
+.site-image-lightbox[hidden] {
+  display: none;
+}
+
+.site-image-lightbox {
+  align-items: center;
+  background: rgb(10 10 10 / 92%);
+  bottom: 0;
+  display: grid;
+  justify-items: center;
+  left: 0;
+  padding: 1rem;
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 1000;
+}
+
+.site-image-lightbox__frame {
+  display: grid;
+  gap: 0.75rem;
+  justify-items: center;
+  max-height: calc(100vh - 2rem);
+  max-width: calc(100vw - 2rem);
+}
+
+.site-image-lightbox__image {
+  background: rgb(245 245 245);
+  border-radius: 8px;
+  box-shadow: 0 1.5rem 4rem rgb(0 0 0 / 45%);
+  max-height: calc(100vh - 6rem);
+  max-width: calc(100vw - 2rem);
+  object-fit: contain;
+}
+
+.site-image-lightbox__caption {
+  color: rgb(245 245 245);
+  font-size: 0.95rem;
+  line-height: 1.4;
+  max-width: min(52rem, calc(100vw - 2rem));
+  text-align: center;
+}
+
+.site-image-lightbox__caption:empty {
+  display: none;
+}
+
+.site-image-lightbox__close {
+  background: rgb(245 245 245);
+  border: 0;
+  border-radius: 6px;
+  color: rgb(23 23 23);
+  cursor: pointer;
+  font: inherit;
+  line-height: 1;
+  padding: 0.65rem 0.8rem;
+  position: fixed;
+  right: 1rem;
+  top: 1rem;
+}
+
+.site-image-lightbox__close:focus {
+  outline: 2px solid rgb(147 197 253);
+  outline-offset: 3px;
+}
+
+body.site-image-lightbox-open {
+  overflow: hidden;
+}
+
+.vhf-screenshot-gallery {
+  display: grid;
+  gap: 1rem;
+  margin: 1rem 0 2rem;
+}
+
+.vhf-screenshot-gallery figure {
+  margin: 0;
+}
+
+.vhf-screenshot-gallery img {
+  border: 1px solid rgb(214 211 209);
+  border-radius: 8px;
+  display: block;
+  height: auto;
+  width: 100%;
+}
+
+.vhf-screenshot-gallery figcaption {
+  font-size: 0.9rem;
+  line-height: 1.35;
+  margin-top: 0.4rem;
+}
+
+.vhf-screenshot-gallery--mobile {
+  grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
+}
+
+.vhf-screenshot-gallery--mobile img {
+  margin: 0 auto;
+  max-width: 14rem;
+}
+
 .prose iframe[src*="youtube.com/embed"] {
   aspect-ratio: 16 / 9;
   height: auto;

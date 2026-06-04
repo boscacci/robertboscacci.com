@@ -117,6 +117,8 @@ sync_once() {
     "$destination"
     --exclude ".DS_Store"
     --exclude "*/.DS_Store"
+    --exclude "._*"
+    --exclude "*/._*"
     --exclude "README.md"
     --exclude ".gitkeep"
   )
@@ -154,6 +156,7 @@ print_urls() {
 
   find "$SOURCE_DIR" -type f \
     ! -name '.DS_Store' \
+    ! -name '._*' \
     ! -name 'README.md' \
     ! -name '.gitkeep' \
     -print | sort | while IFS= read -r path; do

@@ -1,0 +1,101 @@
+<script>
+  (function () {
+    var imageSelector = "main article .prose img";
+    var images = Array.prototype.slice.call(document.querySelectorAll(imageSelector));
+
+    if (!images.length) {
+      return;
+    }
+
+    var previousFocus = null;
+    var lightbox = document.createElement("div");
+    var frame = document.createElement("div");
+    var closeButton = document.createElement("button");
+    var fullImage = document.createElement("img");
+    var caption = document.createElement("div");
+
+    lightbox.className = "site-image-lightbox";
+    lightbox.setAttribute("role", "dialog");
+    lightbox.setAttribute("aria-modal", "true");
+    lightbox.setAttribute("aria-label", "Expanded image");
+    lightbox.hidden = true;
+
+    frame.className = "site-image-lightbox__frame";
+    closeButton.className = "site-image-lightbox__close";
+    closeButton.type = "button";
+    closeButton.textContent = "Close";
+    fullImage.className = "site-image-lightbox__image";
+    caption.className = "site-image-lightbox__caption";
+
+    frame.appendChild(fullImage);
+    frame.appendChild(caption);
+    lightbox.appendChild(closeButton);
+    lightbox.appendChild(frame);
+    document.body.appendChild(lightbox);
+
+    function openLightbox(image) {
+      var figure = image.closest("figure");
+      var figureCaption = figure ? figure.querySelector("figcaption") : null;
+      var captionText = figureCaption ? figureCaption.textContent.trim() : image.alt || "";
+
+      previousFocus = document.activeElement;
+      fullImage.src = image.currentSrc || image.src;
+      fullImage.alt = image.alt || "";
+      caption.textContent = captionText;
+      lightbox.hidden = false;
+      document.body.classList.add("site-image-lightbox-open");
+      closeButton.focus();
+    }
+
+    function closeLightbox() {
+      lightbox.hidden = true;
+      fullImage.removeAttribute("src");
+      fullImage.removeAttribute("alt");
+      caption.textContent = "";
+      document.body.classList.remove("site-image-lightbox-open");
+
+      if (previousFocus && typeof previousFocus.focus === "function") {
+        previousFocus.focus();
+      }
+    }
+
+    images.forEach(function (image) {
+      if (image.closest("a")) {
+        return;
+      }
+
+      image.classList.add("js-lightbox-image");
+      image.setAttribute("role", "button");
+      image.setAttribute("aria-label", "Open image larger");
+
+      if (!image.hasAttribute("tabindex")) {
+        image.setAttribute("tabindex", "0");
+      }
+
+      image.addEventListener("click", function () {
+        openLightbox(image);
+      });
+
+      image.addEventListener("keydown", function (event) {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          openLightbox(image);
+        }
+      });
+    });
+
+    closeButton.addEventListener("click", closeLightbox);
+
+    lightbox.addEventListener("click", function (event) {
+      if (event.target === lightbox) {
+        closeLightbox();
+      }
+    });
+
+    document.addEventListener("keydown", function (event) {
+      if (event.key === "Escape" && !lightbox.hidden) {
+        closeLightbox();
+      }
+    });
+  })();
+</script>

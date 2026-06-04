@@ -24,6 +24,8 @@ assert_contains() {
 mkdir -p "$TMP_DIR/source/elliott-bay-vhf" "$TMP_DIR/bin"
 printf 'fake jpg\n' > "$TMP_DIR/source/elliott-bay-vhf/antenna.jpg"
 printf 'ignore me\n' > "$TMP_DIR/source/.DS_Store"
+printf 'ignore me\n' > "$TMP_DIR/source/._antenna.jpg"
+printf 'ignore me\n' > "$TMP_DIR/source/elliott-bay-vhf/._antenna.jpg"
 printf 'ignore me\n' > "$TMP_DIR/source/README.md"
 
 cat > "$TMP_DIR/bin/aws" <<'AWS'
@@ -42,8 +44,12 @@ export SITE_MEDIA_BASE_URL="https://media.example.com"
 
 assert_contains "s3 sync $TMP_DIR/source/ s3://example-bucket/photos/" "$TMP_DIR/aws.log"
 assert_contains "--dryrun" "$TMP_DIR/aws.log"
-assert_contains "--exclude .DS_Store --exclude */.DS_Store --exclude README.md --exclude .gitkeep" "$TMP_DIR/aws.log"
+assert_contains "--exclude .DS_Store --exclude */.DS_Store --exclude ._* --exclude */._* --exclude README.md --exclude .gitkeep" "$TMP_DIR/aws.log"
 assert_contains "https://media.example.com/photos/elliott-bay-vhf/antenna.jpg" "$TMP_DIR/output.txt"
+
+if grep -Fq '._antenna.jpg' "$TMP_DIR/output.txt"; then
+  fail "print-urls should skip macOS AppleDouble sidecar files"
+fi
 
 if SITE_MEDIA_BUCKET="" "$SCRIPT" --source "$TMP_DIR/source" > "$TMP_DIR/missing-bucket.txt" 2>&1; then
   fail "sync should require SITE_MEDIA_BUCKET or --bucket"
