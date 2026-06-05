@@ -2,7 +2,7 @@
 title: "Elliott Bay Marine VHF Monitor"
 showTableofcontents: true
 date: 2026-05-27T17:45:00-07:00
-lastmod: 2026-06-04T15:33:07-07:00
+lastmod: 2026-06-04T21:08:12-07:00
 draft: false
 description: "A home-lab marine VHF listening project with Raspberry Pi radio capture, OptiPlex processing, AWS HLS live audio, AIS, DynamoDB clip state, transcript search, and analysis."
 summary: "Live Elliott Bay marine VHF capture with HLS live audio, AIS, recent clips, transcripts, search, Hall of Fame, and language analysis."
@@ -27,13 +27,13 @@ This project captures nearby Elliott Bay marine VHF radio traffic and publishes 
 - Development: [vhf-dev.robertboscacci.com](https://vhf-dev.robertboscacci.com/)
 - Source: [boscacci/vhf-seattle](https://github.com/boscacci/vhf-seattle)
 
-_Some hardware links below are Amazon affiliate links. As an Amazon Associate I earn from qualifying purchases._
+_Some hardware links below are Amazon affiliate product links. As an Amazon Associate I earn from qualifying purchases._
 
 ## Why
 
 I learned about the marine radio channels while taking the online classes for the Washington boater safety card. I now see a wide variety of boats going by on Elliott Bay, so I wanted to know what they say to each other.
 
-I originally considered buying a [handheld marine radio](https://www.amazon.com/s?k=handheld+marine+VHF+radio&tag=robertboscacc-20). Instead, I decided it would be more useful and more interesting to connect an [RTL-SDR receiver](https://www.amazon.com/s?k=RTL-SDR+Blog+V4+R828D+RTL2832U+TCXO+SMA&tag=robertboscacc-20) to a [Raspberry Pi](https://www.amazon.com/s?k=Raspberry+Pi&tag=robertboscacc-20) and do computer-based processing with the audio.
+I originally considered buying a [Uniden MHS75 handheld marine radio](https://www.amazon.com/dp/B001J5MQ20?tag=robertboscacc-20). Instead, I decided it would be more useful and more interesting to connect an [RTL-SDR Blog V4 receiver](https://www.amazon.com/dp/B0CD745394?tag=robertboscacc-20) to a [Raspberry Pi 4 starter kit](https://www.amazon.com/dp/B07V5JTMV9?tag=robertboscacc-20) and do computer-based processing with the audio.
 
 ## Screenshots
 
@@ -89,7 +89,7 @@ Mobile captures:
 
 The system has three runtime layers:
 
-- **[Raspberry Pi](https://www.amazon.com/s?k=Raspberry+Pi&tag=robertboscacc-20) radio edge:** VHF voice capture, AIS decode, HLS segment generation, activity detection, clip spooling, and bounded local buffers.
+- **Raspberry Pi radio edge** ([Raspberry Pi 4 starter kit](https://www.amazon.com/dp/B07V5JTMV9?tag=robertboscacc-20)): VHF voice capture, AIS decode, HLS segment generation, activity detection, clip spooling, and bounded local buffers.
 - **OptiPlex home server:** private API, presigned raw-audio uploads, transcription, transcript corrections, public export generation, and telemetry.
 - **AWS public edge:** private S3 origins, CloudFront, DynamoDB, API Gateway/Lambda for AIS, ACM, and Route 53.
 
@@ -109,10 +109,10 @@ _Current production boundary._
 
 Radio capture:
 
-- [Antenna](https://www.amazon.com/s?k=marine+VHF+antenna+156+162+MHz&tag=robertboscacc-20) and [RTL-SDR receivers](https://www.amazon.com/s?k=RTL-SDR+Blog+V4+R828D+RTL2832U+TCXO+SMA&tag=robertboscacc-20) feed the Raspberry Pi.
+- A [Bingfu VHF/UHF antenna kit](https://www.amazon.com/dp/B0CLKLHHNP?tag=robertboscacc-20) and [RTL-SDR Blog V4 receivers](https://www.amazon.com/dp/B0CD745394?tag=robertboscacc-20) feed the Raspberry Pi.
 - RTLSDR-Airband monitors a 12-channel marine VHF profile: 05A, 06, 09, 13, 14, 16, 22A, 67, 68, 69, 71, and 72.
 - VHF 14 remains the default live feed for Seattle Traffic / Puget Sound VTS.
-- A second [RTL-SDR](https://www.amazon.com/s?k=RTL-SDR+Blog+V4+R828D+RTL2832U+TCXO+SMA&tag=robertboscacc-20) runs AIS-catcher around 162 MHz.
+- A second [RTL-SDR Blog V4 receiver](https://www.amazon.com/dp/B0CD745394?tag=robertboscacc-20) runs AIS-catcher around 162 MHz.
 
 Live audio:
 
