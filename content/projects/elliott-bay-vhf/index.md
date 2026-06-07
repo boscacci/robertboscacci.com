@@ -2,10 +2,10 @@
 title: "Elliott Bay Marine VHF Monitor"
 showTableofcontents: true
 date: 2026-05-27T17:45:00-07:00
-lastmod: 2026-06-06T17:50:21-07:00
+lastmod: 2026-06-06T18:00:26-07:00
 draft: false
-description: "A home-lab marine VHF monitor with SDR capture, live HLS audio, AIS, clip transcripts, search, channel analysis, and ongoing Whisper transcription work."
-summary: "Live Elliott Bay VHF audio, AIS, searchable clips, channel analysis, and ongoing Whisper transcription work. Built with help from OpenAI Codex."
+description: "A home-lab marine VHF monitor with SDR capture, browser-playable live audio, AIS, searchable clip transcripts, BERTopic transcript clusters, and ongoing Whisper transcription work."
+summary: "Live Elliott Bay VHF audio, AIS, searchable clips, BERTopic transcript clusters, and ongoing Whisper transcription work. Built with help from OpenAI Codex."
 featureUrl: "https://media.robertboscacci.com/photos/elliott-bay-vhf/app-live-monitor.png"
 featureAlt: "Live Monitor screenshot from the Elliott Bay Marine VHF web interface."
 keywords:
@@ -24,9 +24,9 @@ keywords:
  - OpenTofu
 ---
 
-This project monitors nearby Elliott Bay marine VHF radio traffic. Raspberry Pi SDR receivers capture live VHF audio and AIS, an OptiPlex processes clips and transcripts, and AWS serves live HLS audio, vessel positions, searchable clips, Hall of Fame audio, and channel analysis.
+This project monitors nearby Elliott Bay marine VHF radio traffic. Raspberry Pi SDR receivers capture VHF audio and AIS, a small Ubuntu machine at home processes clips and transcripts, and AWS serves browser-playable live audio, vessel positions, searchable clips, "Hall of Fame" audio, and transcript analysis with word charts, entity counts, and BERTopic clusters.
 
-I used OpenAI Codex while building and deploying the system. The transcription work uses Whisper, with reviewed corrections feeding a fine-tuning workflow for maritime radio audio, vessel names, channel jargon, and Seattle Traffic phrasing.
+I used OpenAI Codex while building and deploying it. The transcription work uses Whisper; reviewed corrections feed an experimental fine-tuning workflow for maritime radio audio, vessel names, channel jargon, and Seattle Traffic phrasing.
 
 - Production: [vhf.robertboscacci.com](https://vhf.robertboscacci.com/)
 - Development: [vhf-dev.robertboscacci.com](https://vhf-dev.robertboscacci.com/)
@@ -42,7 +42,7 @@ I originally considered buying a [Uniden MHS75 handheld marine radio](https://ww
 
 ## Screenshots
 
-The public interface has views for clip review, live monitoring, transcript search, language analysis, and transcript topic clustering.
+The public interface has views for clip review, live monitoring, transcript search, word/entity analysis, and BERTopic transcript clusters.
 
 Desktop captures:
 
@@ -65,9 +65,9 @@ Desktop captures:
   </figure>
 </div>
 
-![Transcript topic cluster animation for Elliott Bay VHF](https://media.robertboscacci.com/photos/elliott-bay-vhf/topic-clusters.gif)
+![BERTopic transcript cluster animation for Elliott Bay VHF](https://media.robertboscacci.com/photos/elliott-bay-vhf/topic-clusters.gif)
 
-_Transcript topic cluster view._
+_BERTopic transcript cluster view._
 
 Mobile captures:
 
@@ -94,17 +94,13 @@ Mobile captures:
 
 The system has three runtime layers:
 
-- **Raspberry Pi radio edge** ([Raspberry Pi 4 starter kit](https://www.amazon.com/dp/B07V5JTMV9?tag=robertboscacc-20)): VHF voice capture, AIS decode, HLS segment generation, activity detection, clip spooling, and bounded local buffers.
-- **OptiPlex home server:** private API, presigned raw-audio uploads, transcription, transcript corrections, public export generation, and telemetry.
+- **Raspberry Pi radio edge** ([Raspberry Pi 4 starter kit](https://www.amazon.com/dp/B07V5JTMV9?tag=robertboscacc-20)): VHF voice capture, AIS decode, live audio publishing, activity detection, and bounded local buffers.
+- **Small Ubuntu home server:** private API, raw-audio uploads, transcription, transcript corrections, public exports, and telemetry.
 - **AWS public edge:** private S3 origins, CloudFront, DynamoDB, API Gateway/Lambda for AIS, ACM, and Route 53.
 
-Boundary decisions:
+The public site reads from AWS. It does not connect directly to the Pi, the home server, LAN Icecast URLs, Tailscale Funnel origins, raw S3 objects, or DynamoDB. Write-capable operator tools stay on the private/dev path over the tailnet.
 
-- Public browser reads terminate at AWS edges.
-- The OptiPlex is private/dev infrastructure, not a production website origin.
-- The Pi publishes outbound only, using scoped cloud resources.
-- Dev/operator paths can reach the OptiPlex private API over the tailnet for write-capable actions.
-- SQLite is retained only for explicit legacy backfills, local fixtures, and separate realtime telemetry.
+SQLite is retained only for explicit legacy backfills, local fixtures, and separate realtime telemetry.
 
 ![Production boundary diagram for Elliott Bay VHF](https://media.robertboscacci.com/photos/elliott-bay-vhf/production-boundary.png)
 
@@ -121,9 +117,9 @@ Radio capture:
 
 Live audio:
 
-- The Pi converts local Icecast output into short HLS playlists and segments.
-- HLS objects are written to the public-site S3 `live/` prefix.
-- CloudFront serves `/live/current.m3u8`, `/live/channels.json`, and per-channel playlists such as `/live/channels/14/current.m3u8`.
+- The Pi converts local Icecast output into a small browser-readable playlist and short audio chunks.
+- Those live audio files are written to the public-site S3 `live/` prefix.
+- CloudFront serves `/live/current.m3u8`, `/live/channels.json`, and per-channel streams such as `/live/channels/14/current.m3u8`.
 
 AIS:
 
@@ -132,22 +128,19 @@ AIS:
 - Lambda strips private fields and bounds the public payload to local waters.
 - Public reads use `/ais/latest.json` and `wss://ais-live.robertboscacci.com/v1`.
 
-Production browsers do not connect directly to the Pi, OptiPlex, LAN Icecast URLs, Tailscale Funnel origins, raw S3 objects, or DynamoDB.
-
 ## Processing Path
 
 Clip processing:
 
-- The Pi creates activity clips and sidecar metadata.
-- The Pi asks the OptiPlex private API for short-lived presigned upload URLs.
+- The Pi creates activity clips and sidecar metadata, then asks the private API for short-lived upload URLs.
 - Raw audio stays in private S3.
 - DynamoDB stores clip events, transcripts, corrections, and serving read models.
-- The OptiPlex runs `faster-whisper`, review/correction workflows, lexical analysis, and public exports.
+- The Ubuntu home server runs `faster-whisper`, review/correction workflows, transcript analysis, and public exports.
 
 Retention and export:
 
 - Unstarred raw `raw/` audio expires after 90 days.
-- Starred Hall of Fame clips are tagged for longer retention.
+- Starred "Hall of Fame" clips are tagged for longer retention.
 - Public exports strip private fields, raw keys, internal URLs, account IDs, and nondisplayable transcript artifacts.
 - Playback controls are shown only when public audio can still be resolved.
 
