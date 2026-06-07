@@ -2,10 +2,10 @@
 title: "Elliott Bay Marine VHF Monitor"
 showTableofcontents: true
 date: 2026-05-27T17:45:00-07:00
-lastmod: 2026-06-06T17:46:09-07:00
+lastmod: 2026-06-06T17:50:21-07:00
 draft: false
-description: "A Codex-built marine VHF monitoring system with SDR capture, live HLS audio, AIS, transcript search, channel analysis, and a Whisper fine-tuning loop for maritime radio."
-summary: "Live Elliott Bay VHF audio, AIS, searchable clips, channel analysis, and Whisper fine-tuning for maritime radio, built with OpenAI Codex."
+description: "A home-lab marine VHF monitor with SDR capture, live HLS audio, AIS, clip transcripts, search, channel analysis, and ongoing Whisper transcription work."
+summary: "Live Elliott Bay VHF audio, AIS, searchable clips, channel analysis, and ongoing Whisper transcription work. Built with help from OpenAI Codex."
 featureUrl: "https://media.robertboscacci.com/photos/elliott-bay-vhf/app-live-monitor.png"
 featureAlt: "Live Monitor screenshot from the Elliott Bay Marine VHF web interface."
 keywords:
@@ -24,9 +24,9 @@ keywords:
  - OpenTofu
 ---
 
-This is a home-lab marine-radio station for Elliott Bay: Raspberry Pi SDR receivers capture live VHF and AIS, an OptiPlex processes clips and transcripts, and AWS serves live HLS audio, vessel positions, searchable clips, Hall of Fame audio, and channel analysis.
+This project monitors nearby Elliott Bay marine VHF radio traffic. Raspberry Pi SDR receivers capture live VHF audio and AIS, an OptiPlex processes clips and transcripts, and AWS serves live HLS audio, vessel positions, searchable clips, Hall of Fame audio, and channel analysis.
 
-I built it with OpenAI Codex as the day-to-day coding partner. The most interesting part is the feedback loop: maritime radio clips are transcribed with Whisper, reviewed and corrected in the operator UI, then fed into a fine-tuning pipeline so the model gets better at vessel names, channel jargon, Seattle Traffic phrasing, and scratchy VHF audio.
+I used OpenAI Codex while building and deploying the system. The transcription work uses Whisper, with reviewed corrections feeding a fine-tuning workflow for maritime radio audio, vessel names, channel jargon, and Seattle Traffic phrasing.
 
 - Production: [vhf.robertboscacci.com](https://vhf.robertboscacci.com/)
 - Development: [vhf-dev.robertboscacci.com](https://vhf-dev.robertboscacci.com/)
