@@ -2,10 +2,10 @@
 title: "Elliott Bay Marine VHF Monitor"
 showTableofcontents: true
 date: 2026-05-27T17:45:00-07:00
-lastmod: 2026-06-04T21:08:12-07:00
+lastmod: 2026-06-06T17:46:09-07:00
 draft: false
-description: "A home-lab marine VHF listening project with Raspberry Pi radio capture, OptiPlex processing, AWS HLS live audio, AIS, DynamoDB clip state, transcript search, and analysis."
-summary: "Live Elliott Bay marine VHF capture with HLS live audio, AIS, recent clips, transcripts, search, Hall of Fame, and language analysis."
+description: "A Codex-built marine VHF monitoring system with SDR capture, live HLS audio, AIS, transcript search, channel analysis, and a Whisper fine-tuning loop for maritime radio."
+summary: "Live Elliott Bay VHF audio, AIS, searchable clips, channel analysis, and Whisper fine-tuning for maritime radio, built with OpenAI Codex."
 featureUrl: "https://media.robertboscacci.com/photos/elliott-bay-vhf/app-live-monitor.png"
 featureAlt: "Live Monitor screenshot from the Elliott Bay Marine VHF web interface."
 keywords:
@@ -17,11 +17,16 @@ keywords:
  - Elliott Bay
  - VHF radio
  - Transcription
+ - OpenAI Codex
+ - Whisper ASR
+ - AIS
  - AWS
  - OpenTofu
 ---
 
-This project captures nearby Elliott Bay marine VHF radio traffic and publishes a read-only web interface for live audio, AIS vessel positions, recent clips, transcripts, search, Hall of Fame clips, and language analysis.
+This is a home-lab marine-radio station for Elliott Bay: Raspberry Pi SDR receivers capture live VHF and AIS, an OptiPlex processes clips and transcripts, and AWS serves live HLS audio, vessel positions, searchable clips, Hall of Fame audio, and channel analysis.
+
+I built it with OpenAI Codex as the day-to-day coding partner. The most interesting part is the feedback loop: maritime radio clips are transcribed with Whisper, reviewed and corrected in the operator UI, then fed into a fine-tuning pipeline so the model gets better at vessel names, channel jargon, Seattle Traffic phrasing, and scratchy VHF audio.
 
 - Production: [vhf.robertboscacci.com](https://vhf.robertboscacci.com/)
 - Development: [vhf-dev.robertboscacci.com](https://vhf-dev.robertboscacci.com/)
@@ -55,7 +60,7 @@ Desktop captures:
     <figcaption>Search.</figcaption>
   </figure>
   <figure>
-    <img src="https://media.robertboscacci.com/photos/elliott-bay-vhf/app-analysis.png" alt="Production Analysis desktop screenshot for Elliott Bay VHF">
+    <img src="https://media.robertboscacci.com/photos/elliott-bay-vhf/app-analysis-channel-bars.png" alt="Analysis dashboard bar chart of analyzed transcript clips by VHF channel for Elliott Bay VHF">
     <figcaption>Analysis.</figcaption>
   </figure>
 </div>
