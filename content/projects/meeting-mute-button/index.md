@@ -2,12 +2,12 @@
 title: "Hardware Zoom Mute Button with Arduino and Duct Tape"
 showTableofcontents: true
 date: 2026-05-27T00:00:00-07:00
-lastmod: 2026-05-28T00:00:00-07:00
+lastmod: 2026-06-10T00:00:00-07:00
 draft: false
 description: "A hardware mute button for Zoom and Microsoft Teams on macOS, using Arduino ESP32 firmware, USB serial messages, and Hammerspoon app control."
 summary: "A physical red and green mute button for Zoom and Microsoft Teams on macOS."
-featureUrl: "https://media.robertboscacci.com/photos/meeting-mute-button/mute-button-index.png"
-featureAlt: "Illustration of the red and green hardware mute button."
+featureUrl: "https://media.robertboscacci.com/photos/meeting-mute-button/mute-button-index-simple.png"
+featureAlt: "Minimal illustration of a two-button hardware mute controller with red mute and green live buttons."
 keywords:
  - Robert Boscacci
  - Software engineering
