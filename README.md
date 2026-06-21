@@ -33,4 +33,4 @@ Production deploys to GitHub Pages from `main` using `.github/workflows/gh-pages
 
 Development is designed as a separate AWS-hosted static site at `dev.robertboscacci.com`. The repo-side deployment workflow is `.github/workflows/dev-preview.yml`; the AWS/Route53/CloudFront/S3 resources are described in `infra/dev/`. Development builds set noindex robots metadata and the CloudFront stack adds an `X-Robots-Tag` noindex response header.
 
-The GitHub Actions workflows currently pin Hugo `0.162.0`.
+The GitHub Actions workflows currently pin Hugo `0.163.2`.
