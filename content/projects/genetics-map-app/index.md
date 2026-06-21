@@ -49,8 +49,8 @@ _The sections below were drafted by OpenAI Codex. They are intentionally more st
     <figcaption>Global map view with clustered provider locations and filters.</figcaption>
   </figure>
   <figure>
-    <img src="https://media.robertboscacci.com/photos/genetics-map-app/app-filtered-map.png" alt="Synthetic desktop screenshot of the genetics professionals app after applying a country filter.">
-    <figcaption>Filtered view focused on one region.</figcaption>
+    <img src="https://media.robertboscacci.com/photos/genetics-map-app/app-specialty-filtered-map.png" alt="Synthetic desktop screenshot of the genetics professionals app after applying a specialty filter, focused on a Northeast regional map view.">
+    <figcaption>Specialty-filtered regional view.</figcaption>
   </figure>
 </div>
 
@@ -70,6 +70,14 @@ _The sections below were drafted by OpenAI Codex. They are intentionally more st
 - Switches the desktop counter from a global total to filtered-result navigation after filtering.
 - Handles directory fields including name, job title, institution, website, work location, language, interpreter-services availability, and specialty.
 - Supports privacy flags that can hide names, email, phone, institution, and address details from the rendered app.
+
+## Technical Notes
+
+- **Frontend:** React, TypeScript, Leaflet, React Leaflet, marker clustering, React Select, Papa Parse, and CryptoJS.
+- **Pipeline:** Google Sheets and Drive APIs, Google geocoding, Python cleaning scripts, Node publishing scripts, GitHub Actions, and GitHub Pages.
+- **Hosting model:** static React app deployed through GitHub Pages.
+- **Design goal:** keep the admin workflow closer to spreadsheet editing than software deployment.
+- **Operational tradeoff:** use automation for fragile data steps, then leave the live map as a cheap static artifact that is simple to host.
 
 ## Admin Workflow
 
@@ -96,13 +104,5 @@ _The sections below were drafted by OpenAI Codex. They are intentionally more st
 - The page and screenshots deliberately avoid exposing the key or real provider-level details.
 - This is not a replacement for a full identity provider or row-level authorization system.
 - It is a practical privacy boundary for an invited-audience directory that still benefits from cheap, low-maintenance static hosting.
-
-## Technical Notes
-
-- **Frontend:** React, TypeScript, Leaflet, React Leaflet, marker clustering, React Select, Papa Parse, and CryptoJS.
-- **Pipeline:** Google Sheets and Drive APIs, Google geocoding, Python cleaning scripts, Node publishing scripts, GitHub Actions, and GitHub Pages.
-- **Hosting model:** static React app deployed through GitHub Pages.
-- **Design goal:** keep the admin workflow closer to spreadsheet editing than software deployment.
-- **Operational tradeoff:** use automation for fragile data steps, then leave the live map as a cheap static artifact that is simple to host.
 
 <!-- MACHINE-GENERATED TECHNICAL DRAFT END -->
