@@ -7,7 +7,7 @@ draft: false
 description: "An authenticated React and Leaflet map for finding genetics professionals worldwide, backed by Google Sheets and GitHub Actions automation."
 summary: "An authenticated global directory and map for genetics professionals, with Google Sheets administration and an encrypted static React deployment."
 featureUrl: "https://media.robertboscacci.com/photos/genetics-map-app/app-global-map.png"
-featureAlt: "Synthetic screenshot of the Global Genetics Professionals map interface showing a world map and filter controls."
+featureAlt: "Screenshot of the Global Genetics Professionals map interface showing a world map and filter controls."
 keywords:
  - Robert Boscacci
  - Software engineering
@@ -22,10 +22,6 @@ keywords:
 
 <!-- HANDWRITTEN INTRO START -->
 
-## Human-Written Context
-
-_This opening section is Robert's custom handwritten context. Everything after the next heading is machine-generated technical copy drafted from repository evidence and local verification._
-
 My friend [Monisha Sebastin, MS, CGC](https://www.cham.org/specialties-and-programs/genetics/our-team), who is also on [LinkedIn](https://www.linkedin.com/in/msebastin-ms-cgc), [Google Scholar](https://scholar.google.com/citations?hl=en&user=vQdAXEcAAAAJ), and in this [ABGC spotlight](https://www.abgc.net/Updates/ABGC-Updates/Article/abgc-spotlight-monisha-sebastin-ms-cgc-nsgc-special-projects-award-winner), is a prestigious genetic counselor at the Children's Hospital at Montefiore Einstein in NYC. I was excited when she approached me with an idea for a project that would help connect genetics professionals from around the world.
 
 The ask was for a members-only interactive map web app powered by a growing dataset of survey results submitted by genetics professionals. Genetic counselors, medical geneticists, researchers, et al. submit their names, specialties, languages spoken, institutional affiliations, contact information, and more for presentation on map detail cards. It also needed to be maintainable by a non-programmer, so the app's underlying dataset had to have a friendly GUI interface like Google Sheets.
@@ -34,52 +30,50 @@ The system is set up such that the web app can be embedded as part of the broade
 
 <!-- HANDWRITTEN INTRO END -->
 
-<!-- MACHINE-GENERATED TECHNICAL DRAFT START -->
-
-## Machine-Generated Technical Notes
-
-_The sections below were drafted by OpenAI Codex. They are intentionally more structured and bullet-pointed than the handwritten intro area above._
-
-- **What it is:** a private, key-protected React application for browsing genetics professionals around the world.
-- **Core interface:** a full-screen Leaflet map with filters for country, city, language, specialty, and name.
-- **Why it exists:** to make a spreadsheet-backed professional directory easier to browse spatially.
-- **Source:** [boscacci/genetics-map-app](https://github.com/boscacci/genetics-map-app).
-- **Deployed app:** [boscacci.github.io/genetics-map-app](https://boscacci.github.io/genetics-map-app/), with access controlled by a shared URL key.
-
 ## Screenshots
 
-- These screenshots use synthetic demo records rendered through the app interface.
-- They show the UI and workflow without exposing real provider names, contact information, addresses, or the access key.
-- The detail-card examples below use invented provider names and `.invalid` contact values.
+_Provider names and contact details shown here are example values._
 
 <div class="project-screenshot-gallery">
   <figure>
-    <img src="https://media.robertboscacci.com/photos/genetics-map-app/app-global-map.png" alt="Synthetic desktop screenshot of the genetics professionals app showing a global map, clustered markers, and filter controls.">
+    <img src="https://media.robertboscacci.com/photos/genetics-map-app/app-global-map.png" alt="Example desktop screenshot of the genetics professionals app showing a global map, clustered markers, and filter controls.">
     <figcaption>Global map view with clustered provider locations and filters.</figcaption>
   </figure>
   <figure>
-    <img src="https://media.robertboscacci.com/photos/genetics-map-app/app-specialty-filtered-map.png" alt="Synthetic desktop screenshot of the genetics professionals app after applying a specialty filter, focused on a Northeast regional map view.">
+    <img src="https://media.robertboscacci.com/photos/genetics-map-app/app-specialty-filtered-map.png" alt="Example desktop screenshot of the genetics professionals app after applying a specialty filter, focused on a Northeast regional map view.">
     <figcaption>Specialty-filtered regional view.</figcaption>
   </figure>
 </div>
 
 <div class="project-screenshot-gallery project-screenshot-gallery--mobile">
   <figure>
-    <img src="https://media.robertboscacci.com/photos/genetics-map-app/app-mobile-map.png" alt="Synthetic mobile screenshot of the genetics professionals app with compact filters above the map.">
+    <img src="https://media.robertboscacci.com/photos/genetics-map-app/app-mobile-map.png" alt="Example mobile screenshot of the genetics professionals app with compact filters above the map.">
     <figcaption>Mobile layout.</figcaption>
   </figure>
 </div>
 
 <div class="project-screenshot-gallery project-screenshot-gallery--cards">
   <figure>
-    <img src="https://media.robertboscacci.com/photos/genetics-map-app/app-detail-card.png" alt="Synthetic provider detail popup for Avery Sample showing role, institution, location, specialty, languages, interpreter services, and a contact button.">
-    <figcaption>Synthetic provider detail popup.</figcaption>
+    <img src="https://media.robertboscacci.com/photos/genetics-map-app/app-detail-card.png" alt="Example provider detail popup for Avery Sample showing role, institution, location, specialty, languages, interpreter services, and a contact button.">
+    <figcaption>Provider detail popup.</figcaption>
   </figure>
   <figure>
-    <img src="https://media.robertboscacci.com/photos/genetics-map-app/app-contact-card.png" alt="Synthetic contact detail modal for Avery Sample showing invented institution, specialty, language, interpreter, email, phone, website, and address fields.">
-    <figcaption>Synthetic contact detail modal.</figcaption>
+    <img src="https://media.robertboscacci.com/photos/genetics-map-app/app-contact-card.png" alt="Example contact detail modal for Avery Sample showing invented institution, specialty, language, interpreter, email, phone, website, and address fields.">
+    <figcaption>Contact detail modal.</figcaption>
   </figure>
 </div>
+
+<!-- MACHINE-GENERATED TECHNICAL DRAFT START -->
+
+## Machine-Generated Technical Notes
+
+_Everything below this heading was drafted by OpenAI Codex. These sections are intentionally more structured and bullet-pointed than the introductory copy above._
+
+- **What it is:** a private, key-protected React application for browsing genetics professionals around the world.
+- **Core interface:** a full-screen Leaflet map with filters for country, city, language, specialty, and name.
+- **Why it exists:** to make a spreadsheet-backed professional directory easier to browse spatially.
+- **Source:** [boscacci/genetics-map-app](https://github.com/boscacci/genetics-map-app).
+- **Deployed app:** [boscacci.github.io/genetics-map-app](https://boscacci.github.io/genetics-map-app/), with access controlled by a shared URL key.
 
 ## What It Does
 
