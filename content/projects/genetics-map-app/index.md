@@ -1,7 +1,7 @@
 ---
 title: "Global Genetics Professionals Map"
 showTableofcontents: true
-date: 2026-06-21T00:00:00-07:00
+date: 2026-06-03T00:00:00-07:00
 lastmod: 2026-06-21T00:00:00-07:00
 draft: false
 description: "An authenticated React and Leaflet map for finding genetics professionals worldwide, backed by Google Sheets and GitHub Actions automation."
