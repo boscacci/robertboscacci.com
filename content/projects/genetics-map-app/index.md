@@ -20,9 +20,17 @@ keywords:
  - Privacy
 ---
 
-<!-- HANDWRITTEN INTRO START: Replace the visible placeholder below with Robert's custom copy. -->
+<!-- HANDWRITTEN INTRO START -->
 
-> **Custom handwritten intro by Robert:** This section is reserved for the final first-person introduction. Everything after the next heading is machine-generated technical copy drafted from repository evidence and local verification.
+## Human-Written Context
+
+_This opening section is Robert's custom handwritten context. Everything after the next heading is machine-generated technical copy drafted from repository evidence and local verification._
+
+My friend [Monisha Sebastin, MS, CGC](https://www.cham.org/specialties-and-programs/genetics/our-team), who is also on [LinkedIn](https://www.linkedin.com/in/msebastin-ms-cgc), [Google Scholar](https://scholar.google.com/citations?hl=en&user=vQdAXEcAAAAJ), and in this [ABGC spotlight](https://www.abgc.net/Updates/ABGC-Updates/Article/abgc-spotlight-monisha-sebastin-ms-cgc-nsgc-special-projects-award-winner), is a prestigious genetic counselor at the Children's Hospital at Montefiore Einstein in NYC. I was excited when she approached me with an idea for a project that would help connect genetics professionals from around the world.
+
+The ask was for a members-only interactive map web app powered by a growing dataset of survey results submitted by genetics professionals. Genetic counselors, medical geneticists, researchers, et al. submit their names, specialties, languages spoken, institutional affiliations, contact information, and more for presentation on map detail cards. It also needed to be maintainable by a non-programmer, so the app's underlying dataset had to have a friendly GUI interface like Google Sheets.
+
+The system is set up such that the web app can be embedded as part of the broader [Global Genetics Directory](https://www.globalgeneticsdirectory.org/) website, so Monisha can use Squarespace's mass communication and membership administration tools in a nice UI, while the actual map app just works for free on GitHub Pages in the background.
 
 <!-- HANDWRITTEN INTRO END -->
 
