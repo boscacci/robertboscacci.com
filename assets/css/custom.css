@@ -138,6 +138,39 @@ body.site-image-lightbox-open {
   max-width: 14rem;
 }
 
+.project-screenshot-gallery {
+  display: grid;
+  gap: 1rem;
+  margin: 1rem 0 2rem;
+}
+
+.project-screenshot-gallery figure {
+  margin: 0;
+}
+
+.project-screenshot-gallery img {
+  border: 1px solid rgb(214 211 209);
+  border-radius: 8px;
+  display: block;
+  height: auto;
+  width: 100%;
+}
+
+.project-screenshot-gallery figcaption {
+  font-size: 0.9rem;
+  line-height: 1.35;
+  margin-top: 0.4rem;
+}
+
+.project-screenshot-gallery--mobile {
+  grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
+}
+
+.project-screenshot-gallery--mobile img {
+  margin: 0 auto;
+  max-width: 14rem;
+}
+
 .prose iframe[src*="youtube.com/embed"] {
   aspect-ratio: 16 / 9;
   height: auto;
