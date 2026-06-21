@@ -171,6 +171,22 @@ body.site-image-lightbox-open {
   max-width: 14rem;
 }
 
+.project-screenshot-gallery--cards {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
+  justify-items: center;
+}
+
+.project-screenshot-gallery--cards figure {
+  max-width: 32rem;
+  width: 100%;
+}
+
+.project-screenshot-gallery--cards img {
+  margin: 0 auto;
+  max-width: 100%;
+  width: auto;
+}
+
 .prose iframe[src*="youtube.com/embed"] {
   aspect-ratio: 16 / 9;
   height: auto;

@@ -42,6 +42,7 @@ _The sections below were drafted by OpenAI Codex. They are intentionally more st
 
 - These screenshots use synthetic demo records rendered through the app interface.
 - They show the UI and workflow without exposing real provider names, contact information, addresses, or the access key.
+- The detail-card examples below use invented provider names and `.invalid` contact values.
 
 <div class="project-screenshot-gallery">
   <figure>
@@ -58,6 +59,17 @@ _The sections below were drafted by OpenAI Codex. They are intentionally more st
   <figure>
     <img src="https://media.robertboscacci.com/photos/genetics-map-app/app-mobile-map.png" alt="Synthetic mobile screenshot of the genetics professionals app with compact filters above the map.">
     <figcaption>Mobile layout.</figcaption>
+  </figure>
+</div>
+
+<div class="project-screenshot-gallery project-screenshot-gallery--cards">
+  <figure>
+    <img src="https://media.robertboscacci.com/photos/genetics-map-app/app-detail-card.png" alt="Synthetic provider detail popup for Avery Sample showing role, institution, location, specialty, languages, interpreter services, and a contact button.">
+    <figcaption>Synthetic provider detail popup.</figcaption>
+  </figure>
+  <figure>
+    <img src="https://media.robertboscacci.com/photos/genetics-map-app/app-contact-card.png" alt="Synthetic contact detail modal for Avery Sample showing invented institution, specialty, language, interpreter, email, phone, website, and address fields.">
+    <figcaption>Synthetic contact detail modal.</figcaption>
   </figure>
 </div>
 
