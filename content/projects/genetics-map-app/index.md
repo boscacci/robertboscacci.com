@@ -54,11 +54,11 @@ _Provider names and contact details shown here are example values._
 
 <div class="project-screenshot-gallery project-screenshot-gallery--cards">
   <figure>
-    <img src="https://media.robertboscacci.com/photos/genetics-map-app/app-detail-card.png?v=20260621-context" alt="Example provider detail popup for Avery Sample showing role, institution, location, specialty, languages, interpreter services, and a contact button.">
+    <img src="https://media.robertboscacci.com/photos/genetics-map-app/app-detail-card-map-context.png" alt="Example provider detail popup for Avery Sample showing role, institution, location, specialty, languages, interpreter services, and a contact button.">
     <figcaption>Provider detail popup.</figcaption>
   </figure>
   <figure>
-    <img src="https://media.robertboscacci.com/photos/genetics-map-app/app-contact-card.png?v=20260621-context" alt="Example contact detail modal for Avery Sample showing invented institution, specialty, language, interpreter, email, phone, website, and address fields.">
+    <img src="https://media.robertboscacci.com/photos/genetics-map-app/app-contact-card-map-context.png" alt="Example contact detail modal for Avery Sample showing invented institution, specialty, language, interpreter, email, phone, website, and address fields.">
     <figcaption>Contact detail modal.</figcaption>
   </figure>
 </div>
