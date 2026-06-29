@@ -1,7 +1,7 @@
 ---
 title: "Elliott Bay Marine VHF Monitor"
 showTableofcontents: true
-date: 2026-05-27T17:45:00-07:00
+date: 2026-06-17T00:00:00-07:00
 lastmod: 2026-06-29T00:00:00-07:00
 draft: false
 description: "A home-lab marine VHF monitor with SDR capture, browser-playable live audio, AIS, searchable clip transcripts, BERTopic transcript clusters, and ongoing Whisper transcription work."

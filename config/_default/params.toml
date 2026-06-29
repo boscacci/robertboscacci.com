@@ -67,7 +67,7 @@ excludedKinds = ["taxonomy", "term"]
 showTermCount = true
 
 [verification]
-google = "G-DF82VT340B"
+# google = ""
 # bing = ""
 # pinterest = ""
 # yandex = ""
