@@ -2,7 +2,7 @@
 title: "Elliott Bay Marine VHF Monitor"
 showTableofcontents: true
 date: 2026-05-27T17:45:00-07:00
-lastmod: 2026-06-06T18:00:26-07:00
+lastmod: 2026-06-29T00:00:00-07:00
 draft: false
 description: "A home-lab marine VHF monitor with SDR capture, browser-playable live audio, AIS, searchable clip transcripts, BERTopic transcript clusters, and ongoing Whisper transcription work."
 summary: "Live Elliott Bay VHF audio, AIS, searchable clips, BERTopic transcript clusters, and ongoing Whisper transcription work. Built with help from OpenAI Codex."
@@ -24,12 +24,12 @@ keywords:
  - OpenTofu
 ---
 
-This project monitors nearby Elliott Bay marine VHF radio traffic. Raspberry Pi SDR receivers capture VHF audio and AIS, a small Ubuntu machine at home processes clips and transcripts, and AWS serves browser-playable live audio, vessel positions, searchable clips, "Hall of Fame" audio, and transcript analysis with word charts, entity counts, and BERTopic clusters.
+This project monitors nearby Elliott Bay marine VHF radio traffic. A Raspberry Pi radio edge captures VHF audio and AIS, an Ubuntu micro-computer at home processes clips and transcripts, and AWS serves browser-playable live audio, vessel positions, searchable clips, "Hall of Fame" audio, and transcript analysis with word charts, entity counts, and BERTopic clusters.
 
 I used OpenAI Codex while building and deploying it. The transcription work uses Whisper; reviewed corrections feed an experimental fine-tuning workflow for maritime radio audio, vessel names, channel jargon, and Seattle Traffic phrasing.
 
-- Production: [vhf.robertboscacci.com](https://vhf.robertboscacci.com/)
-- Development: [vhf-dev.robertboscacci.com](https://vhf-dev.robertboscacci.com/)
+- Production: [seattleboatradio.com](https://seattleboatradio.com/)
+- Development: [dev.seattleboatradio.com](https://dev.seattleboatradio.com/)
 - Source: [boscacci/vhf-seattle](https://github.com/boscacci/vhf-seattle)
 
 _Some hardware links below are Amazon affiliate product links. As an Amazon Associate I earn from qualifying purchases._
@@ -42,14 +42,14 @@ I originally considered buying a [Uniden MHS75 handheld marine radio](https://ww
 
 ## Screenshots
 
-The public interface has views for clip review, live monitoring, transcript search, word/entity analysis, and BERTopic transcript clusters.
+The public interface has views for clips, live monitoring, transcript search, word/entity analysis, and BERTopic transcript clusters.
 
 Desktop captures:
 
 <div class="vhf-screenshot-gallery">
   <figure>
-    <img src="https://media.robertboscacci.com/photos/elliott-bay-vhf/app-clip-review.png" alt="Production Clip Review desktop screenshot for Elliott Bay VHF">
-    <figcaption>Clip Review.</figcaption>
+    <img src="https://media.robertboscacci.com/photos/elliott-bay-vhf/app-clip-review.png" alt="Production Clips desktop screenshot for Elliott Bay VHF">
+    <figcaption>Clips.</figcaption>
   </figure>
   <figure>
     <img src="https://media.robertboscacci.com/photos/elliott-bay-vhf/app-live-monitor.png" alt="Production Live Monitor desktop screenshot for Elliott Bay VHF">
@@ -73,8 +73,8 @@ Mobile captures:
 
 <div class="vhf-screenshot-gallery vhf-screenshot-gallery--mobile">
   <figure>
-    <img src="https://media.robertboscacci.com/photos/elliott-bay-vhf/mobile-clip-review.png" alt="Production Clip Review mobile screenshot for Elliott Bay VHF">
-    <figcaption>Clip Review.</figcaption>
+    <img src="https://media.robertboscacci.com/photos/elliott-bay-vhf/mobile-clip-review.png" alt="Production Clips mobile screenshot for Elliott Bay VHF">
+    <figcaption>Clips.</figcaption>
   </figure>
   <figure>
     <img src="https://media.robertboscacci.com/photos/elliott-bay-vhf/mobile-live-monitor.png" alt="Production Live Monitor mobile screenshot for Elliott Bay VHF">
@@ -95,7 +95,7 @@ Mobile captures:
 The system has three runtime layers:
 
 - **Raspberry Pi radio edge** ([Raspberry Pi 4 starter kit](https://www.amazon.com/dp/B07V5JTMV9?tag=robertboscacc-20)): VHF voice capture, AIS decode, live audio publishing, activity detection, and bounded local buffers.
-- **Small Ubuntu home server:** private API, raw-audio uploads, transcription, transcript corrections, public exports, and telemetry.
+- **Ubuntu micro-computer:** private API, raw-audio uploads, transcription, transcript corrections, public exports, and telemetry.
 - **AWS public edge:** private S3 origins, CloudFront, DynamoDB, API Gateway/Lambda for AIS, ACM, and Route 53.
 
 The public site reads from AWS. It does not connect directly to the Pi, the home server, LAN Icecast URLs, Tailscale Funnel origins, raw S3 objects, or DynamoDB. Write-capable operator tools stay on the private/dev path over the tailnet.
@@ -110,23 +110,25 @@ _Current production boundary._
 
 Radio capture:
 
-- A [Bingfu VHF/UHF antenna kit](https://www.amazon.com/dp/B0CLKLHHNP?tag=robertboscacc-20) and [RTL-SDR Blog V4 receivers](https://www.amazon.com/dp/B0CD745394?tag=robertboscacc-20) feed the Raspberry Pi.
+- A [Bingfu VHF/UHF antenna kit](https://www.amazon.com/dp/B0CLKLHHNP?tag=robertboscacc-20), an [RTL-SDR Blog V4 receiver](https://www.amazon.com/dp/B0CD745394?tag=robertboscacc-20), and a dAISy-catcher receiver feed the Raspberry Pi.
 - RTLSDR-Airband monitors a 12-channel marine VHF profile: 05A, 06, 09, 13, 14, 16, 22A, 67, 68, 69, 71, and 72.
 - VHF 14 remains the default live feed for Seattle Traffic / Puget Sound VTS.
-- A second [RTL-SDR Blog V4 receiver](https://www.amazon.com/dp/B0CD745394?tag=robertboscacc-20) runs AIS-catcher around 162 MHz.
+- AIS-catcher now runs from the dAISy-catcher over USB serial around 162 MHz.
+
+Major shout-out to [Adrian Studer](https://github.com/astuder) and [Jasper](https://github.com/jvde-github) for building the dAISy-catcher and mailing me one for free. It immediately replaced the old AIS RTL-SDR path and started pulling in a much healthier local vessel picture.
 
 Live audio:
 
-- The Pi converts local Icecast output into a small browser-readable playlist and short audio chunks.
-- Those live audio files are written to the public-site S3 `live/` prefix.
-- CloudFront serves `/live/current.m3u8`, `/live/channels.json`, and per-channel streams such as `/live/channels/14/current.m3u8`.
+- The Pi publishes local Icecast output to the private home processing path.
+- The Ubuntu micro-computer exposes a narrow read-only live proxy for the public edge.
+- CloudFront serves same-origin live paths such as `/api/live/current.mp3`, `/api/live/channels`, and per-channel streams such as `/api/live/14/current.mp3`.
 
 AIS:
 
 - AIS-catcher decodes vessel messages on the Pi.
 - A local forwarder sends sanitized-bound input to API Gateway over outbound HTTPS.
 - Lambda strips private fields and bounds the public payload to local waters.
-- Public reads use `/ais/latest.json` and `wss://ais-live.robertboscacci.com/v1`.
+- Public reads use the same-origin `/ais-catcher/` viewer path and `wss://ais-live.robertboscacci.com/v1`.
 
 ## Processing Path
 
@@ -135,7 +137,7 @@ Clip processing:
 - The Pi creates activity clips and sidecar metadata, then asks the private API for short-lived upload URLs.
 - Raw audio stays in private S3.
 - DynamoDB stores clip events, transcripts, corrections, and serving read models.
-- The Ubuntu home server runs `faster-whisper`, review/correction workflows, transcript analysis, and public exports.
+- The Ubuntu micro-computer runs `faster-whisper`, review/correction workflows, transcript analysis, and public exports.
 
 Retention and export:
 
