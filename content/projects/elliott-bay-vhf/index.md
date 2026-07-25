@@ -2,7 +2,7 @@
 title: "Elliott Bay Marine VHF Monitor"
 showTableofcontents: true
 date: 2026-06-17T00:00:00-07:00
-lastmod: 2026-06-29T00:00:00-07:00
+lastmod: 2026-07-25T00:00:00-07:00
 draft: false
 description: "A home-lab marine VHF monitor with SDR capture, browser-playable live audio, AIS, searchable clip transcripts, BERTopic transcript clusters, and ongoing Whisper transcription work."
 summary: "Live Elliott Bay VHF audio, AIS, searchable clips, BERTopic transcript clusters, and ongoing Whisper transcription work. Built with help from OpenAI Codex."
@@ -29,7 +29,6 @@ This project monitors nearby Elliott Bay marine VHF radio traffic. A Raspberry P
 I used OpenAI Codex while building and deploying it. The transcription work uses Whisper; reviewed corrections feed an experimental fine-tuning workflow for maritime radio audio, vessel names, channel jargon, and Seattle Traffic phrasing.
 
 - Production: [seattleboatradio.com](https://seattleboatradio.com/)
-- Development: [dev.seattleboatradio.com](https://dev.seattleboatradio.com/)
 - Source: [boscacci/vhf-seattle](https://github.com/boscacci/vhf-seattle)
 
 _Some hardware links below are Amazon affiliate product links. As an Amazon Associate I earn from qualifying purchases._
@@ -128,7 +127,7 @@ AIS:
 - AIS-catcher decodes vessel messages on the Pi.
 - A local forwarder sends sanitized-bound input to API Gateway over outbound HTTPS.
 - Lambda strips private fields and bounds the public payload to local waters.
-- Public reads use the same-origin `/ais-catcher/` viewer path and `wss://ais-live.robertboscacci.com/v1`.
+- Public reads use the same-origin `/ais-catcher/` viewer path; the retained API Gateway WebSocket endpoint remains available without a custom `robertboscacci.com` hostname.
 
 ## Processing Path
 
