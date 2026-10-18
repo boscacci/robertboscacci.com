@@ -2,10 +2,10 @@
 title: "Hardware Zoom Mute Button with Arduino and Duct Tape"
 showTableofcontents: true
 date: 2026-06-10T00:00:00-07:00
-lastmod: 2026-06-10T00:00:00-07:00
+lastmod: 2026-10-17T00:00:00-07:00
 draft: false
 description: "A hardware mute button for Zoom and Microsoft Teams on macOS, using Arduino ESP32 firmware, USB serial messages, and Hammerspoon app control."
-summary: "A physical red and green mute button for Zoom and Microsoft Teams on macOS."
+summary: "A physical red and green mute button for Zoom and Teams on macOS, with verified device identity and quiet reconnects."
 featureUrl: "https://media.robertboscacci.com/photos/meeting-mute-button/mute-button-index-simple.png"
 featureAlt: "Minimal illustration of a two-button hardware mute controller with red mute and green live buttons."
 keywords:
@@ -21,6 +21,14 @@ keywords:
 This project is a physical mute button for Zoom and Microsoft Teams on macOS. An ESP32 reads a pushbutton, drives a red/green LED, and reports the desired mute state to the Mac over USB serial.
 
 The source repository is [boscacci/meeting-mute-button](https://github.com/boscacci/meeting-mute-button).
+
+## Latest Progress
+
+The latest work makes USB serial ownership safer when several ESP32 projects share a Mac. Hammerspoon opens only a configured USB serial candidate, then waits for the mute firmware to announce its device identity before accepting button events.
+
+That matters because the laundry detector can appear under the same generic serial-device path as the mute controller. The configuration excludes the laundry board by its USB registry fingerprint instead of assuming that a path always identifies the same piece of hardware. With no configured mute-board serial number, serial control stays disabled.
+
+Unplugging the controller now causes quiet reconnect attempts instead of repeated alerts. The red/green LED still represents the desired meeting state, with rapid presses coalesced and at most one app command per state version.
 
 ## Components
 
@@ -53,7 +61,7 @@ After each debounced button press, the firmware prints a serial line that includ
 
 ## macOS Behavior
 
-Hammerspoon listens to the ESP32 serial device. When it receives a new desired state, it checks the supported meeting apps and tries to make the active call match the LED state.
+Hammerspoon listens to the configured ESP32 serial device after verifying its identity. When it receives a new desired state, it checks the supported meeting apps and tries to make the active call match the LED state.
 
 The current app priority is:
 

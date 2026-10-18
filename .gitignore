@@ -1,5 +1,9 @@
 .DS_Store
 public/
+node_modules/
+outputs/dev-releases/
+outputs/dev-smoke-failure.png
+outputs/tools/
 resources/_gen/
 .hugo_build.lock
 .env/

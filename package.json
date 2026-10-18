@@ -1,0 +1,11 @@
+{
+  "name": "robertboscacci-site-checks",
+  "private": true,
+  "scripts": {
+    "test": "node tests/dev-smoke.mjs",
+    "smoke:dev": "node tests/dev-smoke.mjs"
+  },
+  "devDependencies": {
+    "playwright": "1.60.0"
+  }
+}
