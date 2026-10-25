@@ -1,4 +1,9 @@
 .DS_Store
+node_modules/
+outputs/private-trip/
+data/private-trips/
+.staticrypt.json
+static/private/**/*.tmp
 public/
 resources/_gen/
 .hugo_build.lock

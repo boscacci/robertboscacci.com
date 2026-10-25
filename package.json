@@ -1,0 +1,17 @@
+{
+  "name": "robertboscacci.com",
+  "private": true,
+  "scripts": {
+    "test": "node --test tests/private-trip.test.mjs && node tests/private-trip-browser.mjs --fixture",
+    "test:trip": "node tests/private-trip-browser.mjs",
+    "deploy:trip:dev": "node scripts/deploy-private-trip.mjs"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "devDependencies": {
+    "@aws-sdk/client-ssm": "3.1156.0",
+    "playwright": "1.64.1",
+    "staticrypt": "3.5.4"
+  }
+}
