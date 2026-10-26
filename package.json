@@ -4,7 +4,8 @@
   "scripts": {
     "test": "node --test tests/private-trip.test.mjs && node tests/private-trip-browser.mjs --fixture",
     "test:trip": "node tests/private-trip-browser.mjs",
-    "deploy:trip:dev": "node scripts/deploy-private-trip.mjs"
+    "deploy:trip:dev": "node scripts/deploy-private-trip.mjs",
+    "test:hub": "node --test tests/trips/*.test.mjs"
   },
   "engines": {
     "node": ">=22"
