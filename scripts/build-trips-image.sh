@@ -32,6 +32,9 @@ done
 test "$scan_ready" = true || { echo 'Image scan unavailable; release blocked.' >&2; exit 1; }
 findings="$(aws ecr describe-image-scan-findings --repository-name robertboscacci-trips-private --region us-west-2 --image-id imageDigest="$digest" --query 'imageScanFindings.findingSeverityCounts' --output json)"
 node -e 'const f=JSON.parse(process.argv[1]||"{}");if((f?.CRITICAL||0)+(f?.HIGH||0))process.exit(1)' "$findings"
+# Regression check: an executable file capability must not prevent startup
+# under the same capability restrictions used by the deployed service.
+docker run --rm --pull always --network none --user 1000:1000 --read-only --cap-drop ALL --security-opt no-new-privileges:true "${repository}@${digest}" caddy version
 mkdir -p outputs/private-trip
 printf '%s@%s\n' "$repository" "$digest" > outputs/private-trip/private-image.txt
 printf '{"event":"trips_image_published","commit":"%s","digest":"%s"}\n' "$commit" "$digest"

@@ -77,6 +77,11 @@ refreshes every 15 minutes and after boot, reconstructing private content and
 refreshing one-hour STS credentials. The container receives only the temporary
 Route53 role credentials, not the host's AWS directory or the family password.
 The role can change TXT records only for the two ACME challenge names.
+The bounded `on-failure` policy handles process errors; boot recovery starts the
+container after regenerating tmpfs mounts. This avoids Docker creating missing
+runtime directories as root before the user service is ready. The image build
+also executes Caddy under the deployed capability restrictions as a regression
+check for unprivileged startup.
 
 ```bash
 systemctl --user status trips-refresh.timer

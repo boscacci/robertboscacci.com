@@ -5,7 +5,9 @@ services:
     network_mode: host
     user: "1000:1000"
     read_only: true
-    restart: unless-stopped
+    # Boot recovery reconstructs tmpfs inputs before starting the container.
+    # on-failure handles process crashes without racing that boot preparation.
+    restart: on-failure:5
     cap_drop: [ALL]
     security_opt: [no-new-privileges:true]
     tmpfs:
