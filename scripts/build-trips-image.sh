@@ -22,7 +22,14 @@ if test -z "$existing"; then
   docker buildx build --builder "$builder" --platform linux/amd64 --file services/trips/Dockerfile --tag "${repository}:${commit}" --push --provenance=false .
 fi
 digest="$(aws ecr describe-images --repository-name robertboscacci-trips-private --region us-west-2 --image-ids imageTag="$commit" --query 'imageDetails[0].imageDigest' --output text)"
-aws ecr wait image-scan-complete --repository-name robertboscacci-trips-private --region us-west-2 --image-id imageDigest="$digest"
+# Scan-on-push registration can lag publication. Retry the waiter briefly;
+# never interpret an absent scan as a passing scan.
+scan_ready=false
+for attempt in {1..12}; do
+  if aws ecr wait image-scan-complete --repository-name robertboscacci-trips-private --region us-west-2 --image-id imageDigest="$digest"; then scan_ready=true; break; fi
+  sleep 5
+done
+test "$scan_ready" = true || { echo 'Image scan unavailable; release blocked.' >&2; exit 1; }
 findings="$(aws ecr describe-image-scan-findings --repository-name robertboscacci-trips-private --region us-west-2 --image-id imageDigest="$digest" --query 'imageScanFindings.findingSeverityCounts' --output json)"
 node -e 'const f=JSON.parse(process.argv[1]||"{}");if((f?.CRITICAL||0)+(f?.HIGH||0))process.exit(1)' "$findings"
 mkdir -p outputs/private-trip

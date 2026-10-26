@@ -5,6 +5,10 @@ on:
       - 'scripts/*private-trip*'
       - 'tests/private-trip*'
       - 'static/private/**'
+      - 'services/trips/**'
+      - 'tests/trips/**'
+      - 'scripts/*trips*'
+      - 'infra/trips/**'
       - 'package*.json'
       - '.github/workflows/private-trip-checks.yml'
 permissions:
@@ -26,4 +30,5 @@ jobs:
           key: trip-playwright-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
       - run: npx playwright install --with-deps chromium
       - run: npm test
+      - run: npm run test:hub
       - run: npm audit --audit-level=high

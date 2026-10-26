@@ -11,7 +11,10 @@ export const root=fileURLToPath(new URL('../',import.meta.url));
 export const state=join(homedir(),'.local/share/trips');
 export const runtime=join(process.env.XDG_RUNTIME_DIR||`/run/user/${process.getuid()}`,'trips');
 export const envs={dev:{host:'trips-dev.robertboscacci.com',port:9451,health:19451},production:{host:'trips.robertboscacci.com',port:9450,health:19450}};
-export const run=(command,args,options={})=>execFileSync(command,args,{cwd:root,encoding:'utf8',timeout:180000,stdio:['ignore','pipe','pipe'],...options}).trim();
+export const run=(command,args,options={})=>{
+  const result=execFileSync(command,args,{cwd:root,encoding:'utf8',timeout:180000,stdio:['ignore','pipe','pipe'],...options});
+  return Buffer.isBuffer(result)?result:result.trim();
+};
 export const sha=(bytes)=>createHash('sha256').update(bytes).digest('hex');
 export function validImage(image){return /^062008221187\.dkr\.ecr\.us-west-2\.amazonaws\.com\/robertboscacci-trips-private@sha256:[0-9a-f]{64}$/.test(image);}
 

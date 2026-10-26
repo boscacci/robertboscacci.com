@@ -23,10 +23,12 @@ try{
       if(network==='public'){
         assert.equal(index.status(),404);
         assert.ok(!(await index.text()).includes('Puerto Vallarta'));
+        await context.setExtraHTTPHeaders({'X-Forwarded-For':'192.168.1.207','X-Real-IP':'100.124.5.39','X-Tailscale-User-Login':'forged@example.invalid'});
         for(const path of ['/healthz','/manifest.json','/releases/test/artifact.tar.gz']){
-          const result=await context.request.get(`https://${cfg.host}${path}`,{headers:{'X-Forwarded-For':'192.168.1.207','X-Real-IP':'100.124.5.39','X-Tailscale-User-Login':'forged@example.invalid'}});
+          const result=await page.goto(`https://${cfg.host}${path}`);
           assert.equal(result.status(),404);
         }
+        await context.setExtraHTTPHeaders({});
       }else{
         assert.equal(index.status(),200);
         assert.equal(await page.locator('article.card').count(),2);

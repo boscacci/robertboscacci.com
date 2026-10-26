@@ -30,7 +30,9 @@ async function deploy(environment){
   if(sha(await readFile(join(release.directory,'artifact.tar.gz')))!==release.artifact)throw Error('artifact_mismatch');
   if(environment==='production'){
     const approval=JSON.parse(await readFile(process.argv[4],'utf8'));
+    if(!/^trips\/v\d+\.\d+\.\d+$/.test(approval.releaseTag)||run('git',['cat-file','-t',approval.releaseTag])!=='tag')throw Error('annotated_release_tag_required');
     const tagCommit=run('git',['rev-list','-n','1',approval.releaseTag]);
+    run('git',['merge-base','--is-ancestor',tagCommit,'origin/main']);
     if(approval.artifact!==release.artifact||approval.target!=='trips.robertboscacci.com'||tagCommit!==release.commit||!approval.approvedBy||!approval.approvalUrl)throw Error('production_approval_required');
     const dev=JSON.parse(run('aws',['s3','cp',`s3://robertboscacci-com-trips-dev-062008221187/releases/${release.artifact}/verified.json`,'-']));
     if(dev.artifact!==release.artifact||dev.commit!==release.commit)throw Error('dev_verification_required');
@@ -60,6 +62,12 @@ async function deploy(environment){
   if(run('git',['-C',rc,'remote','get-url','origin'])!=='git@github.com:boscacci/rc.git'||run('git',['-C',rc,'status','--porcelain']))throw Error('network_checkout_not_clean');
   if(environment==='dev')run('bash',[join(rc,'optiplex/front-door/activate-trips.sh')]);
   run('node',[join(rc,'optiplex/front-door/configure-trips-dns.mjs'),'--apply',...(environment==='production'?['--production']:[])],{cwd:rc});
+  const publicIp=run('dig',['@1.1.1.1',infra.host,'A','+short']).split('\n').find(v=>/^\d+\.\d+\.\d+\.\d+$/.test(v));
+  if(!publicIp)throw Error('public_dns_missing');
+  for(const[file,hash]of Object.entries(extracted.files)){
+    const bytes=run('curl',['-fsS','--max-time','20','--resolve',`${infra.host}:443:${publicIp}`,`https://${infra.host}/${file}`],{encoding:null});
+    if(sha(bytes)!==hash)throw Error('public_artifact_mismatch');
+  }
   run('node',['tests/trips/browser.mjs',environment]);
   const verified={...record,verifiedAt:new Date().toISOString(),url:`https://${infra.host}/`};
   const file=join(release.directory,`${environment}-verified.json`);await writeFile(file,JSON.stringify(verified,null,2));

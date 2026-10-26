@@ -8,6 +8,8 @@ public/
 resources/_gen/
 .hugo_build.lock
 .env/
+.env
+services/trips/pages/*.tmp
 .terraform/
 **/.terraform/
 *.tfstate
