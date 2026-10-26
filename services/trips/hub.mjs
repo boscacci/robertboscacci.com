@@ -17,7 +17,7 @@ export function privateIndex(trips) {
   return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow,noarchive"><title>Family travel plans</title><style>${css}</style></head><body><header><div><div class="eyebrow">Travel planning · Private collection</div><h1>Good trips start here.</h1><p class="intro">A considered collection of family itineraries, places to stay, and practical preparations. Every trip begins as a proposal.</p></div></header><main><section class="grid" aria-label="Trip plans">${trips.map(t => `<article class="card"><span class="label">${escapeHtml(t.status)}</span><h2><a href="/${t.slug}/">${escapeHtml(t.title)}</a></h2><p class="muted">${escapeHtml(t.dates)}</p><p>${escapeHtml(t.summary)}</p><a href="/${t.slug}/">Read the plan →</a></article>`).join('')}</section><footer>Family travel reference · Dates and availability remain subject to confirmation.</footer></main></body></html>`;
 }
 export function publicFiles(trips) {
-  const result = { 'robots.txt': 'User-agent: *\nDisallow: /\n' };
+  const result = { 'robots.txt': 'User-agent: *\nDisallow: /\n', '404.html': '<!doctype html><html lang="en"><head><meta name="robots" content="noindex,nofollow"><title>Not found</title></head><body>Not found</body></html>' };
   for (const t of trips) {
     if (!allowedSlug(t.slug)) throw Error('Invalid trip route');
     result[`${t.slug}/index.html`] = t.encrypted;
@@ -52,6 +52,7 @@ export async function writePrivate(directory, trips) {
   await writeFile(join(directory, 'index.html'), privateIndex(trips), { mode: 0o600 });
   for (const trip of trips) {
     await mkdir(join(directory, trip.slug), { recursive: true, mode: 0o700 });
-    await writeFile(join(directory, trip.slug, 'index.html'), trip.html, { mode: 0o600 });
+    const html = trip.html.replace('</head>', '<style>.private-only{display:inline!important}.public-only{display:none!important}</style></head>');
+    await writeFile(join(directory, trip.slug, 'index.html'), html, { mode: 0o600 });
   }
 }

@@ -115,7 +115,7 @@ resource "aws_cloudfront_function" "routes" {
       var r = event.request;
       // Only individual trip documents and robots are public. No index, listing,
       // health endpoint, release archive, or private renderer can be fetched.
-      if (r.uri === '/robots.txt') return r;
+      if (r.uri === '/robots.txt' || r.uri === '/404.html') return r;
       if (!/^\/[a-z0-9]+(?:-[a-z0-9]+)+\/(?:index\.html)?$/.test(r.uri)) {
         return { statusCode: 404, statusDescription: 'Not Found',
           headers: { 'cache-control': { value: 'no-store' }, 'x-robots-tag': { value: 'noindex, nofollow, noarchive' } }, body: 'Not found' };
@@ -154,6 +154,7 @@ resource "aws_cloudfront_distribution" "site" {
   custom_error_response {
     error_code            = 403
     response_code         = 404
+    response_page_path    = "/404.html"
     error_caching_min_ttl = 0
   }
   restrictions {
@@ -165,6 +166,12 @@ resource "aws_cloudfront_distribution" "site" {
     ssl_support_method       = "sni-only"
   }
 }
+resource "aws_ecr_repository" "private_site" {
+  name                 = "robertboscacci-trips-private"
+  image_tag_mutability = "IMMUTABLE"
+  image_scanning_configuration { scan_on_push = true }
+}
+output "private_image_repository" { value = aws_ecr_repository.private_site.repository_url }
 resource "aws_s3_bucket_policy" "site" {
   for_each = local.environments
   bucket   = aws_s3_bucket.site[each.key].id
