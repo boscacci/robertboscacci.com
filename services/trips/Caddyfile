@@ -1,0 +1,37 @@
+{
+    admin off
+    auto_https disable_redirects
+    servers {
+        protocols h1 h2
+    }
+}
+http://127.0.0.1:{$HEALTH_PORT} {
+    bind 127.0.0.1
+    respond /healthz "trips-private-ok" 200
+    respond 404
+}
+https://{$TRIPS_HOST}:{$TRIPS_PORT} {
+    bind 127.0.0.1
+    tls {
+        dns route53 {
+            region us-west-2
+            profile trips-dns
+            hosted_zone_id Z1BDNRWTPWQNUU
+        }
+        resolvers 1.1.1.1 8.8.8.8
+    }
+    header {
+        Cache-Control "no-store"
+        X-Robots-Tag "noindex, nofollow, noarchive"
+        X-Content-Type-Options "nosniff"
+        X-Frame-Options "DENY"
+        Referrer-Policy "no-referrer"
+        Strict-Transport-Security "max-age=31536000"
+        Content-Security-Policy "default-src 'none'; style-src 'unsafe-inline'; img-src data:; form-action 'none'; base-uri 'none'; frame-ancestors 'none'"
+    }
+    respond /healthz "trips-private-ok" 200
+    root * /srv/site/current
+    file_server {
+        hide .*
+    }
+}
