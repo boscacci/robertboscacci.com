@@ -1,6 +1,8 @@
 FROM caddy:2.11.7-builder@sha256:c2fc374fd352439d76e1777b28d97d9f6d9c1dd86116db9227460374d46097d5 AS builder
 RUN xcaddy build v2.11.7 --with github.com/caddy-dns/route53@v1.6.2
 FROM caddy:2.11.7-alpine@sha256:eb4d35b7452d1ab6171fbdbe8d9275b2301dad6dad92115d91e19fb9b24d510f
+# Caddy is self-contained; remove unused curl and its vulnerable Brotli dependency.
+RUN apk del --no-cache curl
 COPY --from=builder /usr/bin/caddy /usr/bin/caddy
 COPY services/trips/Caddyfile /etc/caddy/Caddyfile
 USER 1000:1000

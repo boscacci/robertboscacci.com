@@ -22,6 +22,9 @@ if test -z "$existing"; then
   docker buildx build --builder "$builder" --platform linux/amd64 --file services/trips/Dockerfile --tag "${repository}:${commit}" --push --provenance=false .
 fi
 digest="$(aws ecr describe-images --repository-name robertboscacci-trips-private --region us-west-2 --image-ids imageTag="$commit" --query 'imageDetails[0].imageDigest' --output text)"
+aws ecr wait image-scan-complete --repository-name robertboscacci-trips-private --region us-west-2 --image-id imageDigest="$digest"
+findings="$(aws ecr describe-image-scan-findings --repository-name robertboscacci-trips-private --region us-west-2 --image-id imageDigest="$digest" --query 'imageScanFindings.findingSeverityCounts' --output json)"
+node -e 'const f=JSON.parse(process.argv[1]||"{}");if((f?.CRITICAL||0)+(f?.HIGH||0))process.exit(1)' "$findings"
 mkdir -p outputs/private-trip
 printf '%s@%s\n' "$repository" "$digest" > outputs/private-trip/private-image.txt
 printf '{"event":"trips_image_published","commit":"%s","digest":"%s"}\n' "$commit" "$digest"

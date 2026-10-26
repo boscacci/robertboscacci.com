@@ -1,0 +1,23 @@
+services:
+  private-site:
+    image: ${TRIPS_IMAGE:?Immutable registry digest required}
+    container_name: trips-${TRIPS_ENV:?Environment required}-private
+    network_mode: host
+    user: "1000:1000"
+    read_only: true
+    restart: unless-stopped
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    tmpfs:
+      - /tmp:size=16m,mode=1777
+    environment:
+      TRIPS_HOST: ${TRIPS_HOST:?Host required}
+      TRIPS_PORT: ${TRIPS_PORT:?TLS port required}
+      HEALTH_PORT: ${HEALTH_PORT:?Health port required}
+      AWS_PROFILE: trips-dns
+      AWS_SHARED_CREDENTIALS_FILE: /run/secrets/credentials
+    volumes:
+      - ${TRIPS_RUNTIME:?Runtime required}/site:/srv/site:ro
+      - ${TRIPS_SECRETS:?Secrets directory required}:/run/secrets:ro
+      - ${TRIPS_STATE:?State required}/caddy-data:/data
+      - ${TRIPS_STATE:?State required}/caddy-config:/config
