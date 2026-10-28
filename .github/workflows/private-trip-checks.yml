@@ -1,0 +1,34 @@
+name: Private trip checks
+on:
+  pull_request:
+    paths:
+      - 'scripts/*private-trip*'
+      - 'tests/private-trip*'
+      - 'static/private/**'
+      - 'services/trips/**'
+      - 'tests/trips/**'
+      - 'scripts/*trips*'
+      - 'infra/trips/**'
+      - 'package*.json'
+      - '.github/workflows/private-trip-checks.yml'
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: trip-playwright-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
+      - run: npx playwright install --with-deps chromium
+      - run: npm test
+      - run: npm run test:hub
+      - run: npm audit --audit-level=high

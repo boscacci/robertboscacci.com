@@ -3,5 +3,6 @@ User-agent: *
 Disallow: /
 {{- else -}}
 Allow: /
+Disallow: /private/
 Sitemap: {{ "sitemap.xml" | absURL }}
 {{- end }}

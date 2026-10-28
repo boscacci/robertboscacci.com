@@ -1,0 +1,5 @@
+**
+!services/
+!services/trips/
+!services/trips/Dockerfile
+!services/trips/Caddyfile
