@@ -1,16 +1,6 @@
 name: Private trip checks
 on:
   pull_request:
-    paths:
-      - 'scripts/*private-trip*'
-      - 'tests/private-trip*'
-      - 'static/private/**'
-      - 'services/trips/**'
-      - 'tests/trips/**'
-      - 'scripts/*trips*'
-      - 'infra/trips/**'
-      - 'package*.json'
-      - '.github/workflows/private-trip-checks.yml'
 permissions:
   contents: read
 jobs:
