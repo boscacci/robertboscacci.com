@@ -35,4 +35,35 @@ Development is designed as a separate AWS-hosted static site at `dev.robertbosca
 
 The GitHub Actions workflows currently pin Hugo `0.163.2`.
 
+## Google Analytics
+
+The public GA4 measurement ID is configured once in
+`config/_default/config.toml` under `[services.googleAnalytics]`. The shared
+`layouts/_partials/head.html` calls Congo's analytics partial, so production
+Hugo pages (including articles, lists, pagination and 404) receive one Google
+tag. Development previews disable analytics to avoid polluting production data.
+Static encrypted private pages bypass Hugo's templates and remain untracked.
+
+An independently verified copy of the ID is stored in AWS Secrets Manager as
+`robertboscacci.com/google-analytics/measurement-id`, in `us-west-2`, account
+`062008221187`. This is a public browser identifier, not an account credential;
+the checked-in Hugo configuration makes ordinary builds independent of AWS
+credentials. When changing the ID, update the secret, Hugo configuration, and
+expected public ID in `tests/analytics.test.mjs` together. Never store Google
+account credentials in these files.
+
+`npm run test:analytics` builds production and development in temporary folders,
+checks every rendered HTML page, and uses Playwright to verify initialization
+while blocking external requests. The required PR validation runs this test.
+
+From a clean reviewed commit, `npm run deploy:site:dev` validates, creates an
+immutable archive under ignored `outputs/site-releases/<commit>/`, uploads to the
+verified development bucket, invalidates CloudFront, and runs Playwright against
+dev. It preserves private pages and performs no bucket deletions. It verifies
+uploaded checksums and records the artifact hash and dev result. Failed attempts
+remove their unverified artifact directory; successful artifacts remain for review.
+Production still uses the existing GitHub Pages workflow; merging into `main`
+publishes production, so hold the PR until the required human dev smoke test and
+explicit production release approval.
+
 Private encrypted reference pages use the workflow in [docs/private-trip.md](docs/private-trip.md).

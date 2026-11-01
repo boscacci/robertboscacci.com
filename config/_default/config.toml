@@ -16,7 +16,7 @@ summaryLength = 2
 ignoreFiles = [".*:com\\.dropbox\\.attrs$"]
 
 [services.googleAnalytics]
-id = "G-DF82VT340B"
+id = "G-KVWJR6HZTX"
 
 [outputs]
 home = ["HTML", "RSS", "JSON"]
