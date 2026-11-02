@@ -25,6 +25,7 @@ jobs:
         with:
           hugo-version: "0.163.2"
       - run: npm run test:analytics
+      - run: npm run test:release
       - run: npm test
       - run: npm run test:hub
       - run: npm audit --audit-level=high

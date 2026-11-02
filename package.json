@@ -7,7 +7,9 @@
     "deploy:trip:dev": "node scripts/deploy-private-trip.mjs",
     "test:hub": "node --test tests/trips/*.test.mjs",
     "test:analytics": "node --test tests/analytics.test.mjs",
-    "deploy:site:dev": "node scripts/deploy-site-dev.mjs"
+    "deploy:site:dev": "node scripts/deploy-site-dev.mjs",
+    "test:release": "node --test tests/site-release.test.mjs",
+    "release:site": "node scripts/promote-site.mjs"
   },
   "engines": {
     "node": ">=22"
