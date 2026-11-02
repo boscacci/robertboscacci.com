@@ -35,7 +35,7 @@ try {
   if (!aliases.includes('dev.robertboscacci.com')) throw Error('wrong_distribution');
   const tags = JSON.parse(run('aws', ['s3api', 'get-bucket-tagging', '--bucket', bucket])).TagSet;
   if (!tags.some(tag => tag.Key === 'Environment' && tag.Value === 'development')) throw Error('wrong_bucket');
-  for (const args of [['test'], ['run', 'test:hub'], ['run', 'test:analytics'], ['audit', '--audit-level=high']]) run('npm', args);
+  for (const args of [['test'], ['run', 'test:hub'], ['run', 'test:analytics'], ['run', 'test:release'], ['audit', '--audit-level=high']]) run('npm', args);
   const commit = run('git', ['rev-parse', 'HEAD']);
   const candidate = join('outputs/site-releases', commit + (productionArtifact ? '-production' : ''));
   // Refuse to replace an existing immutable artifact; retries rebuild only failed attempts.
