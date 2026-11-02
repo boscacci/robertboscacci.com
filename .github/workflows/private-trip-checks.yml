@@ -9,6 +9,8 @@ jobs:
     timeout-minutes: 2
     steps:
       - uses: actions/checkout@v6
+        with:
+          submodules: recursive
       - uses: actions/setup-node@v6
         with:
           node-version: '22'
@@ -19,6 +21,11 @@ jobs:
           path: ~/.cache/ms-playwright
           key: trip-playwright-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
       - run: npx playwright install --with-deps chromium
+      - uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: "0.163.2"
+      - run: npm run test:analytics
+      - run: npm run test:release
       - run: npm test
       - run: npm run test:hub
       - run: npm audit --audit-level=high
