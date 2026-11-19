@@ -73,12 +73,13 @@ After=docker.service
 Requires=docker.service
 RequiresMountsFor=/var/lib/howlong
 [Service]
-RuntimeDirectory=howlong
 UMask=0077
 ExecStartPre=/usr/bin/test -s $database
+# systemd would reset a RuntimeDirectory to root ownership before ExecStart.
 ExecStartPre=/usr/bin/install -d -o 1000 -g 1000 -m 0700 /run/howlong
 ExecStart=/usr/bin/docker run --rm --name howlong-cloud --pull=never --network none --cap-drop ALL --security-opt no-new-privileges:true --read-only --env-file $root/cloud.env -v $root/counter:/state -v /run/howlong:/run/howlong $image
 ExecStop=/usr/bin/docker stop -t 5 howlong-cloud
+ExecStopPost=/usr/bin/rm -f /run/howlong/server.sock
 Restart=on-failure
 RestartSec=3
 [Install]
@@ -142,9 +143,9 @@ if systemctl cat tailscaled.service >/dev/null 2>&1; then systemctl disable --no
 systemctl daemon-reload
 systemctl enable howlong-cloud.service howlong-cloud-edge.service >/dev/null
 systemctl restart howlong-cloud.service howlong-cloud-edge.service
-for attempt in {1..30}; do
+for attempt in {1..60}; do
   if /usr/local/bin/howlong-cloud-check 2>/dev/null; then break; fi
-  if [[ $attempt == 30 ]]; then exit 1; fi
+  if [[ $attempt == 60 ]]; then exit 1; fi
   sleep 3
 done
 systemctl start howlong-cloud-archive.service
