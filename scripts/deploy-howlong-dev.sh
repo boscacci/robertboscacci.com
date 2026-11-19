@@ -118,7 +118,8 @@ strip_dev='del(.TCP[$port], .Web[$key], .AllowFunnel[$key])'
 jq -e --arg key "$hostname:$port" --arg proxy "$socket" '.AllowFunnel[$key] != true and .Web[$key].Handlers["/"].Proxy == $proxy' <<<"$serve_after" >/dev/null
 curl -fsS --retry 3 --max-time 10 "$origin/healthz" | grep -qx 'howlong-ok'
 # Serve must replace a browser-supplied identity with the authenticated owner.
-curl -fsS --max-time 10 -H 'Tailscale-User-Login: forged@example.invalid' "$origin/api/counter" | jq -e '.canReset and (.start | test("^[0-9-]{10}$"))' >/dev/null
+curl -fsS --max-time 10 -H 'Tailscale-User-Login: forged@example.invalid' -H 'X-Forwarded-Host: forged.example.invalid' "$origin/api/counter" \
+  | jq -e '.canReset and (.start | test("^[0-9-]{10}$"))' >/dev/null
 jq -n --arg commit "$commit" --arg sha "$sha" --arg origin "$origin" --arg time "$(date -u +%FT%TZ)" \
   '{event:"howlong_dev_verified", commit:$commit, sha256:$sha, url:$origin, verifiedAt:$time}' > "$work/dev.json"
 mv -f "$work/dev.json" "$state/dev.json"

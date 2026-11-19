@@ -91,7 +91,8 @@ export async function createCounter({ origin, owner, database, initialDate, iden
   }
 
   async function handle(request, response) {
-    if (request.headers.host !== host) return send(response, 421, { error: 'unexpected_host' });
+    // Serve sets the socket Host to localhost and overwrites X-Forwarded-Host.
+    if ((request.headers['x-forwarded-host'] ?? request.headers.host) !== host) return send(response, 421, { error: 'unexpected_host' });
     if (request.method === 'GET' && request.url === '/healthz') {
       current();
       return send(response, 200, 'howlong-ok\n', 'text/plain');

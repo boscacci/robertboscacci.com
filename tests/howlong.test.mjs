@@ -69,6 +69,7 @@ test('only the owner sees reset access and a fifth fresh click updates every vie
   assert.equal((await click(request, null, { 'X-Howlong-Peer': owner })).status, 403);
   assert.equal((await click(request, null, ownerHeaders, 'https://elsewhere.test')).status, 403);
   assert.equal((await request('/api/counter', { headers: { ...ownerHeaders, Host: 'elsewhere.test' } })).status, 421);
+  assert.equal((await request('/api/counter', { headers: { ...ownerHeaders, Host: 'localhost', 'X-Forwarded-Host': 'howlong.test' } })).status, 200);
   let token = null;
   for (let count = 1; count <= 4; count++) {
     const response = await click(request, token);
