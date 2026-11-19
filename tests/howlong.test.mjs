@@ -165,6 +165,8 @@ test('confirmation expires, rejects invalid bodies and invalidates simultaneous 
   }
   const results = await Promise.all([click(request, token), click(request, other)]);
   assert.deepEqual(results.map(response => response.status).sort(), [200, 409]);
+  const state = await (await request('/api/counter', { headers: ownerHeaders })).json();
+  assert.deepEqual(state.resetHistory, { total: 1, past30Days: 1, hasUndatedResets: false });
 });
 
 test('the vanity origin can use the private API while other origins and non-owners cannot reset', async t => {

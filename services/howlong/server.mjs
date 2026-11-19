@@ -93,7 +93,8 @@ export async function createCounter({ origin, viewOrigin, owner, database, initi
       db.exec('COMMIT');
       return applied;
     } catch (error) {
-      if (db.isTransaction) db.exec('ROLLBACK');
+      // Older Node 22 versions do not expose isTransaction.
+      if (db.isTransaction !== false) db.exec('ROLLBACK');
       throw error;
     }
   }
