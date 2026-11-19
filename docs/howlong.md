@@ -15,6 +15,9 @@ click updates the date and records one timestamp in the same SQLite transaction.
 Only the owner receives the reset totals. All-time totals use the existing counter
 revision, so earlier resets still count. The rolling 30-day total uses saved
 timestamps and is marked as incomplete if earlier timestamps are unavailable.
+The owner's history shows the latest ten recorded resets in Pacific time. Its
+CSV download contains every recorded timestamp in UTC with milliseconds and a
+reset number. Undated legacy resets appear only in the all-time total.
 Open pages refresh about every 10 seconds.
 
 ## Development
@@ -40,6 +43,7 @@ immediately, with a short vibration on devices and browsers that support it.
 A non-owner's account should see the count without the reset control.
 Confirm that the owner's history increments once on a completed reset, including
 a second reset on the same day, and stays hidden for a non-owner.
+Check that the latest reset shows a date and time and appears in the CSV download.
 
 ## Production
 

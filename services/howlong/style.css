@@ -151,10 +151,18 @@ h1 {
   background: #1b3325;
 }
 
-.history h2 {
-  margin: 0 0 .8rem;
-  font-size: 1.05rem;
+.history-heading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: .35rem 1rem;
+  margin-bottom: .8rem;
 }
+
+.history h2 { margin: 0; font-size: 1.05rem; }
+.history a { color: #d5f787; font-size: .9rem; text-underline-offset: .2em; }
+.history a:focus-visible { outline: 2px solid currentColor; outline-offset: 4px; }
 
 .history dl {
   display: grid;
@@ -173,3 +181,13 @@ h1 {
   overflow-wrap: anywhere;
 }
 .history p { margin: .75rem 0 0; font-size: .9rem; line-height: 1.5; }
+
+.history ul {
+  margin: .9rem 0 0;
+  padding-left: 0;
+  list-style: none;
+  font-size: .95rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.history li { padding: .55rem 0; border-top: 1px solid #52715e; }

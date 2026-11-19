@@ -1,4 +1,4 @@
-import { elapsed } from './calendar.mjs';
+import { counterTimeZone, elapsed } from './calendar.mjs';
 
 const counter = document.querySelector('#elapsed');
 const since = document.querySelector('#since');
@@ -11,9 +11,16 @@ const history = document.querySelector('#reset-history');
 const historyRecent = document.querySelector('#reset-recent');
 const historyTotal = document.querySelector('#reset-total');
 const historyNote = document.querySelector('#history-note');
+const historyList = document.querySelector('#reset-timestamps');
+const historyEmpty = document.querySelector('#history-empty');
+const historyDownload = document.querySelector('#history-download');
 const dots = [...button.querySelectorAll('.steps i')];
 const motion = matchMedia('(prefers-reduced-motion: reduce)');
 const dateLabel = new Intl.DateTimeFormat('en', { dateStyle: 'full', timeZone: 'UTC' });
+const resetDateLabel = new Intl.DateTimeFormat('en', {
+  timeZone: counterTimeZone, year: 'numeric', month: 'short', day: 'numeric',
+  hour: 'numeric', minute: '2-digit', second: '2-digit', timeZoneName: 'short',
+});
 const numberLabel = new Intl.NumberFormat('en');
 let token = null;
 let expiry;
@@ -23,17 +30,34 @@ let busy = false;
 let refreshing = false;
 let version = 0;
 let previous;
+let previousTimestamps;
 let apiOrigin;
+
+function displayHistory({ past30Days, total, hasUndatedResets, recent }) {
+  historyRecent.textContent = numberLabel.format(past30Days);
+  historyTotal.textContent = numberLabel.format(total);
+  historyNote.hidden = !hasUndatedResets;
+  historyDownload.hidden = !recent;
+  historyEmpty.hidden = !recent || recent.length > 0;
+  historyList.hidden = !recent?.length;
+  const timestamps = recent?.join(' ');
+  if (timestamps === previousTimestamps) return;
+  previousTimestamps = timestamps;
+  historyList.replaceChildren(...(recent ?? []).map(timestamp => {
+    const item = document.createElement('li');
+    const time = document.createElement('time');
+    time.dateTime = timestamp;
+    time.textContent = resetDateLabel.format(new Date(timestamp));
+    item.append(time);
+    return item;
+  }));
+}
 
 function display({ start, today, canReset, resetHistory }) {
   status.hidden = true;
   reset.hidden = !canReset;
   history.hidden = !canReset || !resetHistory;
-  if (!history.hidden) {
-    historyRecent.textContent = numberLabel.format(resetHistory.past30Days);
-    historyTotal.textContent = numberLabel.format(resetHistory.total);
-    historyNote.hidden = !resetHistory.hasUndatedResets;
-  }
+  if (!history.hidden) displayHistory(resetHistory);
   if (previous?.start === start && previous.today === today) return;
   previous = { start, today };
   const started = document.createElement('time');
@@ -77,6 +101,7 @@ async function refresh() {
       const config = await fetch('/runtime.json', { signal: AbortSignal.timeout(6000) });
       if (!config.ok) throw new Error('configuration_unavailable');
       ({ apiOrigin } = await config.json());
+      historyDownload.href = `${apiOrigin}/api/reset-history.csv`;
     }
     const response = await fetch(`${apiOrigin}/api/counter`, { signal: AbortSignal.timeout(6000) });
     if (!response.ok) throw new Error('counter_unavailable');

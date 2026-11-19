@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { mkdtemp, rm } from 'node:fs/promises';
+import { mkdtemp, readFile, rm } from 'node:fs/promises';
 import { request as httpRequest } from 'node:http';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
@@ -16,7 +16,10 @@ const initial = new Date('2031-11-18T20:00:00Z');
 const initialDate = '2031-11-06';
 const today = '2031-11-18';
 const ownerHeaders = { 'Tailscale-User-Login': owner };
-const emptyHistory = { total: 0, past30Days: 0, hasUndatedResets: false };
+const emptyHistory = { total: 0, past30Days: 0, hasUndatedResets: false, recent: [] };
+const recordedHistory = { total: 1, past30Days: 1, hasUndatedResets: false, recent: [initial.toISOString()] };
+const csvPath = '/api/reset-history.csv';
+const csvHeader = 'reset_number,reset_at_utc\r\n';
 
 test('calendar units follow complete weeks, months and years, including leap days and short months', () => {
   assert.deepEqual(elapsed(initialDate, '2031-11-05'), [[0, 'day']]);
@@ -95,14 +98,13 @@ test('only the owner sees reset access and a fifth fresh click updates every vie
     token = progress.token;
   }
   assert.deepEqual((await (await request('/api/counter', { headers: ownerHeaders })).json()).resetHistory, emptyHistory);
-  const recorded = { total: 1, past30Days: 1, hasUndatedResets: false };
-  assert.deepEqual(await (await click(request, token)).json(), { start: today, today, canReset: true, resetHistory: recorded });
+  assert.deepEqual(await (await click(request, token)).json(), { start: today, today, canReset: true, resetHistory: recordedHistory });
   assert.equal((await click(request, token)).status, 409);
   await counter.close();
   const restarted = await start();
   t.after(() => restarted.counter.close());
   assert.deepEqual(await (await restarted.request('/api/counter', { headers: viewer })).json(), { start: today, today, canReset: false });
-  assert.deepEqual((await (await restarted.request('/api/counter', { headers: ownerHeaders })).json()).resetHistory, recorded);
+  assert.deepEqual((await (await restarted.request('/api/counter', { headers: ownerHeaders })).json()).resetHistory, recordedHistory);
 });
 
 test('legacy resets remain in the total and individual resets age out of the 30-day window', async t => {
@@ -118,15 +120,49 @@ test('legacy resets remain in the total and individual resets age out of the 30-
   const { counter, request } = await start();
   t.after(() => counter.close());
   const history = async () => (await (await request('/api/counter', { headers: ownerHeaders })).json()).resetHistory;
-  assert.deepEqual(await history(), { total: 3, past30Days: 0, hasUndatedResets: true });
+  assert.deepEqual(await history(), { total: 3, past30Days: 0, hasUndatedResets: true, recent: [] });
   assert.equal((await click(request, await confirmFour(request))).status, 200);
   now += 1000;
   assert.equal((await click(request, await confirmFour(request))).status, 200);
-  assert.deepEqual(await history(), { total: 5, past30Days: 2, hasUndatedResets: true });
+  const later = new Date(now).toISOString();
+  const saved = { total: 5, past30Days: 2, hasUndatedResets: true, recent: [later, initial.toISOString()] };
+  assert.deepEqual(await history(), saved);
   now = initial.getTime() + 30 * 86_400_000;
-  assert.deepEqual(await history(), { total: 5, past30Days: 1, hasUndatedResets: true });
+  assert.deepEqual(await history(), { ...saved, past30Days: 1 });
   now += 1000;
-  assert.deepEqual(await history(), { total: 5, past30Days: 0, hasUndatedResets: true });
+  assert.deepEqual(await history(), { ...saved, past30Days: 0 });
+  const exportResponse = await request(csvPath, { headers: ownerHeaders });
+  assert.equal(await exportResponse.text(), `${csvHeader}4,${initial.toISOString()}\r\n5,${later}\r\n`);
+});
+
+test('only the owner can export every dated reset while the page gets a bounded recent list', async t => {
+  const start = await fixture(t, { viewOrigin });
+  const { counter, request, database } = await start();
+  t.after(() => counter.close());
+  const download = () => request(csvPath, { headers: ownerHeaders });
+  assert.equal(await (await download()).text(), csvHeader);
+  assert.equal((await request(csvPath)).status, 403);
+  assert.equal((await request(csvPath, { headers: { Origin: viewOrigin, 'Tailscale-User-Login': 'viewer@example.test' } })).status, 403);
+
+  const timestamps = Array.from({ length: 140 }, (_, index) => initial.getTime() - (139 - index) * 1234);
+  const db = new DatabaseSync(database);
+  try {
+    db.exec('BEGIN');
+    const add = db.prepare('INSERT INTO reset_history (revision, reset_at) VALUES (?, ?)');
+    timestamps.forEach((timestamp, index) => add.run(index + 1, timestamp));
+    db.prepare('UPDATE counter SET revision = ? WHERE id = 1').run(timestamps.length);
+    db.exec('COMMIT');
+  } finally { db.close(); }
+
+  const iso = timestamps.map(timestamp => new Date(timestamp).toISOString());
+  const details = (await (await request('/api/counter', { headers: ownerHeaders })).json()).resetHistory;
+  assert.deepEqual(details.recent, iso.slice(-10).reverse());
+  const response = await download();
+  assert.equal(response.status, 200);
+  assert.match(response.headers.get('content-type'), /^text\/csv\b/);
+  assert.equal(response.headers.get('content-disposition'), 'attachment; filename="howlong-resets.csv"');
+  assert.equal(response.headers.get('cache-control'), 'no-store');
+  assert.equal(await response.text(), csvHeader + iso.map((time, index) => `${index + 1},${time}\r\n`).join(''));
 });
 
 test('a failed history insert rolls the date back and a fresh confirmation records exactly one reset', async t => {
@@ -143,7 +179,7 @@ test('a failed history insert rolls the date back and a fresh confirmation recor
     db.exec('DROP TRIGGER reject_history');
     assert.equal((await click(request, token)).status, 409);
     const retry = await click(request, await confirmFour(request));
-    assert.deepEqual((await retry.json()).resetHistory, { total: 1, past30Days: 1, hasUndatedResets: false });
+    assert.deepEqual((await retry.json()).resetHistory, recordedHistory);
     assert.equal(db.prepare('SELECT reset_at FROM reset_history WHERE revision = 1').get().reset_at, initial.getTime());
   } finally { db.close(); }
 });
@@ -166,7 +202,8 @@ test('confirmation expires, rejects invalid bodies and invalidates simultaneous 
   const results = await Promise.all([click(request, token), click(request, other)]);
   assert.deepEqual(results.map(response => response.status).sort(), [200, 409]);
   const state = await (await request('/api/counter', { headers: ownerHeaders })).json();
-  assert.deepEqual(state.resetHistory, { total: 1, past30Days: 1, hasUndatedResets: false });
+  const resetAt = new Date(now).toISOString();
+  assert.deepEqual(state.resetHistory, { ...recordedHistory, recent: [resetAt] });
 });
 
 test('the vanity origin can use the private API while other origins and non-owners cannot reset', async t => {
@@ -238,6 +275,7 @@ test('the mobile reset control shows each click, warns on the fifth and updates 
   await button.waitFor();
   await admin.getByRole('region', { name: 'Reset history' }).waitFor();
   assert.equal(await admin.locator('#reset-total').textContent(), '0');
+  assert.equal(await admin.getByText('No timestamped resets yet.').isVisible(), true);
   assert.deepEqual(await admin.locator('.unit').allTextContents(), ['1week', '5days']);
   assert.equal(await admin.evaluate(() => document.documentElement.scrollWidth), 360);
   for (let count = 1; count <= 4; count++) {
@@ -251,12 +289,19 @@ test('the mobile reset control shows each click, warns on the fifth and updates 
   assert.equal(await admin.locator('.unit').textContent(), '0days');
   assert.equal(await admin.locator('#reset-total').textContent(), '1');
   assert.equal(await admin.locator('#reset-recent').textContent(), '1');
+  assert.equal(await admin.locator('#reset-timestamps time').getAttribute('datetime'), initial.toISOString());
+  const [download] = await Promise.all([
+    admin.waitForEvent('download'), admin.getByRole('link', { name: 'Download CSV' }).click(),
+  ]);
+  assert.equal(download.suggestedFilename(), 'howlong-resets.csv');
+  assert.equal(await readFile(await download.path(), 'utf8'), `${csvHeader}1,${initial.toISOString()}\r\n`);
   assert.equal((await click(request, await confirmFour(request))).status, 200);
   await admin.clock.fastForward(11_000);
   await admin.waitForFunction(() => document.querySelector('#reset-total').textContent === '2');
   await viewer.clock.fastForward(11_000);
   await viewer.locator(`#since time[datetime="${today}"]`).waitFor();
   assert.equal(await viewer.getByRole('region', { name: 'Reset history' }).count(), 0);
+  assert.equal(await viewer.getByRole('link', { name: 'Download CSV' }).count(), 0);
 });
 
 test('rapid touch taps respond immediately and queue exactly five confirmations through a slow response', async t => {
