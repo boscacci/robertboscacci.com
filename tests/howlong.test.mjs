@@ -125,22 +125,30 @@ test('the vanity origin can use the private API while other origins and non-owne
   assert.equal((await response.json()).remaining, 4);
 });
 
-test('the mobile reset control shows each click, warns on the fifth and updates the read-only view', async t => {
+async function browserFixture(t) {
   const start = await fixture(t, { viewOrigin });
   const { counter, request } = await start();
   t.after(() => counter.close());
   const browser = await chromium.launch();
   t.after(() => browser.close());
 
-  async function open(login, pageOrigin = origin) {
+  async function open(login, { pageOrigin = origin, beforeReset, captureHaptics = false } = {}) {
     const page = await browser.newPage({ viewport: { width: 360, height: 740 }, isMobile: true, hasTouch: true });
     await page.clock.install();
+    if (captureHaptics) await page.addInitScript(() => {
+      window.vibrations = [];
+      navigator.vibrate = duration => { window.vibrations.push(duration); return true; };
+    });
     const handle = async route => {
       const incoming = route.request();
       const { pathname } = new URL(incoming.url());
       if (pageOrigin !== origin && incoming.url() === `${pageOrigin}/runtime.json`) {
         await route.fulfill({ json: { apiOrigin: origin } });
         return;
+      }
+      if (pathname === '/api/reset' && incoming.method() === 'POST') {
+        const replacement = await beforeReset?.();
+        if (replacement) return route.fulfill(replacement);
       }
       const response = await request(pathname, {
         method: incoming.method(), body: incoming.postData(),
@@ -156,10 +164,14 @@ test('the mobile reset control shows each click, warns on the fifth and updates 
     await page.locator('#since time').waitFor();
     return page;
   }
+  return { open, request };
+}
 
+test('the mobile reset control shows each click, warns on the fifth and updates the read-only view', async t => {
+  const { open } = await browserFixture(t);
   const viewer = await open('viewer@example.test');
   assert.equal(await viewer.locator('#reset-button').isVisible(), false);
-  const admin = await open(owner, viewOrigin);
+  const admin = await open(owner, { pageOrigin: viewOrigin });
   const button = admin.getByRole('button', { name: 'Reset to today' });
   await button.waitFor();
   assert.deepEqual(await admin.locator('.unit').allTextContents(), ['1week', '5days']);
@@ -175,4 +187,62 @@ test('the mobile reset control shows each click, warns on the fifth and updates 
   assert.equal(await admin.locator('.unit').textContent(), '0days');
   await viewer.clock.fastForward(11_000);
   await viewer.locator(`#since time[datetime="${today}"]`).waitFor();
+});
+
+test('rapid touch taps respond immediately and queue exactly five confirmations through a slow response', async t => {
+  const { open, request } = await browserFixture(t);
+  const firstRequest = Promise.withResolvers();
+  const releaseResponse = Promise.withResolvers();
+  let posts = 0;
+  const page = await open(owner, {
+    captureHaptics: true,
+    beforeReset: async () => {
+      if (++posts !== 1) return;
+      firstRequest.resolve();
+      await releaseResponse.promise;
+    },
+  });
+  const button = page.locator('#reset-button');
+  const box = await button.boundingBox();
+  const tap = () => page.touchscreen.tap(box.x + box.width / 2, box.y + box.height / 2);
+  try {
+    await tap();
+    await firstRequest.promise;
+    for (let count = 2; count <= 4; count++) await tap();
+    assert.equal(await button.locator('[data-filled]').count(), 4);
+    assert.equal(await button.getAttribute('data-final'), '');
+    assert.match(await page.locator('#reset-status').textContent(), /One more click/);
+    for (let count = 5; count <= 7; count++) await tap();
+    assert.equal(await button.locator('[data-filled]').count(), 5);
+    assert.equal(await button.getAttribute('aria-disabled'), 'true');
+    const pulses = await page.evaluate(() => window.vibrations);
+    assert.equal(pulses.length, 5);
+    assert.ok(pulses[4] > pulses[0]);
+    assert.equal((await (await request('/api/counter', { headers: ownerHeaders })).json()).start, initialDate);
+  } finally {
+    releaseResponse.resolve();
+  }
+  await page.getByText('Counter reset to today for everyone.').waitFor();
+  assert.equal(posts, 5);
+  assert.equal(await page.locator('#since time').getAttribute('datetime'), today);
+});
+
+test('an expired confirmation clears the queued taps without replaying them', async t => {
+  const { open, request } = await browserFixture(t);
+  const response = Promise.withResolvers();
+  let posts = 0;
+  const page = await open(owner, { beforeReset: () => { posts++; return response.promise; } });
+  const button = page.getByRole('button', { name: 'Reset to today' });
+  try {
+    await button.tap();
+    await button.tap();
+    await button.tap();
+    assert.equal(await button.locator('[data-filled]').count(), 3);
+  } finally {
+    response.resolve({ status: 409, json: { error: 'confirmation_expired' } });
+  }
+  await page.getByText('Confirmation expired. Click five times to start again.').waitFor();
+  assert.equal(posts, 1);
+  assert.equal(await button.locator('[data-filled]').count(), 0);
+  assert.equal((await (await request('/api/counter', { headers: ownerHeaders })).json()).start, initialDate);
 });
