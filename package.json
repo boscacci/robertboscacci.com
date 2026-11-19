@@ -9,7 +9,8 @@
     "test:analytics": "node --test tests/analytics.test.mjs",
     "deploy:site:dev": "node scripts/deploy-site-dev.mjs",
     "test:release": "node --test tests/site-release.test.mjs",
-    "release:site": "node scripts/promote-site.mjs"
+    "release:site": "node scripts/promote-site.mjs",
+    "test:howlong": "node --test tests/howlong.test.mjs"
   },
   "engines": {
     "node": ">=22"
