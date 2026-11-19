@@ -14,7 +14,12 @@ if [[ $environment == production ]]; then
   approval=${2:?Pass the post-smoke-test production approval record}
   tag=$(jq -er '.releaseTag | select(test("^howlong/v[0-9]+\\.[0-9]+\\.[0-9]+$"))' "$approval")
   [[ $(git cat-file -t "refs/tags/$tag") == tag && $(git rev-parse "refs/tags/$tag^{commit}") == "$commit" ]]
-  jq -e '.target == "howlong.robertboscacci.com" and (.artifact | test("^sha256:[0-9a-f]{64}$")) and (.instruction | length > 0)' "$approval" >/dev/null
+  dev="${XDG_DATA_HOME:-$HOME/.local/share}/howlong/cloud/dev.json"
+  digest=$(jq -er --arg commit "$commit" 'select(.commit == $commit) | .digest | select(test("^sha256:[0-9a-f]{64}$"))' "$dev")
+  verified_at=$(jq -er '.verifiedAt | fromdateiso8601' "$dev")
+  jq -e --arg digest "$digest" --argjson verified "$verified_at" '
+    .target == "howlong.robertboscacci.com" and .artifact == $digest and (.instruction | length > 0) and (.recordedAt | fromdateiso8601 >= $verified)
+  ' "$approval" >/dev/null
 fi
 
 work=$(mktemp -d)
