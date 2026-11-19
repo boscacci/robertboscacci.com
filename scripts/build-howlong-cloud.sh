@@ -5,8 +5,10 @@ cd "$(dirname "$0")/.."
 
 [[ -z $(git status --porcelain) && $(git remote get-url origin) == git@github.com:boscacci/robertboscacci.com.git ]]
 [[ $(aws sts get-caller-identity --query Account --output text) == 062008221187 ]]
-commit=$(git rev-parse HEAD)
+commit=${1:-$(git rev-parse HEAD)}
+[[ $commit =~ ^[a-f0-9]{40}$ ]]
 git merge-base --is-ancestor "$commit" refs/remotes/origin/main
+git diff --quiet "$commit" HEAD -- services/howlong
 [[ $(df -Pk . | awk 'NR==2 {print $4}') -ge 31457280 ]]
 cache=$(docker system df --format '{{if eq .Type "Build Cache"}}{{.Reclaimable}}{{end}}' | awk 'NF {print $1}')
 [[ $(numfmt --from=si "${cache%B}") -lt 10737418240 ]]
@@ -46,9 +48,14 @@ if [[ -z $digest ]]; then
     --query 'imageDetails[0].imageDigest' --output text)
 fi
 [[ $digest =~ ^sha256:[a-f0-9]{64}$ ]]
-aws ecr wait image-scan-complete --region us-west-2 --repository-name "$repo_name" --image-id imageDigest="$digest"
-aws ecr describe-image-scan-findings --region us-west-2 --repository-name "$repo_name" --image-id imageDigest="$digest" \
-  --query imageScanFindings.findingSeverityCounts --output json | jq -e '(.CRITICAL // 0) + (.HIGH // 0) == 0' >/dev/null
+for attempt in {1..20}; do
+  if aws ecr describe-image-scan-findings --region us-west-2 --repository-name "$repo_name" \
+    --image-id imageDigest="$digest" --output json > "$work/scan.json" 2>/dev/null \
+    && jq -e '.imageScanStatus.status == "COMPLETE"' "$work/scan.json" >/dev/null; then break; fi
+  if [[ $attempt == 20 ]]; then echo 'The image scan did not complete.' >&2; exit 1; fi
+  sleep 3
+done
+jq -ef scripts/howlong-scan.jq "$work/scan.json" >/dev/null
 
 image="$repo@$digest"
 if ! docker image inspect "$image" >/dev/null 2>&1; then

@@ -5,8 +5,10 @@ cd "$(dirname "$0")/.."
 
 [[ -z $(git status --porcelain) && $(git remote get-url origin) == git@github.com:boscacci/robertboscacci.com.git ]]
 [[ $(aws sts get-caller-identity --query Account --output text) == 062008221187 ]]
-commit=$(git rev-parse HEAD)
+commit=${1:-$(git rev-parse HEAD)}
+[[ $commit =~ ^[a-f0-9]{40}$ ]]
 git merge-base --is-ancestor "$commit" refs/remotes/origin/main
+git diff --quiet "$commit" HEAD -- services/howlong
 base="${XDG_DATA_HOME:-$HOME/.local/share}/howlong"
 state="$base/cloud"
 record="$state/releases/$commit.json"
