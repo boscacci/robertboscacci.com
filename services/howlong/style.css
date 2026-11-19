@@ -1,0 +1,104 @@
+:root {
+  color-scheme: dark;
+  font-family: system-ui, sans-serif;
+  background: #13271d;
+  color: #f3f7ec;
+  font-synthesis: none;
+}
+
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+
+body {
+  display: grid;
+  align-items: center;
+  min-height: 100svh;
+  margin: 0;
+  padding: clamp(1.15rem, 6vw, 5.5rem);
+}
+
+main {
+  width: 100%;
+  max-width: 66rem;
+  margin-inline: auto;
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(1.6rem, 4vw, 3.3rem);
+  letter-spacing: -.055em;
+  line-height: 1.1;
+}
+
+.since, .counter-status, .reset p {
+  margin: .6rem 0 0;
+  color: #bfd0c1;
+  font-size: clamp(.95rem, 2vw, 1.15rem);
+  line-height: 1.5;
+}
+
+.elapsed {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .55rem;
+  margin-block: clamp(1.8rem, 6vw, 4rem) clamp(1.2rem, 4vw, 2.5rem);
+}
+
+.unit {
+  display: grid;
+  flex: 1 1 0;
+  min-width: min(100%, 5.35rem);
+  align-content: center;
+  justify-items: center;
+  gap: .6rem;
+  padding: clamp(.8rem, 3vw, 2rem) .25rem;
+  border: 1px solid #52715e;
+  border-radius: clamp(.85rem, 3vw, 1.5rem);
+  background: #1e392a;
+}
+
+.unit strong {
+  font-size: clamp(2.5rem, 12vw, 10rem);
+  font-weight: 850;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -.08em;
+  line-height: .92;
+  padding-right: .08em;
+}
+
+.unit span {
+  color: #d6e4d6;
+  font-size: clamp(.85rem, 2.8vw, 1.65rem);
+  font-weight: 650;
+}
+
+.reset button {
+  display: flex;
+  width: 100%;
+  min-height: clamp(4rem, 10vw, 6.3rem);
+  align-items: center;
+  justify-content: space-between;
+  gap: .8rem;
+  padding: .75rem clamp(.9rem, 4vw, 2rem);
+  border: 0;
+  border-radius: clamp(.85rem, 3vw, 1.5rem);
+  background: #d5f787;
+  color: #15261a;
+  font: 800 clamp(1.2rem, 4.5vw, 2.1rem)/1.15 system-ui, sans-serif;
+  text-align: left;
+  cursor: pointer;
+}
+
+.reset button:hover { background: #e3ffa2; }
+.reset button[data-final] { background: #ffb8a5; }
+.reset button[aria-disabled="true"] { cursor: progress; }
+.reset button:focus-visible { outline: 3px solid #f3f7ec; outline-offset: 4px; }
+
+.steps { display: flex; gap: clamp(.2rem, 1.1vw, .6rem); }
+.steps i {
+  width: clamp(.45rem, 1.65vw, .95rem);
+  aspect-ratio: 1;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+}
+.steps i[data-filled] { background: currentColor; }

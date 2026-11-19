@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#13271d">
+    <title>How Long?</title>
+    <link rel="stylesheet" href="/style.css">
+    <script type="module" src="/app.mjs"></script>
+  </head>
+  <body>
+    <main>
+      <header>
+        <h1>How long has it been?</h1>
+        <p class="since" id="since"></p>
+      </header>
+
+      <div class="elapsed" id="elapsed" aria-live="polite" aria-atomic="true">Loading the counter…</div>
+      <p class="counter-status" id="counter-status" role="status" hidden></p>
+      <noscript>Enable JavaScript to see the current count.</noscript>
+
+      <section class="reset" id="reset" aria-label="Reset counter" hidden>
+        <button id="reset-button" type="button" aria-describedby="reset-status">
+          <span id="reset-label">Reset to today</span>
+          <span class="steps" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
+        </button>
+        <p id="reset-status" role="status">The fifth click resets the counter for everyone. You have 30 seconds between clicks.</p>
+      </section>
+    </main>
+  </body>
+</html>
