@@ -105,11 +105,18 @@ encoded=$(base64 -w 0 services/howlong/cloud-install.sh)
 result=$(remote "set -euo pipefail; install_script=\$(mktemp /run/howlong-control.XXXXXXXX); trap 'unlink \"\$install_script\"' EXIT; printf %s '$encoded' | base64 -d > \"\$install_script\"; bash \"\$install_script\" dev '$image' '$key' '$checksum'")
 ready=$(sed -n '/^{"event":"howlong_cloud_ready"/p' <<<"$result")
 origin=$(jq -er '.url | select(. == "https://howlong-dev.robertboscacci.com")' <<<"$ready")
-[[ $(curl -sS -o /dev/null -w '%{http_code}' --max-time 10 -H 'X-Howlong-User: owner' "$origin/api/counter") == 401 ]]
+for path in / /app.mjs /api/counter /api/reset-history.csv; do
+  [[ $(curl -sS -o /dev/null -w '%{http_code}' --max-time 10 -H 'X-Howlong-User: owner' "$origin$path") == 401 ]]
+done
 curl -fsS --max-time 10 --config "$work/curl.conf" -H 'X-Howlong-User: forged' "$origin/api/counter" \
   | jq -e '.canReset and (.resetHistory | type) == "object"' >/dev/null
+curl -fsS --max-time 10 --config "$work/curl.conf" "$origin/api/reset-history.csv" -o "$work/history.csv"
+grep -q '^reset_number,reset_at_utc' "$work/history.csv"
 jq -n --arg commit "$commit" --arg digest "$digest" --arg url "$origin" --arg date "$(date -u +%FT%TZ)" \
   '{event:"howlong_cloud_dev_verified",commit:$commit,digest:$digest,url:$url,verifiedAt:$date}' > "$work/dev.json"
 mv -f "$work/dev.json" "$state/dev.json"
 verified=true
+if $old_stopped; then
+  systemctl --user disable howlong-dev.service howlong-dev-archive.timer
+fi
 cat "$state/dev.json"
