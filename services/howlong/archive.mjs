@@ -70,14 +70,16 @@ async function aws(args, credentials = {}) {
 async function runArchive(environment, database, runtime) {
   if (!['dev', 'production'].includes(environment) || !database || !runtime) throw Error('invalid_archive_configuration');
   const prefix = `robertboscacci-howlong-archive-${environment}`;
-  let credentials;
-  try {
-    const { Credentials } = await aws(['sts', 'assume-role', '--role-arn', `arn:aws:iam::${account}:role/${prefix}`,
-      '--role-session-name', `howlong-archive-${environment}`, '--duration-seconds', '900', '--region', 'us-west-2']);
-    if (!Credentials?.AccessKeyId || !Credentials.SecretAccessKey || !Credentials.SessionToken) throw Error('invalid_session');
-    credentials = { AWS_ACCESS_KEY_ID: Credentials.AccessKeyId, AWS_SECRET_ACCESS_KEY: Credentials.SecretAccessKey, AWS_SESSION_TOKEN: Credentials.SessionToken };
-  } catch { throw Error('archive_role_unavailable'); }
-  const run = args => aws(args, credentials);
+  let run = aws;
+  if (process.env.HOWLONG_ARCHIVE_INSTANCE_ROLE !== '1') {
+    try {
+      const { Credentials } = await aws(['sts', 'assume-role', '--role-arn', `arn:aws:iam::${account}:role/${prefix}`,
+        '--role-session-name', `howlong-archive-${environment}`, '--duration-seconds', '900', '--region', 'us-west-2']);
+      if (!Credentials?.AccessKeyId || !Credentials.SecretAccessKey || !Credentials.SessionToken) throw Error('invalid_session');
+      const credentials = { AWS_ACCESS_KEY_ID: Credentials.AccessKeyId, AWS_SECRET_ACCESS_KEY: Credentials.SecretAccessKey, AWS_SESSION_TOKEN: Credentials.SessionToken };
+      run = args => aws(args, credentials);
+    } catch { throw Error('archive_role_unavailable'); }
+  }
   const pending = await syncHistory({ database, upload: createS3Writer({ bucket: `${prefix}-${account}`, runtime, run }) });
   try {
     await run(['cloudwatch', 'put-metric-data', '--region', 'us-east-1', '--namespace', `HowLong/Archive/${environment}`,

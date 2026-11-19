@@ -22,7 +22,7 @@ if [[ -z $(lsblk -dn -o FSTYPE "$device") ]]; then
   [[ -z $(wipefs --noheadings "$device") ]]
   mkfs.ext4 "$device"
 fi
-uuid=$(lsblk -dn -o UUID "$device")
+uuid=$(blkid -s UUID -o value "$device")
 [[ -n $uuid ]]
 install -d -m 0700 "$target"
 if ! grep -Fq "UUID=$uuid $target " /etc/fstab; then
