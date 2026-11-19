@@ -1,0 +1,30 @@
+{
+	admin off
+	auto_https disable_redirects
+	servers {
+		protocols h1 h2
+	}
+}
+
+{$HOWLONG_HOST} {
+	tls {
+		dns route53 {
+			region us-west-2
+			hosted_zone_id Z1BDNRWTPWQNUU
+		}
+		resolvers 1.1.1.1 8.8.8.8
+	}
+	header {
+		Cache-Control "no-store"
+		Strict-Transport-Security "max-age=31536000"
+		X-Robots-Tag "noindex, nofollow, noarchive"
+	}
+	basic_auth {
+		owner {$HOWLONG_PASSWORD_HASH}
+	}
+	reverse_proxy unix//run/howlong/server.sock {
+		header_up -Authorization
+		header_up X-Howlong-User {http.auth.user.id}
+		header_up X-Forwarded-Host {$HOWLONG_HOST}
+	}
+}

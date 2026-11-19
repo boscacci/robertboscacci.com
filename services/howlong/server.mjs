@@ -28,6 +28,11 @@ function identityFromServe(request) {
   return typeof login === 'string' && !login.includes(',') ? login : null;
 }
 
+// The cloud TLS proxy sets this header on the private Unix socket after login.
+export function identityFromCloudProxy(request) {
+  return request.headers['x-howlong-user'] === 'owner' ? 'owner' : null;
+}
+
 function send(response, status, data, type = 'application/json') {
   response.writeHead(status, { ...securityHeaders, 'Content-Type': `${type}; charset=utf-8` });
   response.end(type === 'application/json' ? JSON.stringify(data) : data);

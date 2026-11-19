@@ -7,7 +7,7 @@ import { DatabaseSync } from 'node:sqlite';
 import test from 'node:test';
 import { chromium } from 'playwright';
 import { calendarDate, elapsed, validDate } from '../services/howlong/calendar.mjs';
-import { createCounter } from '../services/howlong/server.mjs';
+import { createCounter, identityFromCloudProxy } from '../services/howlong/server.mjs';
 
 const origin = 'http://howlong.test';
 const viewOrigin = 'http://tracker.test';
@@ -20,6 +20,13 @@ const emptyHistory = { total: 0, past30Days: 0, hasUndatedResets: false, recent:
 const recordedHistory = { total: 1, past30Days: 1, hasUndatedResets: false, recent: [initial.toISOString()] };
 const csvPath = '/api/reset-history.csv';
 const csvHeader = 'reset_number,reset_at_utc\r\n';
+
+test('the private cloud proxy authorizer accepts its verified owner identity only', () => {
+  assert.equal(identityFromCloudProxy({ headers: { 'x-howlong-user': 'owner' } }), 'owner');
+  assert.equal(identityFromCloudProxy({ headers: { 'x-howlong-user': 'viewer' } }), null);
+  assert.equal(identityFromCloudProxy({ headers: { 'x-howlong-user': 'owner, viewer' } }), null);
+  assert.equal(identityFromCloudProxy({ headers: { 'tailscale-user-login': owner } }), null);
+});
 
 test('calendar units follow complete weeks, months and years, including leap days and short months', () => {
   assert.deepEqual(elapsed(initialDate, '2031-11-05'), [[0, 'day']]);
