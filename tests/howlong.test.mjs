@@ -3,6 +3,7 @@ import { mkdtemp, rm } from 'node:fs/promises';
 import { request as httpRequest } from 'node:http';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
+import { DatabaseSync } from 'node:sqlite';
 import test from 'node:test';
 import { chromium } from 'playwright';
 import { calendarDate, elapsed, validDate } from '../services/howlong/calendar.mjs';
@@ -15,6 +16,7 @@ const initial = new Date('2031-11-18T20:00:00Z');
 const initialDate = '2031-11-06';
 const today = '2031-11-18';
 const ownerHeaders = { 'Tailscale-User-Login': owner };
+const emptyHistory = { total: 0, past30Days: 0, hasUndatedResets: false };
 
 test('calendar units follow complete weeks, months and years, including leap days and short months', () => {
   assert.deepEqual(elapsed(initialDate, '2031-11-05'), [[0, 'day']]);
@@ -29,11 +31,16 @@ test('calendar units follow complete weeks, months and years, including leap day
   assert.equal(calendarDate(new Date('2026-11-19T08:00:00Z')), '2026-11-19');
 });
 
-async function fixture(t, options = {}) {
+async function fixture(t, { seed, ...options } = {}) {
   const dir = await mkdtemp(join(tmpdir(), 'howlong-test-'));
   t.after(() => rm(dir, { recursive: true, force: true }));
+  const database = join(dir, 'counter.sqlite');
+  if (seed) {
+    const db = new DatabaseSync(database);
+    try { seed(db); } finally { db.close(); }
+  }
   const start = async () => {
-    const counter = await createCounter({ origin, owner, initialDate, database: join(dir, 'counter.sqlite'), now: () => initial, log() {}, ...options });
+    const counter = await createCounter({ origin, owner, initialDate, database, now: () => initial, log() {}, ...options });
     await new Promise(resolve => counter.server.listen(0, '127.0.0.1', resolve));
     const port = counter.server.address().port;
     function request(path, { headers, method, body } = {}) {
@@ -49,13 +56,19 @@ async function fixture(t, options = {}) {
         outgoing.end(body);
       });
     }
-    return { counter, request };
+    return { counter, request, database };
   };
   return start;
 }
 
 function click(request, token = null, identity = ownerHeaders, from = origin) {
   return request('/api/reset', { method: 'POST', headers: { ...identity, Origin: from, 'Content-Type': 'application/json' }, body: JSON.stringify({ token }) });
+}
+
+async function confirmFour(request) {
+  let token = null;
+  for (let count = 0; count < 4; count++) token = (await (await click(request, token)).json()).token;
+  return token;
 }
 
 test('only the owner sees reset access and a fifth fresh click updates every viewer and survives restart', async t => {
@@ -65,7 +78,7 @@ test('only the owner sees reset access and a fifth fresh click updates every vie
   const viewer = { 'Tailscale-User-Login': 'viewer@example.test' };
   assert.equal((await request('/api/counter')).status, 403);
   assert.deepEqual(await (await request('/api/counter', { headers: viewer })).json(), { start: initialDate, today, canReset: false });
-  assert.equal((await (await request('/api/counter', { headers: ownerHeaders })).json()).canReset, true);
+  assert.deepEqual(await (await request('/api/counter', { headers: ownerHeaders })).json(), { start: initialDate, today, canReset: true, resetHistory: emptyHistory });
   assert.equal((await click(request, null, viewer)).status, 403);
   assert.equal((await click(request, null, { 'X-Howlong-Peer': owner })).status, 403);
   assert.equal((await click(request, null, ownerHeaders, 'https://elsewhere.test')).status, 403);
@@ -81,12 +94,58 @@ test('only the owner sees reset access and a fifth fresh click updates every vie
     assert.equal((await (await request('/api/counter', { headers: viewer })).json()).start, initialDate);
     token = progress.token;
   }
-  assert.deepEqual(await (await click(request, token)).json(), { start: today, today, canReset: true });
+  assert.deepEqual((await (await request('/api/counter', { headers: ownerHeaders })).json()).resetHistory, emptyHistory);
+  const recorded = { total: 1, past30Days: 1, hasUndatedResets: false };
+  assert.deepEqual(await (await click(request, token)).json(), { start: today, today, canReset: true, resetHistory: recorded });
   assert.equal((await click(request, token)).status, 409);
   await counter.close();
   const restarted = await start();
   t.after(() => restarted.counter.close());
-  assert.equal((await (await restarted.request('/api/counter', { headers: viewer })).json()).start, today);
+  assert.deepEqual(await (await restarted.request('/api/counter', { headers: viewer })).json(), { start: today, today, canReset: false });
+  assert.deepEqual((await (await restarted.request('/api/counter', { headers: ownerHeaders })).json()).resetHistory, recorded);
+});
+
+test('legacy resets remain in the total and individual resets age out of the 30-day window', async t => {
+  let now = initial.getTime();
+  const start = await fixture(t, {
+    now: () => new Date(now),
+    seed(db) {
+      db.exec('CREATE TABLE counter (id INTEGER PRIMARY KEY CHECK (id = 1), start TEXT NOT NULL, revision INTEGER NOT NULL)');
+      db.prepare('INSERT INTO counter VALUES (1, ?, 3)').run(initialDate);
+    },
+  });
+
+  const { counter, request } = await start();
+  t.after(() => counter.close());
+  const history = async () => (await (await request('/api/counter', { headers: ownerHeaders })).json()).resetHistory;
+  assert.deepEqual(await history(), { total: 3, past30Days: 0, hasUndatedResets: true });
+  assert.equal((await click(request, await confirmFour(request))).status, 200);
+  now += 1000;
+  assert.equal((await click(request, await confirmFour(request))).status, 200);
+  assert.deepEqual(await history(), { total: 5, past30Days: 2, hasUndatedResets: true });
+  now = initial.getTime() + 30 * 86_400_000;
+  assert.deepEqual(await history(), { total: 5, past30Days: 1, hasUndatedResets: true });
+  now += 1000;
+  assert.deepEqual(await history(), { total: 5, past30Days: 0, hasUndatedResets: true });
+});
+
+test('a failed history insert rolls the date back and a fresh confirmation records exactly one reset', async t => {
+  const start = await fixture(t);
+  const { counter, request, database } = await start();
+  t.after(() => counter.close());
+  const db = new DatabaseSync(database);
+  try {
+    db.exec(`CREATE TRIGGER reject_history BEFORE INSERT ON reset_history
+      BEGIN SELECT RAISE(ABORT, 'fixture history write failure'); END;`);
+    const token = await confirmFour(request);
+    assert.equal((await click(request, token)).status, 503);
+    assert.deepEqual(await (await request('/api/counter', { headers: ownerHeaders })).json(), { start: initialDate, today, canReset: true, resetHistory: emptyHistory });
+    db.exec('DROP TRIGGER reject_history');
+    assert.equal((await click(request, token)).status, 409);
+    const retry = await click(request, await confirmFour(request));
+    assert.deepEqual((await retry.json()).resetHistory, { total: 1, past30Days: 1, hasUndatedResets: false });
+    assert.equal(db.prepare('SELECT reset_at FROM reset_history WHERE revision = 1').get().reset_at, initial.getTime());
+  } finally { db.close(); }
 });
 
 test('confirmation expires, rejects invalid bodies and invalidates simultaneous stale confirmations', async t => {
@@ -106,6 +165,8 @@ test('confirmation expires, rejects invalid bodies and invalidates simultaneous 
   }
   const results = await Promise.all([click(request, token), click(request, other)]);
   assert.deepEqual(results.map(response => response.status).sort(), [200, 409]);
+  const state = await (await request('/api/counter', { headers: ownerHeaders })).json();
+  assert.deepEqual(state.resetHistory, { total: 1, past30Days: 1, hasUndatedResets: false });
 });
 
 test('the vanity origin can use the private API while other origins and non-owners cannot reset', async t => {
@@ -168,12 +229,15 @@ async function browserFixture(t) {
 }
 
 test('the mobile reset control shows each click, warns on the fifth and updates the read-only view', async t => {
-  const { open } = await browserFixture(t);
+  const { open, request } = await browserFixture(t);
   const viewer = await open('viewer@example.test');
   assert.equal(await viewer.locator('#reset-button').isVisible(), false);
+  assert.equal(await viewer.getByRole('region', { name: 'Reset history' }).count(), 0);
   const admin = await open(owner, { pageOrigin: viewOrigin });
   const button = admin.getByRole('button', { name: 'Reset to today' });
   await button.waitFor();
+  await admin.getByRole('region', { name: 'Reset history' }).waitFor();
+  assert.equal(await admin.locator('#reset-total').textContent(), '0');
   assert.deepEqual(await admin.locator('.unit').allTextContents(), ['1week', '5days']);
   assert.equal(await admin.evaluate(() => document.documentElement.scrollWidth), 360);
   for (let count = 1; count <= 4; count++) {
@@ -185,8 +249,14 @@ test('the mobile reset control shows each click, warns on the fifth and updates 
   await admin.getByRole('button', { name: 'Confirm reset' }).click();
   await admin.getByText('Counter reset to today for everyone.').waitFor();
   assert.equal(await admin.locator('.unit').textContent(), '0days');
+  assert.equal(await admin.locator('#reset-total').textContent(), '1');
+  assert.equal(await admin.locator('#reset-recent').textContent(), '1');
+  assert.equal((await click(request, await confirmFour(request))).status, 200);
+  await admin.clock.fastForward(11_000);
+  await admin.waitForFunction(() => document.querySelector('#reset-total').textContent === '2');
   await viewer.clock.fastForward(11_000);
   await viewer.locator(`#since time[datetime="${today}"]`).waitFor();
+  assert.equal(await viewer.getByRole('region', { name: 'Reset history' }).count(), 0);
 });
 
 test('rapid touch taps respond immediately and queue exactly five confirmations through a slow response', async t => {

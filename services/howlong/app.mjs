@@ -7,6 +7,10 @@ const reset = document.querySelector('#reset');
 const button = document.querySelector('#reset-button');
 const label = document.querySelector('#reset-label');
 const hint = document.querySelector('#reset-status');
+const history = document.querySelector('#reset-history');
+const historyRecent = document.querySelector('#reset-recent');
+const historyTotal = document.querySelector('#reset-total');
+const historyNote = document.querySelector('#history-note');
 const dots = [...button.querySelectorAll('.steps i')];
 const motion = matchMedia('(prefers-reduced-motion: reduce)');
 const dateLabel = new Intl.DateTimeFormat('en', { dateStyle: 'full', timeZone: 'UTC' });
@@ -21,9 +25,15 @@ let version = 0;
 let previous;
 let apiOrigin;
 
-function display({ start, today, canReset }) {
+function display({ start, today, canReset, resetHistory }) {
   status.hidden = true;
   reset.hidden = !canReset;
+  history.hidden = !canReset || !resetHistory;
+  if (!history.hidden) {
+    historyRecent.textContent = numberLabel.format(resetHistory.past30Days);
+    historyTotal.textContent = numberLabel.format(resetHistory.total);
+    historyNote.hidden = !resetHistory.hasUndatedResets;
+  }
   if (previous?.start === start && previous.today === today) return;
   previous = { start, today };
   const started = document.createElement('time');
@@ -78,6 +88,7 @@ async function refresh() {
     status.textContent = 'The counter is temporarily unavailable. Retrying shortly.';
     status.hidden = false;
     reset.hidden = true;
+    history.hidden = true;
   } finally {
     refreshing = false;
   }
