@@ -20,6 +20,12 @@ CSV download contains every recorded timestamp in UTC with milliseconds and a
 reset number. Undated legacy resets appear only in the all-time total.
 Open pages refresh about every 10 seconds.
 
+The archive worker copies each dated reset to its environment's private,
+encrypted and versioned S3 bucket about once a minute. Each object contains the
+reset number and UTC timestamp. SQLite commits the reset before any AWS call.
+The worker retries unacknowledged records, checks the S3 checksum, and backfills
+existing dated rows. It has scoped, short-lived AWS access to its own archive.
+
 ## Development
 
 On OptiPlex, run `npm ci`, `npm run test:howlong` and then run the checked-in
@@ -28,6 +34,7 @@ deployment script from a clean reviewed commit. Supply the initial date in the
 
 ```bash
 bash scripts/deploy-howlong.sh dev
+bash scripts/deploy-howlong-archive.sh dev
 ```
 
 The script archives the tracked service, retains the SHA-256 and commit, and
@@ -66,6 +73,7 @@ never copied into production.
 
 ```bash
 bash scripts/deploy-howlong.sh production /path/to/approval.json
+bash scripts/deploy-howlong-archive.sh production
 bash scripts/deploy-howlong-edge.sh
 # From the rc checkout:
 bash optiplex/front-door/activate-howlong.sh
@@ -79,3 +87,10 @@ to investigate backend, TLS or certificate credential failures. For release
 rollback, retain the database and certificates and promote a prior retained
 dev-tested artifact with its annotated tag and approval. Use a SQLite online
 backup or stop the service before copying the database for recovery.
+
+The How Long archive sends a heartbeat to CloudWatch in `us-east-1`. A missing
+heartbeat alerts the existing `NotifyMe` topic. Inspect archive failures with
+`journalctl --user -u howlong-production-archive.service`. The next timer run
+retries pending records. For a checksum mismatch, compare the saved SQLite row
+with the existing S3 object before retrying. Keep the counter database and
+archive together when restoring state so reset numbers are never reused.
