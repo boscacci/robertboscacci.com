@@ -11,7 +11,11 @@ identity headers. It talks to Node through a private Unix socket. Anyone who
 can reach the service with a Tailscale user identity may read the counter. Only
 the configured owner's identity can confirm a reset. Each click advances a
 server-side, single-use confirmation that expires after 30 seconds. The fifth
-click updates the database atomically. Open pages refresh about every 10 seconds.
+click updates the date and records one timestamp in the same SQLite transaction.
+Only the owner receives the reset totals. All-time totals use the existing counter
+revision, so earlier resets still count. The rolling 30-day total uses saved
+timestamps and is marked as incomplete if earlier timestamps are unavailable.
+Open pages refresh about every 10 seconds.
 
 ## Development
 
@@ -34,6 +38,8 @@ and keep the original date, the fifth click shows zero days, and the other tab
 updates. Try five quick taps on a phone. The button and dots should respond
 immediately, with a short vibration on devices and browsers that support it.
 A non-owner's account should see the count without the reset control.
+Confirm that the owner's history increments once on a completed reset, including
+a second reset on the same day, and stays hidden for a non-owner.
 
 ## Production
 

@@ -28,6 +28,15 @@
         </button>
         <p id="reset-status" role="status">The fifth click resets the counter for everyone. You have 30 seconds between clicks.</p>
       </section>
+
+      <section class="history" id="reset-history" aria-labelledby="history-heading" hidden>
+        <h2 id="history-heading">Reset history</h2>
+        <dl>
+          <div><dt>Past 30 days</dt><dd id="reset-recent"></dd></div>
+          <div><dt>All time</dt><dd id="reset-total"></dd></div>
+        </dl>
+        <p id="history-note" hidden>Past 30 days counts resets with saved timestamps. Earlier resets are included in the all-time total.</p>
+      </section>
     </main>
   </body>
 </html>

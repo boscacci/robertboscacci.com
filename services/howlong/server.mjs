@@ -6,6 +6,7 @@ import { DatabaseSync } from 'node:sqlite';
 import { calendarDate, validDate } from './calendar.mjs';
 
 const confirmationMs = 30_000;
+const recentWindowMs = 30 * 86_400_000;
 const securityHeaders = {
   'Cache-Control': 'no-store',
   'Content-Security-Policy': "default-src 'none'; style-src 'self'; script-src 'self'; connect-src 'self'; frame-ancestors 'none'; base-uri 'none'; form-action 'none'",
@@ -54,16 +55,47 @@ export async function createCounter({ origin, viewOrigin, owner, database, initi
   db.exec(`PRAGMA busy_timeout = 3000;
     CREATE TABLE IF NOT EXISTS counter (
       id INTEGER PRIMARY KEY CHECK (id = 1), start TEXT NOT NULL, revision INTEGER NOT NULL
-    );`);
+    );
+    CREATE TABLE IF NOT EXISTS reset_history (
+      revision INTEGER PRIMARY KEY CHECK (revision > 0), reset_at INTEGER NOT NULL
+    );
+    CREATE INDEX IF NOT EXISTS reset_history_time ON reset_history (reset_at);`);
   db.prepare('INSERT OR IGNORE INTO counter VALUES (1, ?, 0)').run(initialDate);
   const get = db.prepare('SELECT start, revision FROM counter WHERE id = 1');
+  const getWithHistory = db.prepare(`SELECT start, revision,
+    (SELECT count(*) FROM reset_history) AS recorded,
+    (SELECT count(*) FROM reset_history WHERE reset_at > ? AND reset_at <= ?) AS past30Days
+    FROM counter WHERE id = 1`);
   const reset = db.prepare('UPDATE counter SET start = ?, revision = revision + 1 WHERE id = 1 AND revision = ?');
+  const recordReset = db.prepare('INSERT INTO reset_history (revision, reset_at) VALUES (?, ?)');
   const pending = new Map();
 
-  function current() {
-    const row = get.get();
-    if (!validDate(row?.start) || !Number.isSafeInteger(row.revision)) throw new Error('invalid_counter_state');
+  function current(timestamp) {
+    const row = timestamp === undefined ? get.get() : getWithHistory.get(timestamp - recentWindowMs, timestamp);
+    if (!validDate(row?.start) || !Number.isSafeInteger(row.revision) || row.revision < 0) throw new Error('invalid_counter_state');
     return row;
+  }
+
+  function snapshot(canReset, instant) {
+    const row = current(canReset ? instant.getTime() : undefined);
+    const result = { start: row.start, today: calendarDate(instant), canReset };
+    if (canReset) result.resetHistory = {
+      total: row.revision, past30Days: row.past30Days, hasUndatedResets: row.recorded < row.revision,
+    };
+    return result;
+  }
+
+  function commitReset(today, revision, timestamp) {
+    db.exec('BEGIN IMMEDIATE');
+    try {
+      const applied = reset.run(today, revision).changes === 1;
+      if (applied) recordReset.run(revision + 1, timestamp);
+      db.exec('COMMIT');
+      return applied;
+    } catch (error) {
+      if (db.isTransaction) db.exec('ROLLBACK');
+      throw error;
+    }
   }
 
   function applyClick(token) {
@@ -77,11 +109,10 @@ export async function createCounter({ origin, viewOrigin, owner, database, initi
     if (!attempt) return [409, { error: 'confirmation_expired' }];
     if (token !== null) pending.delete(token);
     if (attempt.count === 4) {
-      const today = calendarDate(instant);
-      if (reset.run(today, revision).changes !== 1) return [409, { error: 'confirmation_expired' }];
+      if (!commitReset(calendarDate(instant), revision, timestamp)) return [409, { error: 'confirmation_expired' }];
       pending.clear();
       log({ event: 'howlong_reset', revision: revision + 1 });
-      return [200, { start: today, today, canReset: true }];
+      return [200, snapshot(true, instant)];
     }
     if (pending.size >= 32) return [429, { error: 'too_many_confirmations' }];
     const next = randomBytes(16).toString('hex');
@@ -113,9 +144,7 @@ export async function createCounter({ origin, viewOrigin, owner, database, initi
       const asset = assets.get(request.url);
       if (asset) return send(response, 200, ...asset);
       if (request.url === '/runtime.json') return send(response, 200, { apiOrigin: '' });
-      if (request.url === '/api/counter') return send(response, 200, {
-        start: current().start, today: calendarDate(now()), canReset: identity === owner,
-      });
+      if (request.url === '/api/counter') return send(response, 200, snapshot(identity === owner, now()));
     }
     if (request.method === 'POST' && request.url === '/api/reset') {
       if (identity !== owner || !from || (from !== origin && from !== viewOrigin)) return send(response, 403, { error: 'reset_forbidden' });
