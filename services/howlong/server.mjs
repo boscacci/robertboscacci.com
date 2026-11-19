@@ -44,9 +44,9 @@ async function readToken(request) {
   return data.token;
 }
 
-export async function createCounter({ origin, owner, database, initialDate, identify = identityFromServe, now = () => new Date(), log = record => console.log(JSON.stringify(record)) }) {
+export async function createCounter({ origin, viewOrigin, owner, database, initialDate, identify = identityFromServe, now = () => new Date(), log = record => console.log(JSON.stringify(record)) }) {
   const { host } = new URL(origin);
-  if (!owner || !database || !validDate(initialDate)) throw new Error('invalid_counter_configuration');
+  if (!owner || !database || !validDate(initialDate) || (viewOrigin && new URL(viewOrigin).origin !== viewOrigin)) throw new Error('invalid_counter_configuration');
   const assets = new Map(await Promise.all(Object.entries(files).map(async ([path, [file, type]]) =>
     [path, [await readFile(new URL(file, import.meta.url)), type]],
   )));
@@ -97,17 +97,28 @@ export async function createCounter({ origin, owner, database, initialDate, iden
       current();
       return send(response, 200, 'howlong-ok\n', 'text/plain');
     }
+    const from = request.headers.origin;
+    if (viewOrigin && from === viewOrigin && ['/api/counter', '/api/reset'].includes(request.url)) {
+      response.setHeader('Access-Control-Allow-Origin', viewOrigin);
+      response.setHeader('Vary', 'Origin');
+      if (request.method === 'OPTIONS' && request.url === '/api/reset' && request.headers['access-control-request-method'] === 'POST') {
+        response.setHeader('Access-Control-Allow-Methods', 'POST');
+        response.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+        return send(response, 204, '', 'text/plain');
+      }
+    }
     const identity = await identify(request);
     if (!identity) return send(response, 403, { error: 'tailnet_identity_required' });
     if (request.method === 'GET') {
       const asset = assets.get(request.url);
       if (asset) return send(response, 200, ...asset);
+      if (request.url === '/runtime.json') return send(response, 200, { apiOrigin: '' });
       if (request.url === '/api/counter') return send(response, 200, {
         start: current().start, today: calendarDate(now()), canReset: identity === owner,
       });
     }
     if (request.method === 'POST' && request.url === '/api/reset') {
-      if (identity !== owner || request.headers.origin !== origin) return send(response, 403, { error: 'reset_forbidden' });
+      if (identity !== owner || !from || (from !== origin && from !== viewOrigin)) return send(response, 403, { error: 'reset_forbidden' });
       let token;
       try { token = await readToken(request); }
       catch { return send(response, 400, { error: 'invalid_confirmation' }); }

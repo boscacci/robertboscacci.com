@@ -3,11 +3,11 @@ import { createCounter } from './server.mjs';
 
 const {
   HOWLONG_ORIGIN: origin, HOWLONG_OWNER: owner, HOWLONG_STATE: database,
-  HOWLONG_SOCKET: socket, HOWLONG_INITIAL_DATE: initialDate,
+  HOWLONG_SOCKET: socket, HOWLONG_INITIAL_DATE: initialDate, HOWLONG_VIEW_ORIGIN: viewOrigin,
 } = process.env;
 try {
   if (!socket) throw new Error('missing_socket');
-  const counter = await createCounter({ origin, owner, database, initialDate });
+  const counter = await createCounter({ origin, viewOrigin, owner, database, initialDate });
   await new Promise((resolve, reject) => {
     counter.server.once('error', reject);
     counter.server.listen(socket, resolve);

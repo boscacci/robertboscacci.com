@@ -9,6 +9,7 @@ import { calendarDate, elapsed, validDate } from '../services/howlong/calendar.m
 import { createCounter } from '../services/howlong/server.mjs';
 
 const origin = 'http://howlong.test';
+const viewOrigin = 'http://tracker.test';
 const owner = 'owner@example.test';
 const initial = new Date('2031-11-18T20:00:00Z');
 const initialDate = '2031-11-06';
@@ -41,7 +42,7 @@ async function fixture(t, options = {}) {
           try {
             const chunks = [];
             for await (const chunk of incoming) chunks.push(chunk);
-            resolve(new Response(Buffer.concat(chunks), { status: incoming.statusCode, headers: incoming.headers }));
+            resolve(new Response(incoming.statusCode === 204 ? null : Buffer.concat(chunks), { status: incoming.statusCode, headers: incoming.headers }));
           } catch (error) { reject(error); }
         });
         outgoing.on('error', reject);
@@ -107,33 +108,58 @@ test('confirmation expires, rejects invalid bodies and invalidates simultaneous 
   assert.deepEqual(results.map(response => response.status).sort(), [200, 409]);
 });
 
+test('the vanity origin can use the private API while other origins and non-owners cannot reset', async t => {
+  const start = await fixture(t, { viewOrigin });
+  const { counter, request } = await start();
+  t.after(() => counter.close());
+  const preflight = await request('/api/reset', { method: 'OPTIONS', headers: {
+    Origin: viewOrigin, 'Access-Control-Request-Method': 'POST', 'Access-Control-Request-Headers': 'content-type',
+  } });
+  assert.equal(preflight.status, 204);
+  assert.equal(preflight.headers.get('access-control-allow-origin'), viewOrigin);
+  assert.equal((await click(request, null, ownerHeaders, 'http://tracker.test.attacker.test')).status, 403);
+  assert.equal((await click(request, null, { 'Tailscale-User-Login': 'viewer@example.test' }, viewOrigin)).status, 403);
+  const response = await click(request, null, ownerHeaders, viewOrigin);
+  assert.equal(response.status, 200);
+  assert.equal(response.headers.get('access-control-allow-origin'), viewOrigin);
+  assert.equal((await response.json()).remaining, 4);
+});
+
 test('the mobile reset control shows each click, warns on the fifth and updates the read-only view', async t => {
-  const start = await fixture(t);
+  const start = await fixture(t, { viewOrigin });
   const { counter, request } = await start();
   t.after(() => counter.close());
   const browser = await chromium.launch();
   t.after(() => browser.close());
 
-  async function open(login) {
+  async function open(login, pageOrigin = origin) {
     const page = await browser.newPage({ viewport: { width: 360, height: 740 }, isMobile: true, hasTouch: true });
     await page.clock.install();
-    await page.route(`${origin}/**`, async route => {
+    const handle = async route => {
       const incoming = route.request();
       const { pathname } = new URL(incoming.url());
+      if (pageOrigin !== origin && incoming.url() === `${pageOrigin}/runtime.json`) {
+        await route.fulfill({ json: { apiOrigin: origin } });
+        return;
+      }
       const response = await request(pathname, {
         method: incoming.method(), body: incoming.postData(),
         headers: { ...incoming.headers(), 'Tailscale-User-Login': login },
       });
-      await route.fulfill({ status: response.status, headers: Object.fromEntries(response.headers), body: Buffer.from(await response.arrayBuffer()) });
-    });
-    await page.goto(origin);
+      const headers = Object.fromEntries(response.headers);
+      if (pageOrigin !== origin && pathname === '/') headers['content-security-policy'] = headers['content-security-policy'].replace("connect-src 'self'", `connect-src 'self' ${origin}`);
+      await route.fulfill({ status: response.status, headers, body: Buffer.from(await response.arrayBuffer()) });
+    };
+    await page.route(`${origin}/**`, handle);
+    if (pageOrigin !== origin) await page.route(`${pageOrigin}/**`, handle);
+    await page.goto(pageOrigin);
     await page.locator('#since time').waitFor();
     return page;
   }
 
   const viewer = await open('viewer@example.test');
   assert.equal(await viewer.locator('#reset-button').isVisible(), false);
-  const admin = await open(owner);
+  const admin = await open(owner, viewOrigin);
   const button = admin.getByRole('button', { name: 'Reset to today' });
   await button.waitFor();
   assert.deepEqual(await admin.locator('.unit').allTextContents(), ['1week', '5days']);

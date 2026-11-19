@@ -16,6 +16,7 @@ let busy = false;
 let refreshing = false;
 let version = 0;
 let previous;
+let apiOrigin;
 
 function display({ start, today, canReset }) {
   status.hidden = true;
@@ -56,7 +57,12 @@ async function refresh() {
   const stamp = version;
   refreshing = true;
   try {
-    const response = await fetch('/api/counter', { signal: AbortSignal.timeout(6000) });
+    if (apiOrigin === undefined) {
+      const config = await fetch('/runtime.json', { signal: AbortSignal.timeout(6000) });
+      if (!config.ok) throw new Error('configuration_unavailable');
+      ({ apiOrigin } = await config.json());
+    }
+    const response = await fetch(`${apiOrigin}/api/counter`, { signal: AbortSignal.timeout(6000) });
     if (!response.ok) throw new Error('counter_unavailable');
     const data = await response.json();
     if (stamp === version) display(data);
@@ -81,7 +87,7 @@ button.addEventListener('click', async () => {
   busy = true;
   button.setAttribute('aria-disabled', 'true');
   try {
-    const response = await fetch('/api/reset', {
+    const response = await fetch(`${apiOrigin}/api/reset`, {
       method: 'POST', headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ token }), signal: AbortSignal.timeout(6000),
     });
