@@ -23,9 +23,11 @@ case "$environment" in
     git merge-base --is-ancestor "$commit" refs/remotes/origin/main
     release="$base/dev/releases/$commit"
     sha=$(sha256sum "$release/howlong.tar.gz" | cut -d' ' -f1)
-    jq -e --arg commit "$commit" --arg sha "$sha" '.commit == $commit and .sha256 == $sha' "$base/dev/dev.json" >/dev/null
-    jq -e --arg target "${view_origin#https://}" --arg sha "$sha" '
-      .target == $target and .artifact == $sha and (.instruction | length > 0) and (.recordedAt | fromdateiso8601 > 0)
+    tested_at=$(jq -er --arg commit "$commit" --arg sha "$sha" '
+      select(.commit == $commit and .sha256 == $sha) | .verifiedAt | fromdateiso8601
+    ' "$release/verified.json")
+    jq -e --arg target "${view_origin#https://}" --arg sha "$sha" --argjson tested "$tested_at" '
+      .target == $target and .artifact == $sha and (.instruction | length > 0) and (.recordedAt | fromdateiso8601 >= $tested)
     ' "$approval" >/dev/null
     ;;
   *) echo 'Usage: deploy-howlong.sh dev | production approval.json' >&2; exit 2 ;;
@@ -40,6 +42,11 @@ socket="unix:$runtime/server.sock"
 mkdir -p "$state" "$units"
 exec 9>"$state/deploy.lock"
 flock -n 9
+if [[ $environment == production ]]; then
+  mkdir -p "$state/approvals"
+  saved_approval="$state/approvals/${tag#howlong/}.json"
+  if [[ -f $saved_approval ]]; then cmp "$approval" "$saved_approval"; fi
+fi
 
 node_bin=$(readlink -f "$(command -v node)")
 [[ $node_bin =~ ^/[[:alnum:]._/-]+$ && $state =~ ^/[[:alnum:]._/-]+$ ]]
@@ -146,7 +153,12 @@ curl -fsS --max-time 10 -H 'Tailscale-User-Login: forged@example.invalid' -H 'X-
   | jq -e '.canReset and (.start | test("^[0-9-]{10}$"))' >/dev/null
 jq -n --arg commit "$commit" --arg sha "$sha" --arg origin "$origin" --arg time "$(date -u +%FT%TZ)" --arg environment "$environment" \
   '{event:"howlong_api_verified", environment:$environment, commit:$commit, sha256:$sha, url:$origin, verifiedAt:$time}' > "$work/deployment.json"
-if [[ $environment == production ]]; then install -m 0600 "$approval" "$state/approval.json"; fi
+if [[ $environment == production ]]; then
+  if [[ ! -f $saved_approval ]]; then install -m 0600 "$approval" "$saved_approval"; fi
+  install -m 0600 "$saved_approval" "$state/approval.json"
+elif [[ ! -f $release/verified.json ]]; then
+  install -m 0600 "$work/deployment.json" "$release/verified.json"
+fi
 mv -f "$work/deployment.json" "$state/$environment.json"
 verified=true
 cat "$state/$environment.json"
