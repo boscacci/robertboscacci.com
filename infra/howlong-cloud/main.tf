@@ -24,11 +24,17 @@ variable "environment" {
   }
 }
 
+variable "public_web" {
+  type    = bool
+  default = false
+}
+
 locals {
   name     = "howlong-cloud-${var.environment}"
   zone     = "us-west-2a"
   archive  = "arn:aws:s3:::robertboscacci-howlong-archive-${var.environment}-062008221187"
   registry = "arn:aws:ecr:us-west-2:062008221187:repository"
+  hostname = var.environment == "dev" ? "howlong-dev.robertboscacci.com" : "howlong.robertboscacci.com"
   tags     = { Application = "howlong-cloud", Environment = var.environment, ManagedBy = "opentofu" }
 }
 
@@ -69,6 +75,16 @@ resource "aws_security_group" "host" {
   name        = local.name
   description = "Outbound-only connector for SSM and Tailscale"
   vpc_id      = aws_vpc.host.id
+  dynamic "ingress" {
+    for_each = var.public_web ? [443] : []
+    content {
+      description = "Password-protected HTTPS"
+      from_port   = ingress.value
+      to_port     = ingress.value
+      protocol    = "tcp"
+      cidr_blocks = ["0.0.0.0/0"]
+    }
+  }
   egress {
     from_port   = 0
     to_port     = 0
@@ -105,15 +121,16 @@ resource "aws_iam_role_policy" "runtime" {
   ] })
 }
 
-resource "aws_iam_role_policy" "certificate" {
-  count = var.environment == "production" ? 1 : 0
+resource "aws_iam_role_policy" "web" {
+  count = var.public_web ? 1 : 0
   role  = aws_iam_role.host.id
   policy = jsonencode({ Version = "2012-10-17", Statement = [
     { Effect = "Allow", Action = "route53:GetChange", Resource = "arn:aws:route53:::change/*" },
+    { Effect = "Allow", Action = "secretsmanager:GetSecretValue", Resource = "arn:aws:secretsmanager:us-west-2:062008221187:secret:howlong/cloud/${var.environment}/web-login-??????" },
     { Effect = "Allow", Action = ["route53:GetHostedZone", "route53:ListResourceRecordSets"], Resource = "arn:aws:route53:::hostedzone/Z1BDNRWTPWQNUU" },
     { Effect = "Allow", Action = "route53:ChangeResourceRecordSets", Resource = "arn:aws:route53:::hostedzone/Z1BDNRWTPWQNUU",
       Condition = { "ForAllValues:StringEquals" = {
-        "route53:ChangeResourceRecordSetsNormalizedRecordNames" = ["_acme-challenge.howlong.robertboscacci.com"],
+        "route53:ChangeResourceRecordSetsNormalizedRecordNames" = ["_acme-challenge.${local.hostname}"],
         "route53:ChangeResourceRecordSetsRecordTypes"           = ["TXT"],
         "route53:ChangeResourceRecordSetsActions"               = ["CREATE", "UPSERT", "DELETE"]
     } } },
@@ -170,6 +187,27 @@ resource "aws_ecr_repository" "release" {
   image_tag_mutability = "IMMUTABLE"
   image_scanning_configuration { scan_on_push = true }
   tags = local.tags
+}
+
+resource "aws_eip" "web" {
+  count  = var.public_web ? 1 : 0
+  domain = "vpc"
+  tags   = local.tags
+}
+
+resource "aws_eip_association" "web" {
+  count         = var.public_web ? 1 : 0
+  instance_id   = aws_instance.host.id
+  allocation_id = aws_eip.web[0].id
+}
+
+resource "aws_route53_record" "web" {
+  count   = var.public_web ? 1 : 0
+  zone_id = "Z1BDNRWTPWQNUU"
+  name    = local.hostname
+  type    = "A"
+  ttl     = 60
+  records = [aws_eip.web[0].public_ip]
 }
 
 output "instance_id" { value = aws_instance.host.id }

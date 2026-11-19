@@ -3,10 +3,7 @@ set -euo pipefail
 umask 077
 
 dnf install -y docker jq
-curl -fsSL --max-time 30 https://pkgs.tailscale.com/stable/amazon-linux/2023/tailscale.repo \
-  -o /etc/yum.repos.d/tailscale.repo
-dnf install -y tailscale
-systemctl enable --now docker tailscaled
+systemctl enable --now docker
 
 target=/var/lib/howlong
 serial=$(printf '%s' '${volume_id}' | tr -d '-')

@@ -2,9 +2,10 @@
 
 ## AWS migration
 
-The AWS environment runs the same counter and archive code in containers on an
-outbound-only EC2 instance. Tailscale supplies private ingress and verifies the
-original viewer. Systems Manager provides administration without inbound SSH.
+The AWS environment runs the same counter and archive code in containers on EC2.
+Caddy requires an owner password over HTTPS and passes the verified identity to
+the application through a private Unix socket. Systems Manager provides
+administration without inbound SSH. The sole public port is HTTPS.
 The SQLite data volume is encrypted and separate from the host root disk. The
 instance profile can write conditionally to its own S3 reset archive. The existing
 archive alarm checks the heartbeat after a successful HTTPS probe and S3 sync.
@@ -17,21 +18,19 @@ bash scripts/build-howlong-cloud.sh
 bash scripts/deploy-howlong-cloud-dev.sh
 ```
 
-Before deploying, enroll `howlong-cloud-dev` in the owner's tailnet by running
-`tailscale up --hostname=howlong-cloud-dev --accept-dns=false --accept-routes=false --ssh=false`
-through Systems Manager and completing its one-time login. The deploy script
-checks enrollment before pausing the old dev services. It migrates an online
-SQLite backup through a private versioned S3 object, verifies the cloud service,
-and removes the temporary object version. It retains the old database for
-rollback and records the verified image digest under the cloud dev state.
+The dev deploy creates an owner password in AWS Secrets Manager at
+`howlong/cloud/dev/web-login` if it does not already exist. The browser username
+is `owner`. The deploy script checks the cloud host before pausing the old dev
+services. It migrates a SQLite backup through a private versioned S3 object,
+verifies the cloud login, and removes the temporary object version. It retains
+the old database for rollback and records the verified image digest.
 
 For the subsequent production migration, record one approval for the exact
-cloud-dev-tested image digest. Provision and enroll the separate production host.
-Preserve the production SQLite state and verify the existing vanity hostname's
-TLS and owner behavior before redirecting clients. The cloud host can serve the
-exact private vanity DNS record on its Tailscale address. Use an exact restricted
-nameserver for `howlong.robertboscacci.com` in Tailscale so this name resolves
-independently of the home Pi-hole. Keep the home route until the approved cutover.
+cloud-dev-tested image digest. Provision the separate production host and its
+own secret and S3 archive. Preserve the production SQLite state and verify the
+existing vanity hostname's TLS and owner behavior before redirecting clients.
+At the approved cutover, remove the exact old Pi-hole override for this hostname
+so Route 53 serves the cloud address independently of the home network.
 
 ## OptiPlex release and rollback
 

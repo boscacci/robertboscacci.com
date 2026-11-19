@@ -39,12 +39,8 @@ remote() {
   return 1
 }
 
-# No local counter, archive, or migration data is touched before tailnet enrollment.
-expected_suffix=$(tailscale status --json | jq -er '.CurrentTailnet.MagicDNSSuffix | rtrimstr(".") | select(test("^[a-z0-9.-]+\\.ts\\.net$"))')
-expected_owner=$(tailscale status --json | jq -er '.Self.UserID | numbers')
-cloud_tail=$(remote 'mountpoint -q /var/lib/howlong && tailscale status --json | jq -ce '\''select(.BackendState == "Running" and .Self.Online) | {suffix:.CurrentTailnet.MagicDNSSuffix,owner:.Self.UserID}'\''')
-jq -e --arg suffix "$expected_suffix" --argjson owner "$expected_owner" '(.suffix | rtrimstr(".")) == $suffix and .owner == $owner' <<<"$cloud_tail" >/dev/null
-has_database=$(remote 'if test -f /var/lib/howlong/counter/counter.sqlite; then echo present; else echo absent; fi')
+# Confirm the cloud host and durable volume before touching the local dev services.
+has_database=$(remote 'set -e; mountpoint -q /var/lib/howlong; systemctl is-active --quiet docker; if test -f /var/lib/howlong/counter/counter.sqlite; then echo present; else echo absent; fi')
 [[ $has_database == present || $has_database == absent ]]
 if [[ $has_database == present && ! -f $state/dev.json ]]; then
   echo 'A staged cloud database exists without a verified cutover record. Reconcile the copies before retrying.' >&2
@@ -60,7 +56,7 @@ checksum=''
 bucket=robertboscacci-howlong-archive-dev-062008221187
 cleanup() {
   if ! $verified && $old_stopped; then
-    remote 'systemctl stop howlong-cloud-archive.timer howlong-cloud.service 2>/dev/null || true' >/dev/null || true
+    remote 'systemctl stop howlong-cloud-archive.timer howlong-cloud-edge.service howlong-cloud.service 2>/dev/null || true' >/dev/null || true
     systemctl --user start howlong-dev.service howlong-dev-archive.timer || true
   fi
   if [[ -n $migration_version ]]; then
@@ -70,6 +66,18 @@ cleanup() {
   find "$work" -depth -delete
 }
 trap cleanup EXIT
+
+secret=howlong/cloud/dev/web-login
+if ! aws secretsmanager describe-secret --region us-west-2 --secret-id "$secret" >/dev/null 2>"$work/secret-error"; then
+  grep -q 'ResourceNotFoundException' "$work/secret-error"
+  openssl rand -hex 24 | tr -d '\n' > "$work/password"
+  aws secretsmanager create-secret --region us-west-2 --name "$secret" --secret-string "file://$work/password" >/dev/null
+  unlink "$work/password"
+fi
+password=$(aws secretsmanager get-secret-value --region us-west-2 --secret-id "$secret" --query SecretString --output text)
+[[ $password =~ ^[a-f0-9]{48}$ ]]
+printf 'user = "owner:%s"\n' "$password" > "$work/curl.conf"
+unset password
 
 if [[ $has_database == absent ]]; then
   [[ $(hostname -s) == optiplex && -s $base/dev/counter.sqlite ]]
@@ -94,11 +102,9 @@ fi
 encoded=$(base64 -w 0 services/howlong/cloud-install.sh)
 result=$(remote "set -euo pipefail; install_script=\$(mktemp /run/howlong-control.XXXXXXXX); trap 'unlink \"\$install_script\"' EXIT; printf %s '$encoded' | base64 -d > \"\$install_script\"; bash \"\$install_script\" dev '$image' '$key' '$checksum'")
 ready=$(sed -n '/^{"event":"howlong_cloud_ready"/p' <<<"$result")
-origin=$(jq -er '.url | select(test("^https://[a-z0-9.-]+\\.ts\\.net$"))' <<<"$ready")
-tail=$(jq -er '.tailnetAddress | select(test("^100\\.[0-9.]+$"))' <<<"$ready")
-host=${origin#https://}
-[[ $(curl -fsS --max-time 10 --resolve "$host:443:$tail" "$origin/healthz") == howlong-ok ]]
-curl -fsS --max-time 10 --resolve "$host:443:$tail" -H 'Tailscale-User-Login: forged@example.invalid' "$origin/api/counter" \
+origin=$(jq -er '.url | select(. == "https://howlong-dev.robertboscacci.com")' <<<"$ready")
+[[ $(curl -sS -o /dev/null -w '%{http_code}' --max-time 10 -H 'X-Howlong-User: owner' "$origin/api/counter") == 401 ]]
+curl -fsS --max-time 10 --config "$work/curl.conf" -H 'X-Howlong-User: forged' "$origin/api/counter" \
   | jq -e '.canReset and (.resetHistory | type) == "object"' >/dev/null
 jq -n --arg commit "$commit" --arg digest "$digest" --arg url "$origin" --arg date "$(date -u +%FT%TZ)" \
   '{event:"howlong_cloud_dev_verified",commit:$commit,digest:$digest,url:$url,verifiedAt:$date}' > "$work/dev.json"

@@ -23,8 +23,27 @@ run "cloud_dev_has_private_ingress_and_durable_state" {
   }
 
   assert {
-    condition     = length(aws_iam_role_policy.certificate) == 0
-    error_message = "Development must not get certificate DNS write access."
+    condition     = length(aws_iam_role_policy.web) == 0
+    error_message = "A compute-only preview must not get DNS or credential access."
+  }
+}
+
+run "cloud_web_only_admits_https_for_its_exact_hostname" {
+  command = plan
+
+  variables {
+    environment = "dev"
+    public_web  = true
+  }
+
+  assert {
+    condition     = length(aws_security_group.host.ingress) == 1 && one(aws_security_group.host.ingress).from_port == 443 && one(aws_security_group.host.ingress).to_port == 443
+    error_message = "Only HTTPS may enter the cloud host."
+  }
+
+  assert {
+    condition     = aws_route53_record.web[0].name == "howlong-dev.robertboscacci.com"
+    error_message = "Development must have its own DNS name."
   }
 }
 

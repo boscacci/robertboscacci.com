@@ -26,6 +26,6 @@ work=$(mktemp -d)
 trap 'find "$work" -depth -delete' EXIT
 export TF_DATA_DIR="$work/tofu"
 tofu -chdir=infra/howlong-cloud init -input=false -lockfile=readonly -no-color -backend-config="key=howlong/cloud-$environment.tfstate"
-tofu -chdir=infra/howlong-cloud apply -input=false -auto-approve -no-color -var="environment=$environment"
+tofu -chdir=infra/howlong-cloud apply -input=false -auto-approve -no-color -var="environment=$environment" -var='public_web=true'
 instance=$(tofu -chdir=infra/howlong-cloud output -raw instance_id)
 jq -cn --arg instance "$instance" --arg environment "$environment" '{event:"howlong_cloud_host_provisioned",instance:$instance,environment:$environment}'
