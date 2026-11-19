@@ -35,6 +35,11 @@ variable "notifications_enabled" {
   default = true
 }
 
+variable "cloud_runtime" {
+  type    = bool
+  default = false
+}
+
 locals {
   name      = "robertboscacci-howlong-archive-${var.environment}"
   namespace = "HowLong/Archive/${var.environment}"
@@ -110,9 +115,13 @@ resource "aws_iam_role_policy" "writer" {
 }
 
 resource "aws_cloudwatch_metric_alarm" "archive" {
-  provider            = aws.monitoring
-  alarm_name          = "${local.name}-offline"
-  alarm_description   = "How Long ${var.environment} archive stopped reporting success. Inspect the howlong-${var.environment}-archive user service journal on OptiPlex. The local reset records remain available for retry."
+  provider   = aws.monitoring
+  alarm_name = "${local.name}-offline"
+  alarm_description = var.cloud_runtime ? (
+    "How Long ${var.environment} missed HTTPS, counter, or S3 archive health. Use SSM on howlong-cloud-${var.environment} to inspect howlong-cloud-edge, howlong-cloud, and howlong-cloud-archive systemd journals. Reset rows stay on the encrypted counter volume for retry."
+    ) : (
+    "How Long ${var.environment} archive stopped reporting success. Inspect the howlong-${var.environment}-archive user service journal on OptiPlex. The local reset records remain available for retry."
+  )
   actions_enabled     = var.notifications_enabled
   alarm_actions       = ["arn:aws:sns:us-east-1:062008221187:NotifyMe"]
   namespace           = local.namespace

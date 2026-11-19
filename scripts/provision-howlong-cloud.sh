@@ -5,6 +5,10 @@ cd "$(dirname "$0")/.."
 
 environment=${1:-dev}
 [[ $environment == dev || $environment == production ]]
+phase=${3:-publish}
+[[ $phase == publish || ( $phase == stage && $environment == production ) ]]
+publish_dns=true
+if [[ $phase == stage ]]; then publish_dns=false; fi
 [[ -z $(git status --porcelain) ]]
 [[ $(git remote get-url origin) == git@github.com:boscacci/robertboscacci.com.git ]]
 [[ $(aws sts get-caller-identity --query Account --output text) == 062008221187 ]]
@@ -28,7 +32,8 @@ fi
 work=$(mktemp -d)
 trap 'find "$work" -depth -delete' EXIT
 export TF_DATA_DIR="$work/tofu"
-tofu -chdir=infra/howlong-cloud init -input=false -lockfile=readonly -no-color -backend-config="key=howlong/cloud-$environment.tfstate"
-tofu -chdir=infra/howlong-cloud apply -input=false -auto-approve -no-color -var="environment=$environment" -var='public_web=true'
+tofu -chdir=infra/howlong-cloud init -input=false -lockfile=readonly -no-color -backend-config="key=howlong/cloud-$environment.tfstate" >&2
+tofu -chdir=infra/howlong-cloud apply -input=false -auto-approve -no-color -var="environment=$environment" -var='public_web=true' -var="publish_dns=$publish_dns" >&2
 instance=$(tofu -chdir=infra/howlong-cloud output -raw instance_id)
-jq -cn --arg instance "$instance" --arg environment "$environment" '{event:"howlong_cloud_host_provisioned",instance:$instance,environment:$environment}'
+web_ip=$(tofu -chdir=infra/howlong-cloud output -raw web_ip)
+jq -cn --arg instance "$instance" --arg environment "$environment" --arg web_ip "$web_ip" '{event:"howlong_cloud_host_provisioned",instance:$instance,environment:$environment,ip:$web_ip}'

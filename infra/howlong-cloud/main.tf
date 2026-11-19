@@ -29,6 +29,11 @@ variable "public_web" {
   default = false
 }
 
+variable "publish_dns" {
+  type    = bool
+  default = true
+}
+
 locals {
   name     = "howlong-cloud-${var.environment}"
   zone     = "us-west-2a"
@@ -202,7 +207,7 @@ resource "aws_eip_association" "web" {
 }
 
 resource "aws_route53_record" "web" {
-  count   = var.public_web ? 1 : 0
+  count   = var.public_web && var.publish_dns ? 1 : 0
   zone_id = "Z1BDNRWTPWQNUU"
   name    = local.hostname
   type    = "A"
@@ -211,3 +216,4 @@ resource "aws_route53_record" "web" {
 }
 
 output "instance_id" { value = aws_instance.host.id }
+output "web_ip" { value = try(aws_eip.web[0].public_ip, null) }

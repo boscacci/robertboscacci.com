@@ -25,12 +25,28 @@ services. It migrates a SQLite backup through a private versioned S3 object,
 verifies the cloud login, and removes the temporary object version. It retains
 the old database for rollback and records the verified image digest.
 
-For the subsequent production migration, record one approval for the exact
-cloud-dev-tested image digest. Provision the separate production host and its
-own secret and S3 archive. Preserve the production SQLite state and verify the
-existing vanity hostname's TLS and owner behavior before redirecting clients.
-At the approved cutover, remove the exact old Pi-hole override for this hostname
-so Route 53 serves the cloud address independently of the home network.
+After the owner smoke-tests dev and approves the exact tag and image digest,
+record `releaseTag`, `commit`, `artifact`, `target`, `instruction`, and the UTC
+`recordedAt` in the private approval file. Run the initial production migration
+from the clean default branch on OptiPlex.
+
+```bash
+bash scripts/deploy-howlong-cloud-production.sh /path/to/approval.json
+```
+
+The script keeps a copy of the approval in private, versioned S3. It creates
+the production archive, alarm, and Secrets Manager login at
+`howlong/cloud/production/web-login`. It stages and probes HTTPS on the cloud
+IP before publishing DNS. To avoid losing a reset, it pauses the legacy writer
+and compares the current database with the staged copy before changing DNS.
+It removes the exact old Pi-hole override and retains the legacy database and
+ingress receipt for recovery. If the database comparison fails, the script
+restarts the legacy writer and leaves DNS in place. Retain and reconcile the
+staged database before retrying. After DNS changes, keep AWS as the sole writer
+and rerun the migration to finish any outstanding verification or retirement.
+For later recovery, retain the current database and archive together so reset
+numbers stay unique. Inspect the `howlong-cloud-edge`, `howlong-cloud`, and
+`howlong-cloud-archive` systemd journals through Systems Manager.
 
 ## OptiPlex release and rollback
 
