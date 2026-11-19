@@ -59,3 +59,18 @@ run "production_reuses_the_registry_without_granting_dev_dns_writes" {
     error_message = "Production must reuse the dev artifact registry."
   }
 }
+
+run "production_can_stage_https_before_publishing_dns" {
+  command = plan
+
+  variables {
+    environment = "production"
+    public_web  = true
+    publish_dns = false
+  }
+
+  assert {
+    condition     = length(aws_eip.web) == 1 && length(aws_route53_record.web) == 0
+    error_message = "The production edge needs a stable IP before its DNS cutover."
+  }
+}
