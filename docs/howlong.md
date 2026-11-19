@@ -31,7 +31,9 @@ Service logs are available through `journalctl --user -u howlong-dev.service`.
 
 On Tailscale, open the dev URL in two tabs. Check that four clicks show progress
 and keep the original date, the fifth click shows zero days, and the other tab
-updates. A non-owner's account should see the count without the reset control.
+updates. Try five quick taps on a phone. The button and dots should respond
+immediately, with a short vibration on devices and browsers that support it.
+A non-owner's account should see the count without the reset control.
 
 ## Production
 

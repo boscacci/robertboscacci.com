@@ -73,32 +73,72 @@ h1 {
 }
 
 .reset button {
-  display: flex;
+  --button-depth: .5rem;
+  --face-top: #e6ffa4;
+  --face-bottom: #c3ea67;
+  --base: #64862d;
+  --button-radius: clamp(.85rem, 3vw, 1.5rem);
+  display: block;
   width: 100%;
+  padding: 0 0 var(--button-depth);
+  border: 0;
+  border-radius: var(--button-radius);
+  background: var(--base);
+  box-shadow: 0 .45rem 1.1rem #0005;
+  color: #15261a;
+  font: 800 clamp(1.2rem, 4.5vw, 2.1rem)/1.15 system-ui, sans-serif;
+  text-align: left;
+  cursor: pointer;
+  touch-action: manipulation;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.reset-face {
+  display: flex;
   min-height: clamp(4rem, 10vw, 6.3rem);
   align-items: center;
   justify-content: space-between;
   gap: .8rem;
   padding: .75rem clamp(.9rem, 4vw, 2rem);
-  border: 0;
-  border-radius: clamp(.85rem, 3vw, 1.5rem);
-  background: #d5f787;
-  color: #15261a;
-  font: 800 clamp(1.2rem, 4.5vw, 2.1rem)/1.15 system-ui, sans-serif;
-  text-align: left;
-  cursor: pointer;
+  border: 1px solid #ffffff33;
+  border-radius: var(--button-radius);
+  background: linear-gradient(var(--face-top), var(--face-bottom));
+  box-shadow: inset 0 1px #ffffff60, inset 0 -2px #0001;
+  transition: transform 145ms cubic-bezier(.18, .8, .3, 1), filter 100ms ease-out;
 }
 
-.reset button:hover { background: #e3ffa2; }
-.reset button[data-final] { background: #ffb8a5; }
+.reset button[data-final] {
+  --face-top: #ffcfb6;
+  --face-bottom: #ffa387;
+  --base: #a14c37;
+}
+
+@media (hover: hover) {
+  .reset button:not([aria-disabled="true"]):hover .reset-face { filter: brightness(1.05); }
+}
+
+.reset button:not([aria-disabled="true"]):active .reset-face,
+.reset button[aria-disabled="true"] .reset-face {
+  transform: translateY(var(--button-depth));
+  filter: brightness(.97);
+  transition-duration: 45ms;
+}
+
 .reset button[aria-disabled="true"] { cursor: progress; }
 .reset button:focus-visible { outline: 3px solid #f3f7ec; outline-offset: 4px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .reset .reset-face { transition: none; }
+}
 
 .steps { display: flex; gap: clamp(.2rem, 1.1vw, .6rem); }
 .steps i {
   width: clamp(.45rem, 1.65vw, .95rem);
   aspect-ratio: 1;
-  border: 1px solid currentColor;
+  border: 1px solid #15261a85;
   border-radius: 50%;
+  background: #15261a14;
+  box-shadow: inset 0 1px 2px #15261a26;
 }
 .steps i[data-filled] { background: currentColor; }
