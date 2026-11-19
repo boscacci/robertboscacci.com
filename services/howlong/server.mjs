@@ -3,6 +3,8 @@ import { readFile } from 'node:fs/promises';
 import { createServer } from 'node:http';
 import { performance } from 'node:perf_hooks';
 import { DatabaseSync } from 'node:sqlite';
+import { Readable } from 'node:stream';
+import { pipeline } from 'node:stream/promises';
 import { calendarDate, validDate } from './calendar.mjs';
 
 const confirmationMs = 30_000;
@@ -68,6 +70,8 @@ export async function createCounter({ origin, viewOrigin, owner, database, initi
     FROM counter WHERE id = 1`);
   const reset = db.prepare('UPDATE counter SET start = ?, revision = revision + 1 WHERE id = 1 AND revision = ?');
   const recordReset = db.prepare('INSERT INTO reset_history (revision, reset_at) VALUES (?, ?)');
+  const recentResets = db.prepare('SELECT reset_at FROM reset_history WHERE revision <= ? ORDER BY revision DESC LIMIT 10');
+  const exportPage = db.prepare('SELECT revision, reset_at FROM reset_history WHERE revision > ? AND revision <= ? ORDER BY revision LIMIT 128');
   const pending = new Map();
 
   function current(timestamp) {
@@ -81,8 +85,32 @@ export async function createCounter({ origin, viewOrigin, owner, database, initi
     const result = { start: row.start, today: calendarDate(instant), canReset };
     if (canReset) result.resetHistory = {
       total: row.revision, past30Days: row.past30Days, hasUndatedResets: row.recorded < row.revision,
+      recent: recentResets.all(row.revision).map(({ reset_at }) => new Date(reset_at).toISOString()),
     };
     return result;
+  }
+
+  function* historyCsv(through) {
+    yield 'reset_number,reset_at_utc\r\n';
+    let after = 0;
+    while (after < through) {
+      const rows = exportPage.all(after, through);
+      if (!rows.length) break;
+      yield rows.map(({ revision, reset_at }) => `${revision},${new Date(reset_at).toISOString()}\r\n`).join('');
+      after = rows.at(-1).revision;
+    }
+  }
+
+  async function sendHistory(response) {
+    // A fixed revision keeps concurrent resets out of an in-progress export.
+    const { revision } = current();
+    response.writeHead(200, {
+      ...securityHeaders,
+      'Content-Type': 'text/csv; charset=utf-8',
+      'Content-Disposition': 'attachment; filename="howlong-resets.csv"',
+    });
+    await pipeline(Readable.from(historyCsv(revision), { objectMode: false }), response);
+    return 200;
   }
 
   function commitReset(today, revision, timestamp) {
@@ -146,6 +174,10 @@ export async function createCounter({ origin, viewOrigin, owner, database, initi
       if (asset) return send(response, 200, ...asset);
       if (request.url === '/runtime.json') return send(response, 200, { apiOrigin: '' });
       if (request.url === '/api/counter') return send(response, 200, snapshot(identity === owner, now()));
+      if (request.url === '/api/reset-history.csv') {
+        if (identity !== owner) return send(response, 403, { error: 'history_forbidden' });
+        return sendHistory(response);
+      }
     }
     if (request.method === 'POST' && request.url === '/api/reset') {
       if (identity !== owner || !from || (from !== origin && from !== viewOrigin)) return send(response, 403, { error: 'reset_forbidden' });
@@ -162,8 +194,11 @@ export async function createCounter({ origin, viewOrigin, owner, database, initi
     let status;
     try { status = await handle(request, response); }
     catch (error) {
+      if (response.destroyed && error.code === 'ERR_STREAM_PREMATURE_CLOSE') return;
       log({ event: 'howlong_request_error', code: error.code ?? 'unexpected_error', action: 'Check service and counter database health' });
-      status = send(response, 503, { error: 'counter_unavailable' });
+      status = 503;
+      if (response.headersSent || response.destroyed) response.destroy();
+      else send(response, status, { error: 'counter_unavailable' });
     }
     if (status >= 500 || request.url === '/api/reset') log({ event: 'howlong_request', status, durationMs: Math.round(performance.now() - start) });
   });

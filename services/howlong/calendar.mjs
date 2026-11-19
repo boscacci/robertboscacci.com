@@ -1,6 +1,7 @@
 const dayMs = 86_400_000;
+export const counterTimeZone = 'America/Los_Angeles';
 const pacificCalendar = new Intl.DateTimeFormat('en', {
-  timeZone: 'America/Los_Angeles', year: 'numeric', month: '2-digit', day: '2-digit',
+  timeZone: counterTimeZone, year: 'numeric', month: '2-digit', day: '2-digit',
 });
 
 export function calendarDate(instant) {

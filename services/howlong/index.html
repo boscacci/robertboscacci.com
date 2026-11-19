@@ -30,11 +30,16 @@
       </section>
 
       <section class="history" id="reset-history" aria-labelledby="history-heading" hidden>
-        <h2 id="history-heading">Reset history</h2>
+        <div class="history-heading">
+          <h2 id="history-heading">Reset history</h2>
+          <a id="history-download" hidden>Download CSV</a>
+        </div>
         <dl>
           <div><dt>Past 30 days</dt><dd id="reset-recent"></dd></div>
           <div><dt>All time</dt><dd id="reset-total"></dd></div>
         </dl>
+        <ul id="reset-timestamps" aria-label="Most recent resets" hidden></ul>
+        <p id="history-empty" hidden>No timestamped resets yet.</p>
         <p id="history-note" hidden>Past 30 days counts resets with saved timestamps. Earlier resets are included in the all-time total.</p>
       </section>
     </main>
