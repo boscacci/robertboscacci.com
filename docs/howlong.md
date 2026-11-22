@@ -1,52 +1,41 @@
 # How Long?
 
-## AWS migration
+## AWS deployment
 
-The AWS environment runs the same counter and archive code in containers on EC2.
-Caddy requires an owner password over HTTPS and passes the verified identity to
-the application through a private Unix socket. Systems Manager provides
-administration without inbound SSH. The sole public port is HTTPS.
-The SQLite data volume is encrypted and separate from the host root disk. The
-instance profile can write conditionally to its own S3 reset archive. The existing
-archive alarm checks the heartbeat after a successful HTTPS probe and S3 sync.
+Anyone can open the public HTTPS page and see the current counter. The browser
+also checks the private Tailscale Serve endpoint. Only the configured owner's
+Tailscale identity can see history, download the CSV or reset the clock. The
+public edge removes incoming identity headers. Both paths use the same database
+on encrypted EBS and the same S3 timestamp archive.
 
-Build and deploy dev from the same clean, reviewed default-branch commit.
+Enroll the EC2 host once in the owner's tailnet through Systems Manager using
+`tailscale up --hostname=howlong-dev --accept-dns=false` (production uses
+`howlong-production`). The cloud installer configures private Serve on port
+8443. Tailnet clients must be able to reach that port. Browsers that ask for
+local network access need permission to discover the owner controls. The
+private HTTPS address also serves the page directly.
+
+Build and deploy from the reviewed default branch on the owner-operated release host.
 
 ```bash
-bash scripts/provision-howlong-cloud.sh dev
 bash scripts/build-howlong-cloud.sh
 bash scripts/deploy-howlong-cloud-dev.sh
 ```
 
-The dev deploy creates an owner password in AWS Secrets Manager at
-`howlong/cloud/dev/web-login` if it does not already exist. The browser username
-is `owner`. The deploy script checks the cloud host before pausing the old dev
-services. It migrates a SQLite backup through a private versioned S3 object,
-verifies the cloud login, and removes the temporary object version. It retains
-the old database for rollback and records the verified image digest.
-
-After the owner smoke-tests dev and approves the exact tag and image digest,
-record `releaseTag`, `commit`, `artifact`, `target`, `instruction`, and the UTC
-`recordedAt` in the private approval file. Run the initial production migration
-from the clean default branch on OptiPlex.
+Verification checks public and owner access without completing a reset. After
+enrolling a staged dev host, rerun the dev command with
+`HOWLONG_VERIFY_ONLY=1` to finish verification. After the owner smoke-tests dev,
+tag the verified commit and record the release tag, commit, digest (artifact),
+target hostname, approval instruction and UTC recordedAt for promotion.
 
 ```bash
 bash scripts/deploy-howlong-cloud-production.sh /path/to/approval.json
 ```
 
-The script keeps a copy of the approval in private, versioned S3. It creates
-the production archive, alarm, and Secrets Manager login at
-`howlong/cloud/production/web-login`. It stages and probes HTTPS on the cloud
-IP before publishing DNS. To avoid losing a reset, it pauses the legacy writer
-and compares the current database with the staged copy before changing DNS.
-It removes the exact old Pi-hole override and retains the legacy database and
-ingress receipt for recovery. If the database comparison fails, the script
-restarts the legacy writer and leaves DNS in place. Retain and reconcile the
-staged database before retrying. After DNS changes, keep AWS as the sole writer
-and rerun the migration to finish any outstanding verification or retirement.
-For later recovery, retain the current database and archive together so reset
-numbers stay unique. Inspect the `howlong-cloud-edge`, `howlong-cloud`, and
-`howlong-cloud-archive` systemd journals through Systems Manager.
+Both deployments require the existing cloud data volume. The original migration
+scripts and procedure are preserved at commit 0667719. Inspect the
+howlong-cloud, howlong-cloud-edge, howlong-cloud-tailnet and howlong-cloud-archive
+systemd journals through SSM.
 
 ## OptiPlex release and rollback
 

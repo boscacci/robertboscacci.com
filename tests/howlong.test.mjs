@@ -7,7 +7,7 @@ import { DatabaseSync } from 'node:sqlite';
 import test from 'node:test';
 import { chromium } from 'playwright';
 import { calendarDate, elapsed, validDate } from '../services/howlong/calendar.mjs';
-import { createCounter, identityFromCloudProxy } from '../services/howlong/server.mjs';
+import { createCounter } from '../services/howlong/server.mjs';
 
 const origin = 'http://howlong.test';
 const viewOrigin = 'http://tracker.test';
@@ -20,13 +20,6 @@ const emptyHistory = { total: 0, past30Days: 0, hasUndatedResets: false, recent:
 const recordedHistory = { total: 1, past30Days: 1, hasUndatedResets: false, recent: [initial.toISOString()] };
 const csvPath = '/api/reset-history.csv';
 const csvHeader = 'reset_number,reset_at_utc\r\n';
-
-test('the private cloud proxy authorizer accepts its verified owner identity only', () => {
-  assert.equal(identityFromCloudProxy({ headers: { 'x-howlong-user': 'owner' } }), 'owner');
-  assert.equal(identityFromCloudProxy({ headers: { 'x-howlong-user': 'viewer' } }), null);
-  assert.equal(identityFromCloudProxy({ headers: { 'x-howlong-user': 'owner, viewer' } }), null);
-  assert.equal(identityFromCloudProxy({ headers: { 'tailscale-user-login': owner } }), null);
-});
 
 test('calendar units follow complete weeks, months and years, including leap days and short months', () => {
   assert.deepEqual(elapsed(initialDate, '2031-11-05'), [[0, 'day']]);
@@ -367,4 +360,51 @@ test('an expired confirmation clears the queued taps without replaying them', as
   assert.equal(posts, 1);
   assert.equal(await button.locator('[data-filled]').count(), 0);
   assert.equal((await (await request('/api/counter', { headers: ownerHeaders })).json()).start, initialDate);
+});
+
+test('public cloud reads expose only the counter, even with forged owner headers', async t => {
+  const start = await fixture(t, { publicOrigin: viewOrigin, viewOrigin });
+  const { counter, request } = await start();
+  t.after(() => counter.close());
+  const publicHeaders = { Host: 'tracker.test', ...ownerHeaders, 'X-Howlong-User': 'owner' };
+  assert.equal((await request('/', { headers: publicHeaders })).status, 200);
+  assert.deepEqual(await (await request('/api/counter', { headers: publicHeaders })).json(), { start: initialDate, today, canReset: false });
+  assert.equal((await click(request, null, publicHeaders, viewOrigin)).status, 403);
+  assert.equal((await request(csvPath, { headers: publicHeaders })).status, 403);
+  assert.equal((await (await request('/api/counter', { headers: ownerHeaders })).json()).canReset, true);
+  assert.equal((await request('/api/counter')).status, 403);
+});
+
+test('public page discovers an owner on the private origin and stays usable off tailnet', async t => {
+  const { counter, request } = await (await fixture(t, { publicOrigin: viewOrigin, viewOrigin }))();
+  t.after(() => counter.close());
+  const browser = await chromium.launch();
+  t.after(() => browser.close());
+  for (const onTailnet of [false, true]) {
+    const page = await browser.newPage();
+    const handle = async route => {
+      const incoming = route.request();
+      const url = new URL(incoming.url());
+      if (url.origin === origin && !onTailnet) return route.abort();
+      const headers = { ...incoming.headers(), Host: url.host };
+      if (url.origin === origin) Object.assign(headers, ownerHeaders);
+      const response = await request(url.pathname, { headers, method: incoming.method(), body: incoming.postData() });
+      await route.fulfill({ status: response.status, headers: Object.fromEntries(response.headers), body: Buffer.from(await response.arrayBuffer()) });
+    };
+    await page.route(viewOrigin + '/**', handle);
+    await page.route(origin + '/**', handle);
+    const probe = page.waitForRequest(origin + '/api/counter');
+    await page.goto(viewOrigin);
+    await probe;
+    await page.locator('#since time').waitFor();
+    if (onTailnet) {
+      await page.locator('#reset-button').click();
+      await page.waitForFunction(() => document.querySelector('#reset-status').textContent.includes('4 more'));
+      assert.equal(await page.locator('#history-download').getAttribute('href'), origin + csvPath);
+    } else {
+      assert.equal(await page.locator('#reset-button').isVisible(), false);
+      assert.equal(await page.locator('#reset-history').isVisible(), false);
+    }
+    await page.close();
+  }
 });

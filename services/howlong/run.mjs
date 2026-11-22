@@ -1,5 +1,5 @@
 import { chmod } from 'node:fs/promises';
-import { createCounter, identityFromCloudProxy } from './server.mjs';
+import { createCounter } from './server.mjs';
 
 const {
   HOWLONG_ORIGIN: origin, HOWLONG_OWNER: owner, HOWLONG_STATE: database,
@@ -7,8 +7,7 @@ const {
 } = process.env;
 try {
   if (!socket) throw new Error('missing_socket');
-  const identify = process.env.HOWLONG_AUTH === 'cloud-proxy' ? identityFromCloudProxy : undefined;
-  const counter = await createCounter({ origin, viewOrigin, owner, database, initialDate, identify });
+  const counter = await createCounter({ origin, viewOrigin, publicOrigin: process.env.HOWLONG_PUBLIC_ORIGIN, owner, database, initialDate });
   await new Promise((resolve, reject) => {
     counter.server.once('error', reject);
     counter.server.listen(socket, resolve);

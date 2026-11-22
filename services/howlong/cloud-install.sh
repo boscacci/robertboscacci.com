@@ -11,6 +11,17 @@ mountpoint -q "$root"
 [[ $(aws sts get-caller-identity --query Account --output text) == 062008221187 ]]
 host=howlong.robertboscacci.com
 if [[ $environment == dev ]]; then host=howlong-dev.robertboscacci.com; fi
+owner=${5:?Missing tailnet owner}
+[[ $owner =~ ^[A-Za-z0-9._+@-]+$ ]]
+private_host=howlong-$environment.tailbea63b.ts.net
+if ! command -v tailscale >/dev/null; then
+  curl -fsS https://pkgs.tailscale.com/stable/amazon-linux/2023/tailscale.repo -o /etc/yum.repos.d/tailscale.repo
+  dnf install -y tailscale
+fi
+systemctl enable --now tailscaled
+if [[ $environment == production ]]; then
+  tailscale status --json | jq -e --arg name "$private_host." '.BackendState == "Running" and .Self.DNSName == $name' >/dev/null
+fi
 
 exec 9>/run/howlong-cloud-install.lock
 flock -n 9
@@ -38,10 +49,7 @@ docker cp "$container:/app/CloudCaddyfile" "$work/Caddyfile"
 install -m 0755 "$work/caddy" /usr/local/bin/howlong-caddy
 install -m 0600 "$work/Caddyfile" "$root/CloudCaddyfile"
 install -d -m 0700 -o 1000 -g 1000 "$root/caddy-data" "$root/caddy-config"
-password_hash=$(aws secretsmanager get-secret-value --region us-west-2 --secret-id "howlong/cloud/$environment/web-login" \
-  --query SecretString --output text | /usr/local/bin/howlong-caddy hash-password --bcrypt-cost 10)
-[[ $password_hash =~ ^\$2[aby]\$10\$[./A-Za-z0-9]{53}$ ]]
-printf 'HOWLONG_HOST=%s\nHOWLONG_PASSWORD_HASH=%s\n' "$host" "$password_hash" > "$work/edge.env"
+printf 'HOWLONG_HOST=%s\n' "$host" > "$work/edge.env"
 install -m 0600 "$work/edge.env" "$root/edge.env"
 
 database="$root/counter/counter.sqlite"
@@ -58,9 +66,10 @@ if [[ ! -f $database ]]; then
 fi
 
 cat > "$work/cloud.env" <<EOF
-HOWLONG_ORIGIN=https://$host
-HOWLONG_AUTH=cloud-proxy
-HOWLONG_OWNER=owner
+HOWLONG_ORIGIN=https://$private_host:8443
+HOWLONG_VIEW_ORIGIN=https://$host
+HOWLONG_PUBLIC_ORIGIN=https://$host
+HOWLONG_OWNER=$owner
 HOWLONG_STATE=/state/counter.sqlite
 HOWLONG_SOCKET=/run/howlong/server.sock
 HOWLONG_INITIAL_DATE=2000-01-01
@@ -87,7 +96,7 @@ WantedBy=multi-user.target
 EOF
 cat > /etc/systemd/system/howlong-cloud-edge.service <<EOF
 [Unit]
-Description=Password-protected How Long HTTPS edge
+Description=Public read-only How Long HTTPS edge
 After=network-online.target howlong-cloud.service
 Requires=howlong-cloud.service
 RequiresMountsFor=/var/lib/howlong
@@ -113,7 +122,7 @@ chown 1000:1000 "$root/CloudCaddyfile"
 cat > "$work/check.sh" <<EOF
 #!/usr/bin/env bash
 set -euo pipefail
-[[ \$(curl -sS -o /dev/null -w '%{http_code}' --max-time 5 --resolve $host:443:127.0.0.1 https://$host/) == 401 ]]
+curl -fsS --max-time 5 --resolve $host:443:127.0.0.1 https://$host/api/counter | jq -e '.canReset == false and (has("resetHistory") | not)' >/dev/null
 docker exec howlong-cloud node /app/cloud-health.mjs
 EOF
 install -m 0700 "$work/check.sh" /usr/local/bin/howlong-cloud-check
@@ -139,10 +148,31 @@ Persistent=true
 WantedBy=timers.target
 EOF
 
-if systemctl cat tailscaled.service >/dev/null 2>&1; then systemctl disable --now tailscaled.service; fi
+install -m 0755 /dev/stdin /usr/local/bin/howlong-tailnet-serve <<'SCRIPT'
+#!/usr/bin/env bash
+set -euo pipefail
+until tailscale status --json | jq -e --arg name "$1." '.BackendState == "Running" and .Self.DNSName == $name' >/dev/null; do sleep 5; done
+tailscale serve status --json | jq -e '[(.AllowFunnel // {})[]] | all(. == false)' >/dev/null
+exec tailscale serve --bg --https=8443 unix:/run/howlong/server.sock
+SCRIPT
+cat > /etc/systemd/system/howlong-cloud-tailnet.service <<EOF
+[Unit]
+Description=Serve How Long owner controls on the tailnet
+After=tailscaled.service howlong-cloud.service
+Requires=tailscaled.service
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/howlong-tailnet-serve $private_host
+TimeoutStartSec=infinity
+RemainAfterExit=yes
+[Install]
+WantedBy=multi-user.target
+EOF
 systemctl daemon-reload
 systemctl enable howlong-cloud.service howlong-cloud-edge.service >/dev/null
 systemctl restart howlong-cloud.service howlong-cloud-edge.service
+systemctl enable howlong-cloud-tailnet.service
+systemctl restart --no-block howlong-cloud-tailnet.service
 for attempt in {1..60}; do
   if /usr/local/bin/howlong-cloud-check 2>/dev/null; then break; fi
   if [[ $attempt == 60 ]]; then exit 1; fi
