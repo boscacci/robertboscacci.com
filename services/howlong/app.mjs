@@ -32,6 +32,8 @@ let version = 0;
 let previous;
 let previousTimestamps;
 let apiOrigin;
+let ownerOrigin;
+let readOrigin;
 
 function displayHistory({ past30Days, total, hasUndatedResets, recent }) {
   historyRecent.textContent = numberLabel.format(past30Days);
@@ -97,16 +99,36 @@ async function refresh() {
   const stamp = version;
   refreshing = true;
   try {
-    if (apiOrigin === undefined) {
+    if (readOrigin === undefined) {
       const config = await fetch('/runtime.json', { signal: AbortSignal.timeout(6000) });
       if (!config.ok) throw new Error('configuration_unavailable');
-      ({ apiOrigin } = await config.json());
+      ({ apiOrigin: readOrigin, ownerOrigin } = await config.json());
+      apiOrigin = readOrigin;
       historyDownload.href = `${apiOrigin}/api/reset-history.csv`;
     }
-    const response = await fetch(`${apiOrigin}/api/counter`, { signal: AbortSignal.timeout(6000) });
+    const response = await fetch(`${readOrigin}/api/counter`, { signal: AbortSignal.timeout(6000) });
     if (!response.ok) throw new Error('counter_unavailable');
     const data = await response.json();
-    if (stamp === version) display(data);
+    if (stamp !== version) return;
+    if (!ownerOrigin) return display(data);
+    if (!previous) display(data);
+    let snapshot = data;
+    try {
+      const privateResponse = await fetch(`${ownerOrigin}/api/counter`, {
+        credentials: 'omit', signal: AbortSignal.timeout(3000),
+      });
+      if (privateResponse.ok) {
+        const privateData = await privateResponse.json();
+        if (privateData.canReset) snapshot = privateData;
+      }
+    } catch {
+      // Off-tailnet devices use the public counter.
+    }
+    if (stamp !== version) return;
+    apiOrigin = snapshot.canReset ? ownerOrigin : readOrigin;
+    historyDownload.href = `${apiOrigin}/api/reset-history.csv`;
+    if (!snapshot.canReset && token) clearConfirmation('');
+    display(snapshot);
   } catch {
     if (stamp !== version) return;
     if (!previous) counter.replaceChildren();

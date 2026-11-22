@@ -28,13 +28,8 @@ function identityFromServe(request) {
   return typeof login === 'string' && !login.includes(',') ? login : null;
 }
 
-// The cloud TLS proxy sets this header on the private Unix socket after login.
-export function identityFromCloudProxy(request) {
-  return request.headers['x-howlong-user'] === 'owner' ? 'owner' : null;
-}
-
-function send(response, status, data, type = 'application/json') {
-  response.writeHead(status, { ...securityHeaders, 'Content-Type': `${type}; charset=utf-8` });
+function send(response, status, data, type = 'application/json', extraHeaders = {}) {
+  response.writeHead(status, { ...securityHeaders, ...extraHeaders, 'Content-Type': `${type}; charset=utf-8` });
   response.end(type === 'application/json' ? JSON.stringify(data) : data);
   return status;
 }
@@ -52,8 +47,10 @@ async function readToken(request) {
   return data.token;
 }
 
-export async function createCounter({ origin, viewOrigin, owner, database, initialDate, identify = identityFromServe, now = () => new Date(), log = record => console.log(JSON.stringify(record)) }) {
+export async function createCounter({ origin, viewOrigin, publicOrigin, owner, database, initialDate, identify = identityFromServe, now = () => new Date(), log = record => console.log(JSON.stringify(record)) }) {
   const { host } = new URL(origin);
+  const publicHost = publicOrigin && new URL(publicOrigin).host;
+  if (publicOrigin && (publicOrigin !== viewOrigin || publicHost === host)) throw new Error('invalid_public_origin');
   if (!owner || !database || !validDate(initialDate) || (viewOrigin && new URL(viewOrigin).origin !== viewOrigin)) throw new Error('invalid_counter_configuration');
   const assets = new Map(await Promise.all(Object.entries(files).map(async ([path, [file, type]]) =>
     [path, [await readFile(new URL(file, import.meta.url)), type]],
@@ -157,27 +154,35 @@ export async function createCounter({ origin, viewOrigin, owner, database, initi
 
   async function handle(request, response) {
     // Serve sets the socket Host to localhost and overwrites X-Forwarded-Host.
-    if ((request.headers['x-forwarded-host'] ?? request.headers.host) !== host) return send(response, 421, { error: 'unexpected_host' });
+    const incomingHost = request.headers['x-forwarded-host'] ?? request.headers.host;
+    const publicRead = publicHost && incomingHost === publicHost;
+    if (!publicRead && incomingHost !== host) return send(response, 421, { error: 'unexpected_host' });
     if (request.method === 'GET' && request.url === '/healthz') {
       current();
       return send(response, 200, 'howlong-ok\n', 'text/plain');
     }
     const from = request.headers.origin;
-    if (viewOrigin && from === viewOrigin && ['/api/counter', '/api/reset'].includes(request.url)) {
+    if (!publicRead && viewOrigin && from === viewOrigin && ['/api/counter', '/api/reset'].includes(request.url)) {
       response.setHeader('Access-Control-Allow-Origin', viewOrigin);
       response.setHeader('Vary', 'Origin');
-      if (request.method === 'OPTIONS' && request.url === '/api/reset' && request.headers['access-control-request-method'] === 'POST') {
-        response.setHeader('Access-Control-Allow-Methods', 'POST');
+      if (request.method === 'OPTIONS' && request.headers['access-control-request-method'] === (request.url === '/api/reset' ? 'POST' : 'GET')) {
+        response.setHeader('Access-Control-Allow-Methods', 'GET, POST');
         response.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+        response.setHeader('Access-Control-Allow-Private-Network', 'true');
         return send(response, 204, '', 'text/plain');
       }
     }
-    const identity = await identify(request);
-    if (!identity) return send(response, 403, { error: 'tailnet_identity_required' });
+    const identity = publicRead ? null : await identify(request);
+    if (!publicRead && !identity) return send(response, 403, { error: 'tailnet_identity_required' });
     if (request.method === 'GET') {
       const asset = assets.get(request.url);
-      if (asset) return send(response, 200, ...asset);
-      if (request.url === '/runtime.json') return send(response, 200, { apiOrigin: '' });
+      if (asset) {
+        const headers = publicRead && request.url === '/' ? {
+          'Content-Security-Policy': securityHeaders['Content-Security-Policy'].replace("connect-src 'self'", `connect-src 'self' ${origin}`),
+        } : {};
+        return send(response, 200, ...asset, headers);
+      }
+      if (request.url === '/runtime.json') return send(response, 200, publicRead ? { apiOrigin: '', ownerOrigin: origin } : { apiOrigin: '' });
       if (request.url === '/api/counter') return send(response, 200, snapshot(identity === owner, now()));
       if (request.url === '/api/reset-history.csv') {
         if (identity !== owner) return send(response, 403, { error: 'history_forbidden' });

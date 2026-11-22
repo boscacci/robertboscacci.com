@@ -19,12 +19,11 @@
 		Strict-Transport-Security "max-age=31536000"
 		X-Robots-Tag "noindex, nofollow, noarchive"
 	}
-	basic_auth {
-		owner {$HOWLONG_PASSWORD_HASH}
-	}
+
 	reverse_proxy unix//run/howlong/server.sock {
 		header_up -Authorization
-		header_up X-Howlong-User {http.auth.user.id}
+		header_up -Tailscale-User-Login
+		header_up -X-Howlong-User
 		header_up X-Forwarded-Host {$HOWLONG_HOST}
 	}
 }
