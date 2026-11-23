@@ -27,3 +27,22 @@ test('a complete ECR scan with empty severity counts passes the release check', 
     assert.equal(result.status, expected ? 0 : 1);
   }
 });
+
+test('an owner-confirmed smoke test after dev deployment survives a later automated recheck', () => {
+  const filter = fileURLToPath(new URL('../scripts/howlong-approval.jq', import.meta.url));
+  const deployed = '2020-11-20T16:00:00Z';
+  const verified = '2020-11-22T19:00:00Z';
+  for (const [approvalTime, attestation, expected] of [
+    ['2020-11-20T15:00:00Z', 'confirmed by owner', false],
+    ['2020-11-21T17:00:00Z', '', false],
+    ['2020-11-21T17:00:00Z', 'confirmed by owner', true],
+    ['2020-11-22T20:00:00Z', '', true],
+  ]) {
+    const result = spawnSync('jq', ['-ef', filter, '--arg', 'host', 'tracker.test', '--arg', 'commit', 'abc',
+      '--arg', 'digest', 'digest', '--arg', 'deployed', deployed, '--arg', 'verified', verified], {
+      input: JSON.stringify({ target: 'tracker.test', commit: 'abc', artifact: 'digest',
+        instruction: 'Promote to prod', recordedAt: approvalTime, humanSmokeTest: attestation }),
+    });
+    assert.equal(result.status, expected ? 0 : 1);
+  }
+});

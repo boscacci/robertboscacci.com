@@ -8,7 +8,8 @@ cd "$(dirname "$0")/.."
 environment=${1:?Use dev or production}
 [[ $environment == dev || $environment == production ]]
 state="${XDG_DATA_HOME:-$HOME/.local/share}/howlong/cloud"
-commit=$(git rev-parse HEAD)
+commit=${HOWLONG_RELEASE_COMMIT:-$(git rev-parse HEAD)}
+[[ $commit =~ ^[0-9a-f]{40}$ ]]
 host=howlong-dev.robertboscacci.com
 if [[ $environment == production ]]; then
   host=howlong.robertboscacci.com
@@ -50,10 +51,10 @@ remote() {
   return 1
 }
 if [[ $environment == production ]]; then
-  verified=$(jq -er --arg commit "$commit" --arg digest "$digest" 'select(.commit == $commit and .digest == $digest) | .verifiedAt | fromdateiso8601' "$state/dev.json")
-  jq -e --arg host "$host" --arg digest "$digest" --arg commit "$commit" --argjson verified "$verified" '
-    .target == $host and .artifact == $digest and .commit == $commit and (.instruction | length > 0)
-    and (.recordedAt | fromdateiso8601 >= $verified)' "$approval" >/dev/null
+  verified=$(jq -er --arg commit "$commit" --arg digest "$digest" 'select(.commit == $commit and .digest == $digest) | .verifiedAt' "$state/dev.json")
+  deployed=$(jq -er '.deployedAt // .verifiedAt' "$state/dev.json")
+  jq -ef scripts/howlong-approval.jq --arg host "$host" --arg digest "$digest" --arg commit "$commit" \
+    --arg deployed "$deployed" --arg verified "$verified" "$approval" >/dev/null
   bucket=robertboscacci-howlong-archive-production-062008221187
   work=$(mktemp -d "${XDG_RUNTIME_DIR:?}/howlong-approval.XXXXXXXX")
   trap 'find "$work" -depth -delete' EXIT
@@ -75,7 +76,10 @@ encoded=$(base64 -w 0 services/howlong/cloud-install.sh)
 if [[ ${HOWLONG_VERIFY_ONLY:-0} != 1 ]]; then
   remote "set -eu; f=\$(mktemp /run/howlong-install.XXXXXXXX); trap 'unlink \"\$f\"' EXIT; printf %s '$encoded' | base64 -d > \"\$f\"; bash \"\$f\" '$environment' '$image' '' '' '$owner'"
 fi
-[[ $(remote 'docker inspect --format "{{.Config.Image}}" howlong-cloud') == "$image" ]]
+container=$(remote 'docker inspect --format "{{.Config.Image}} {{.State.StartedAt}} {{.State.Running}}" howlong-cloud')
+read -r running_image started running <<<"$container"
+[[ $running_image == "$image" && $running == true ]]
+deployed=$(date -u -d "$started" +%FT%TZ)
 origin=https://$host
 curl -fsS --max-time 10 "$origin/" >/dev/null
 curl -fsS --max-time 10 -H "Tailscale-User-Login: $owner" -H 'X-Howlong-User: owner' "$origin/api/counter" | jq -e '.canReset == false and (has("resetHistory") | not)' >/dev/null
@@ -88,5 +92,5 @@ curl -fsS --max-time 10 --json '{"token":null}' -H "Origin: $origin" "$private/a
 record=$(mktemp "$state/.$environment.XXXXXXXX")
 trap 'rm -f "$record"' EXIT
 jq -n --arg commit "$commit" --arg digest "$digest" --arg url "$origin" --arg date "$(date -u +%FT%TZ)" \
-  --arg tag "${tag:-}" '{commit:$commit,digest:$digest,url:$url,verifiedAt:$date} + (if $tag == "" then {} else {releaseTag:$tag} end)' > "$record"
+  --arg deployed "$deployed" --arg tag "${tag:-}" '{commit:$commit,digest:$digest,url:$url,deployedAt:$deployed,verifiedAt:$date} + (if $tag == "" then {} else {releaseTag:$tag} end)' > "$record"
 mv -f "$record" "$state/$environment.json"
