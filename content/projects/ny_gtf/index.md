@@ -16,6 +16,11 @@ keywords:
  - Web design
  - Squarespace
  - Non-profit
+tags:
+  - Genetics
+  - Web Design
+  - Web Development
+  - Accessibility
 ---
 ## What:
 

@@ -16,4 +16,8 @@ keywords:
  - Contract
  - Freelance
  - Full-time
+tags:
+  - Backpacking
+  - Entrepreneurship
+  - MLOps
 ---

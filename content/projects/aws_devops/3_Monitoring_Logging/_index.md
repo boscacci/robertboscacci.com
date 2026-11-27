@@ -8,13 +8,10 @@ related: false
 Description: "Robert Boscacci is a devops engineer. He wants to help you \
 pass the aws devops professional certification by sharing his notes here."
 summary: "EventBridge, CloudWatch, Kinesis, SNS, X-ray"
-Tags:
- - Robert Boscacci
- - DevOps
- - DevSecOps
- - NYC
- - New York City
- - Data Engineering
- - MLOps
- - AWS
+tags:
+  - AWS
+  - Observability
+  - CloudWatch
+  - Logging
+  - Event-Driven Architecture
 ---

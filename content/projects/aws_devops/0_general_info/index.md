@@ -15,6 +15,10 @@ keywords:
  - Data Engineering
  - MLOps
  - AWS
+tags:
+  - AWS
+  - DevOps
+  - AWS Certification
 ---
 
 This is study material for the [AWS DevOps Professional Exam](https://aws.amazon.com/certification/certified-devops-engineer-professional/), version DOP-C02.

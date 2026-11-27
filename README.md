@@ -21,6 +21,13 @@ For a development-subdomain build:
 hugo --gc --minify --cleanDestinationDir --environment development --baseURL "https://dev.robertboscacci.com/"
 ```
 
+## Content tags
+
+Add three to five topic labels under `tags` in the front matter of each public post
+or page. Reuse the spelling and capitalization from `/tags/` when a topic fits.
+Use `params.researchTopics` for by-link family research so its topics stay out of
+the public tag browser. Run `npm run test:tags` to verify the generated listings.
+
 ## Media workflow
 
 Post photos are kept out of git and synced to versioned S3-backed media hosting.

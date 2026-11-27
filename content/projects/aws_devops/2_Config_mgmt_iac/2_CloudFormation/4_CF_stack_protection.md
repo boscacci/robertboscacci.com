@@ -6,15 +6,11 @@ weight: 14
 Description: "Robert Boscacci is a devops engineer. He wants to help you \
 pass the aws devops professional certification by sharing his notes here." # Keep to 150-160 chars
 summary: "How do we keep prod from being fragile?"
-Tags:
- - Robert Boscacci
- - DevOps
- - DevSecOps
- - NYC
- - New York City
- - Data Engineering
- - MLOps
- - AWS
+tags:
+  - AWS
+  - CloudFormation
+  - Infrastructure as Code
+  - Cloud Security
 ---
 ## How do we prevent accidental stack deletion/updates?
 1. Termination protection

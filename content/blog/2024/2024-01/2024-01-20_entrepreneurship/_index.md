@@ -9,6 +9,11 @@ keywords:
  - Bootstrap
  - SaaS
 Description: "Robert Boscacci is a data scientist and engineer looking to get entrepreneurial." # Keep to 150-160 chars
+tags:
+  - Entrepreneurship
+  - Bootstrapping
+  - Product Development
+  - Reading Notes
 ---
 
 Just some notes I've taken on entrepreneurship.

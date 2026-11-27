@@ -10,6 +10,11 @@ keywords:
  - Astro-photography
  - Landscape photography
  - Travel photography
+tags:
+  - Photography
+  - Astrophotography
+  - Landscape Photography
+  - Travel
 ---
 
 When I look back at the dozens of thousands of photos I've shot and

@@ -18,6 +18,10 @@ keywords:
  - Brooklyn
  - New York City
  - Consulting
+tags:
+  - Data Analysis
+  - Data Visualization
+  - Consulting
 ---
 
 🏡🌳🌴🌲🌴🌳🏡

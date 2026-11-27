@@ -24,6 +24,12 @@ showDate: false
 showDateUpdated: false
 showReadingTime: false
 showTableOfContents: true
+params:
+  researchTopics:
+    - Family History
+    - Civil Engineering
+    - Nicaragua
+    - Archival Research
 ---
 
 ## Relationship And Research Note

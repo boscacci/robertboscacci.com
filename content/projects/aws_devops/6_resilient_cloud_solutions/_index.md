@@ -8,13 +8,9 @@ related: false
 Description: "Robert Boscacci is a devops engineer. He wants to help you \
 pass the aws devops professional certification by sharing his notes here."
 summary: "Auto-scaling, multi-az, DynamoDB, HA"
-Tags:
- - Robert Boscacci
- - DevOps
- - DevSecOps
- - NYC
- - New York City
- - Data Engineering
- - MLOps
- - AWS
+tags:
+  - AWS
+  - Cloud Architecture
+  - High Availability
+  - Auto Scaling
 ---

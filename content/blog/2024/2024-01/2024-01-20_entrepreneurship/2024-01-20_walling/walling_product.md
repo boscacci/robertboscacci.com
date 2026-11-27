@@ -16,6 +16,12 @@ keywords:
  - Marketing
  - Bootstrapping
  - Software Product
+tags:
+  - Entrepreneurship
+  - Product Development
+  - Pricing
+  - Outsourcing
+  - Reading Notes
 ---
 
 ## How much energy should you pour into it?

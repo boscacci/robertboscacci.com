@@ -6,15 +6,11 @@ weight: 90
 Description: "Robert Boscacci is a devops engineer. He wants to help you \
 pass the aws devops professional certification by sharing his notes here." # Keep to 150-160 chars
 summary: "👽😵"
-Tags:
- - Robert Boscacci
- - DevOps
- - DevSecOps
- - NYC
- - New York City
- - Data Engineering
- - MLOps
- - AWS
+tags:
+  - AWS
+  - Observability
+  - Cloud Governance
+  - Cost Optimization
 ---
 
 # 1. AWS Compute Optimizer

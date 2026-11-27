@@ -16,6 +16,11 @@ keywords:
  - Face recognition
  - Privacy and AI
  - Surveillance
+tags:
+  - Computer Vision
+  - Machine Learning
+  - AI Ethics
+  - Privacy
 ---
 How does the human experience change, now that computers can "see"?
 

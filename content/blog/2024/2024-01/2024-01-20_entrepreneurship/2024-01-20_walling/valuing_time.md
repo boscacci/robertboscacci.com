@@ -18,6 +18,11 @@ keywords:
  - Startups
  - Marketing
  - Bootstrapping
+tags:
+  - Entrepreneurship
+  - Productivity
+  - Outsourcing
+  - Reading Notes
 ---
 
 ## What's your most precious resource, as a founder?

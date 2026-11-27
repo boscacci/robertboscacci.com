@@ -19,6 +19,11 @@ keywords:
  - Startups
  - Marketing
  - Bootstrapping
+tags:
+  - Entrepreneurship
+  - Bootstrapping
+  - Product Development
+  - Reading Notes
 ---
 
 ### Lessons on Entrepreneurship

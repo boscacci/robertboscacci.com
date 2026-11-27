@@ -7,15 +7,11 @@ draft: false
 Description: "Robert Boscacci is a devops engineer. He wants to help you \
 pass the aws devops professional certification by sharing his notes here." # Keep to 150-160 chars
 Summary: "Talk the talk"
-Tags:
- - Robert Boscacci
- - DevOps
- - DevSecOps
- - NYC
- - New York City
- - Data Engineering
- - MLOps
- - AWS
+tags:
+  - AWS
+  - DevOps
+  - CI and CD
+  - Automation
 ---
 
 # Q&A

@@ -17,6 +17,11 @@ keywords:
  - Startups
  - Marketing
  - Bootstrapping
+tags:
+  - Entrepreneurship
+  - Marketing
+  - Web Design
+  - Reading Notes
 ---
 
 ## What's it meant to accomplish?

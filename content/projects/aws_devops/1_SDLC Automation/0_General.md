@@ -15,6 +15,11 @@ keywords:
  - Data Engineering
  - MLOps
  - AWS
+tags:
+  - AWS
+  - DevOps
+  - CI and CD
+  - Automation
 ---
 
 __"Software Development Lifecycle"__

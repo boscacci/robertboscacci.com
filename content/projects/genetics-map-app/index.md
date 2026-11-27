@@ -18,6 +18,12 @@ keywords:
  - GitHub Actions
  - Genetics
  - Privacy
+tags:
+  - Genetics
+  - Web Mapping
+  - Data Visualization
+  - Web Development
+  - Data Engineering
 ---
 
 <!-- HANDWRITTEN INTRO START -->

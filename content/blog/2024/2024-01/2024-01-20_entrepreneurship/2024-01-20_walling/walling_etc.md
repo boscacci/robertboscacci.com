@@ -18,6 +18,11 @@ keywords:
  - Startups
  - Marketing
  - Bootstrapping
+tags:
+  - Entrepreneurship
+  - Customer Support
+  - Documentation
+  - Reading Notes
 ---
 
 ## Any other notes?

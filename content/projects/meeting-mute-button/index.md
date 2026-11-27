@@ -16,6 +16,12 @@ keywords:
  - Zoom
  - Microsoft Teams
  - Hardware
+tags:
+  - Embedded Systems
+  - Arduino
+  - macOS
+  - Accessibility
+  - Automation
 ---
 
 This project is a physical mute button for Zoom and Microsoft Teams on macOS. An ESP32 reads a pushbutton, drives a red/green LED, and reports the desired mute state to the Mac over USB serial.

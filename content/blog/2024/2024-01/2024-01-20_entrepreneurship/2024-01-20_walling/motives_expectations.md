@@ -17,6 +17,11 @@ keywords:
  - Bootstrapping
  - Commitment
  - Motivation
+tags:
+  - Entrepreneurship
+  - Bootstrapping
+  - Productivity
+  - Reading Notes
 ---
 
 ## How do you build the resolve to actually start up?

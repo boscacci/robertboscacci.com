@@ -22,6 +22,11 @@ keywords:
  - AIS
  - AWS
  - OpenTofu
+tags:
+  - Marine Radio
+  - Software-Defined Radio
+  - Automation
+  - Washington
 ---
 
 This project monitors nearby Elliott Bay marine VHF radio traffic. A Raspberry Pi radio edge captures VHF audio and AIS, an Ubuntu micro-computer at home processes clips and transcripts, and AWS serves browser-playable live audio, vessel positions, searchable clips, "Hall of Fame" audio, and transcript analysis with word charts, entity counts, and BERTopic clusters.

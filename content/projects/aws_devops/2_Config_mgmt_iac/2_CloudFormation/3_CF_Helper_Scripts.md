@@ -6,15 +6,11 @@ weight: 13
 Description: "Robert Boscacci is a devops engineer. He wants to help you \
 pass the aws devops professional certification by sharing his notes here." # Keep to 150-160 chars
 summary: "CFN-init, signal, hup, get-metadata"
-Tags:
- - Robert Boscacci
- - DevOps
- - DevSecOps
- - NYC
- - New York City
- - Data Engineering
- - MLOps
- - AWS
+tags:
+  - AWS
+  - CloudFormation
+  - EC2
+  - Automation
 ---
 ## What are CF helper scripts?
 - __Python scripts__ to install software and start services on ec2 boxes
