@@ -6,15 +6,11 @@ weight: 15
 Description: "Robert Boscacci is a devops engineer. He wants to help you \
 pass the aws devops professional certification by sharing his notes here." # Keep to 150-160 chars
 summary: "How do we roll out updates?"
-Tags:
- - Robert Boscacci
- - DevOps
- - DevSecOps
- - NYC
- - New York City
- - Data Engineering
- - MLOps
- - AWS
+tags:
+  - AWS
+  - CloudFormation
+  - Infrastructure as Code
+  - Deployment
 ---
 ## How does one update a CF stack?
 (Say we need to size up our ec2 instance)

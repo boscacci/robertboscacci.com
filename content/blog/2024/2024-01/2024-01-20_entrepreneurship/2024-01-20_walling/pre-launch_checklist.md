@@ -16,6 +16,11 @@ keywords:
  - Startups
  - Marketing
  - Bootstrapping
+tags:
+  - Entrepreneurship
+  - Product Launch
+  - Marketing
+  - Reading Notes
 ---
 
 ## What's the A-to-Z from zero to launch?

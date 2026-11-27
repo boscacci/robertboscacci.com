@@ -16,6 +16,12 @@ keywords:
  - Contract
  - Freelance
  - Full-time
+tags:
+  - Portfolio
+  - Data Engineering
+  - Computer Vision
+  - Automation
+  - DevOps
 ---
 
 Selected projects and technical notes, mostly from the overlap between data engineering, computer vision, film workflows, and practical automation.

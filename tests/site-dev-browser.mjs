@@ -7,7 +7,7 @@ export async function smoke(baseURL, commit, measurementID = null) {
     const page = await browser.newPage();
     // Verify initialization without creating synthetic analytics traffic from dev.
     await page.route(/googletagmanager\.com|google-analytics\.com/, route => route.fulfill({ body: '', contentType: 'text/javascript' }));
-    for (const path of ['/', '/blog/', '/projects/', '/404.html']) {
+    for (const path of ['/', '/blog/', '/projects/', '/tags/', '/tags/backpacking/', '/404.html']) {
       const response = await page.goto(new URL(`${path}?release=${commit}`, baseURL).href);
       assert.equal(response.status(), 200, path);
       assert.ok(await page.title(), path);
@@ -18,6 +18,9 @@ export async function smoke(baseURL, commit, measurementID = null) {
         assert.deepEqual(configs, [measurementID], path);
       } else assert.match(await page.locator('meta[name="robots"]').getAttribute('content'), /noindex/);
       assert.match(response.headers()['x-robots-tag'], /noindex/);
+      if (path === '/') await page.locator('nav a[href$="/tags/"]').waitFor();
+      if (path === '/tags/') await page.locator('main h2 a[href$="/tags/backpacking/"]').waitFor();
+      if (path === '/tags/backpacking/') await page.locator('main h3 a[href$="/blog/2025/rainier-backpacking/"]').waitFor();
     }
   } finally { await browser.close(); }
 }

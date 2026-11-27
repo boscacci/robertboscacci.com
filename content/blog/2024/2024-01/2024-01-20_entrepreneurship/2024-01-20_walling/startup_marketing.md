@@ -18,6 +18,11 @@ keywords:
  - Startups
  - Marketing
  - Bootstrapping
+tags:
+  - Entrepreneurship
+  - Marketing
+  - Product Launch
+  - Reading Notes
 ---
 
 ## Ok, so marketing is crucial. How's it done economically?

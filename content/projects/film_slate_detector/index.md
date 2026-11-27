@@ -16,6 +16,11 @@ keywords:
  - Computer vision
  - Film slate
  - Object detection
+tags:
+  - Computer Vision
+  - Object Detection
+  - Machine Learning
+  - Filmmaking
 ---
 
 🎬 🎥 💻 A computer vision (object detection) pet project 👨‍💻 🍿 🎤

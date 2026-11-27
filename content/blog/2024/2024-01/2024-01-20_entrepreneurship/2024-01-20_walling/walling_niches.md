@@ -16,6 +16,11 @@ keywords:
  - Marketing
  - Bootstrapping
  - Startup Niche
+tags:
+  - Entrepreneurship
+  - Market Research
+  - Marketing
+  - Reading Notes
 ---
 
 ## How do you find folks to build for?

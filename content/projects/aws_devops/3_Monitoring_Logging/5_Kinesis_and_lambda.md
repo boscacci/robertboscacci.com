@@ -6,15 +6,12 @@ weight: 50
 Description: "Robert Boscacci is a devops engineer. He wants to help you \
 pass the aws devops professional certification by sharing his notes here." # Keep to 150-160 chars
 summary: "How do they interact?"
-Tags:
- - Robert Boscacci
- - DevOps
- - DevSecOps
- - NYC
- - New York City
- - Data Engineering
- - MLOps
- - AWS
+tags:
+  - AWS
+  - Kinesis
+  - Lambda
+  - Data Streaming
+  - Data Engineering
 ---
 
 ## Architecture

@@ -16,6 +16,12 @@ keywords:
  - Gotify
  - Home automation
  - Hardware
+tags:
+  - Embedded Systems
+  - Home Automation
+  - ESP32
+  - Automation
+  - Notifications
 ---
 
 This project uses an ESP32 and accelerometer to detect when a washer or dryer cycle finishes by measuring vibration from the outside of the appliance. It sends a phone notification when the cycle appears to be done.

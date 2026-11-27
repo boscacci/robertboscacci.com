@@ -19,6 +19,11 @@ keywords:
  - Startups
  - Marketing
  - Bootstrapping
+tags:
+  - Entrepreneurship
+  - Market Research
+  - Product Development
+  - Reading Notes
 ---
 
 ## What's the biggest startup pitfall?

@@ -17,11 +17,11 @@ keywords:
   - Outdoor Adventure
   - Camping
 tags:
-  - hiking
-  - backpacking
-  - olympic-national-park
-  - washington
-  - outdoor-adventure
+  - Backpacking
+  - Hiking
+  - Olympic National Park
+  - Washington
+  - Outdoor Adventure
 ---
 
 {{< lead >}}

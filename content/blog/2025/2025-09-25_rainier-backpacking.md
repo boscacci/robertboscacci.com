@@ -17,11 +17,11 @@ keywords:
   - Outdoor Adventure
   - Camping
 tags:
-  - hiking
-  - backpacking
-  - mount-rainier
-  - washington
-  - outdoor-adventure
+  - Backpacking
+  - Hiking
+  - Mount Rainier
+  - Washington
+  - Outdoor Adventure
 ---
 
 {{< lead >}}

@@ -18,6 +18,11 @@ keywords:
  - Author
  - SilverRide
  - Azure
+tags:
+  - Data Engineering
+  - DevOps
+  - Consulting
+  - Portfolio
 ---
 I'm a Seattle-based data engineer, husband, [author](/book), and former [film colorist / dailies technician](https://www.imdb.com/name/nm4574526/).
 

@@ -6,15 +6,11 @@ weight: 30
 Description: "Robert Boscacci is a devops engineer. He wants to help you \
 pass the aws devops professional certification by sharing his notes here." # Keep to 150-160 chars
 summary: "Multi-step lambda workflows"
-Tags:
- - Robert Boscacci
- - DevOps
- - DevSecOps
- - NYC
- - New York City
- - Data Engineering
- - MLOps
- - AWS
+tags:
+  - AWS
+  - Step Functions
+  - Serverless
+  - Automation
 ---
 
 ## What are step functions?

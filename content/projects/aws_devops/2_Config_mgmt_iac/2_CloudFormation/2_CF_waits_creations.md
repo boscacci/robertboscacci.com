@@ -6,15 +6,11 @@ weight: 12
 Description: "Robert Boscacci is a devops engineer. He wants to help you \
 pass the aws devops professional certification by sharing his notes here." # Keep to 150-160 chars
 summary: "How are these similar but different?"
-Tags:
- - Robert Boscacci
- - DevOps
- - DevSecOps
- - NYC
- - New York City
- - Data Engineering
- - MLOps
- - AWS
+tags:
+  - AWS
+  - CloudFormation
+  - Infrastructure as Code
+  - Deployment
 ---
 ## What are wait conditions for?
 - It's a CF resource, like anything else

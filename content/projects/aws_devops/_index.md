@@ -17,6 +17,12 @@ keywords:
  - Data Engineering
  - MLOps
  - AWS
+tags:
+  - AWS
+  - DevOps
+  - AWS Certification
+  - CI and CD
+  - Infrastructure as Code
 ---
 ☁️ 🚀 📚 AWS DevOps Professional Certification study guide 👨‍💻 🔧 ⚙️
 

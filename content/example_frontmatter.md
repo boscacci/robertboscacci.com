@@ -15,6 +15,10 @@ keywords:
  - SEM
  - Bootstrapping
 weight: 0
+tags:
+  - Hugo
+  - Documentation
+  - Web Development
 ---
 
 **Blog Post File Structure:**  

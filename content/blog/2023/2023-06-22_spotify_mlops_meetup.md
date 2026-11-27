@@ -16,6 +16,11 @@ keywords:
  - Spotify
  - Engineering
  - MLOps
+tags:
+  - Machine Learning
+  - MLOps
+  - Data Engineering
+  - New York City
 ---
 
 <link rel="stylesheet" href="/css/custom.css">

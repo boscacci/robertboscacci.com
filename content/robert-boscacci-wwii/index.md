@@ -21,6 +21,12 @@ showDate: false
 showDateUpdated: false
 showReadingTime: false
 showTableOfContents: true
+params:
+  researchTopics:
+    - Family History
+    - World War II
+    - Military History
+    - Archival Research
 ---
 
 {{< figure src="portrait.jpg" alt="Studio portrait of Robert E. Boscacci in a World War II-era U.S. Army Air Forces officer uniform." caption="Robert E. Boscacci in a World War II-era U.S. Army Air Forces officer uniform." class="family-military-portrait" >}}

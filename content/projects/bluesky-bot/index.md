@@ -20,6 +20,11 @@ keywords:
  - Multi-modal AI
  - Python
  - Flask
+tags:
+  - Bluesky
+  - Generative AI
+  - Computer Vision
+  - Automation
 ---
 
 🤖 🧠 💻 A multi-modal AI bot for Bluesky social media 👨‍💻 🚴‍♂️ 🏙️

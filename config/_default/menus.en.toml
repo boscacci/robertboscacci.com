@@ -26,6 +26,11 @@ pageRef = "/blog"
 weight = 30
 
 [[main]]
+name = "Tags"
+pageRef = "/tags"
+weight = 40
+
+[[main]]
 name = "About"
 pageRef = "/about"
 weight = 100
@@ -39,8 +44,3 @@ weight = 100
 # -- Footer Menu --
 # The footer menu is displayed at the bottom of the page, just before
 # the copyright notice. Configure as per the main menu above.
-
-# [[footer]]
-#   name = "Tags"
-#   pageRef = "tags"
-#   weight = 10

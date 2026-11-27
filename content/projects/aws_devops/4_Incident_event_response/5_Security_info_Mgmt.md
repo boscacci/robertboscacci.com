@@ -8,15 +8,11 @@ related: false
 Description: "Robert Boscacci is a devops engineer. He wants to help you \
   pass the aws devops professional certification by sharing his notes here."
 summary: "Which services? How to use?"
-Tags:
-  - Robert Boscacci
-  - DevOps
-  - DevSecOps
-  - NYC
-  - New York City
-  - Data Engineering
-  - MLOps
+tags:
   - AWS
+  - Cloud Security
+  - Threat Detection
+  - Incident Response
 ---
 
 ## Automatable Security Services?

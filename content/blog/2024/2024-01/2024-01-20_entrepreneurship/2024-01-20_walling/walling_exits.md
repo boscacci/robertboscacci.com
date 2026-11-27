@@ -18,6 +18,11 @@ keywords:
  - Startups
  - Marketing
  - Bootstrapping
+tags:
+  - Entrepreneurship
+  - Bootstrapping
+  - Automation
+  - Reading Notes
 ---
 
 ## Grow it or Start Over?
